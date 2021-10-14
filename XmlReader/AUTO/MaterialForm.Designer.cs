@@ -32,6 +32,9 @@ namespace CookHelper
             this.ItemName = new System.Windows.Forms.TextBox();
             this.Closer = new System.Windows.Forms.Button();
             this.PanelMission = new System.Windows.Forms.GroupBox();
+            this.MissionInfoPanel = new System.Windows.Forms.Panel();
+            this.SampleCheck = new System.Windows.Forms.CheckBox();
+            this.MissionInfo = new System.Windows.Forms.TextBox();
             this.PanelSkill = new System.Windows.Forms.GroupBox();
             this.SkillInfo = new System.Windows.Forms.TextBox();
             this.SkillPic = new System.Windows.Forms.PictureBox();
@@ -44,10 +47,9 @@ namespace CookHelper
             this.PanelAtt2 = new System.Windows.Forms.Panel();
             this.PriceWed = new System.Windows.Forms.TextBox();
             this.Price = new System.Windows.Forms.TextBox();
-            this.MissionInfo = new System.Windows.Forms.TextBox();
-            this.MissionInfoPanel = new System.Windows.Forms.Panel();
-            this.SampleCheck = new System.Windows.Forms.CheckBox();
+            this.ItemID = new System.Windows.Forms.TextBox();
             this.PanelMission.SuspendLayout();
+            this.MissionInfoPanel.SuspendLayout();
             this.PanelSkill.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SkillPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ItemPic)).BeginInit();
@@ -55,7 +57,6 @@ namespace CookHelper
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.PanelAtt2.SuspendLayout();
-            this.MissionInfoPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // ItemName
@@ -77,7 +78,7 @@ namespace CookHelper
             // 
             this.Closer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.Closer.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Closer.Location = new System.Drawing.Point(0, 468);
+            this.Closer.Location = new System.Drawing.Point(0, 517);
             this.Closer.Name = "Closer";
             this.Closer.Size = new System.Drawing.Size(234, 32);
             this.Closer.TabIndex = 62;
@@ -91,12 +92,52 @@ namespace CookHelper
             this.PanelMission.Controls.Add(this.MissionInfo);
             this.PanelMission.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PanelMission.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PanelMission.Location = new System.Drawing.Point(0, 357);
+            this.PanelMission.Location = new System.Drawing.Point(0, 262);
             this.PanelMission.Name = "PanelMission";
             this.PanelMission.Size = new System.Drawing.Size(234, 111);
             this.PanelMission.TabIndex = 67;
             this.PanelMission.TabStop = false;
             this.PanelMission.Text = "任务取得";
+            // 
+            // MissionInfoPanel
+            // 
+            this.MissionInfoPanel.Controls.Add(this.SampleCheck);
+            this.MissionInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.MissionInfoPanel.Location = new System.Drawing.Point(3, 44);
+            this.MissionInfoPanel.Name = "MissionInfoPanel";
+            this.MissionInfoPanel.Size = new System.Drawing.Size(228, 64);
+            this.MissionInfoPanel.TabIndex = 68;
+            // 
+            // SampleCheck
+            // 
+            this.SampleCheck.Appearance = System.Windows.Forms.Appearance.Button;
+            this.SampleCheck.AutoSize = true;
+            this.SampleCheck.Dock = System.Windows.Forms.DockStyle.Top;
+            this.SampleCheck.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.SampleCheck.Location = new System.Drawing.Point(0, 0);
+            this.SampleCheck.Name = "SampleCheck";
+            this.SampleCheck.Size = new System.Drawing.Size(228, 30);
+            this.SampleCheck.TabIndex = 52;
+            this.SampleCheck.TabStop = false;
+            this.SampleCheck.Text = "道具信息";
+            this.SampleCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.SampleCheck.UseVisualStyleBackColor = true;
+            this.SampleCheck.Visible = false;
+            // 
+            // MissionInfo
+            // 
+            this.MissionInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.MissionInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.MissionInfo.Dock = System.Windows.Forms.DockStyle.Top;
+            this.MissionInfo.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.MissionInfo.Location = new System.Drawing.Point(3, 25);
+            this.MissionInfo.Name = "MissionInfo";
+            this.MissionInfo.ReadOnly = true;
+            this.MissionInfo.Size = new System.Drawing.Size(228, 19);
+            this.MissionInfo.TabIndex = 67;
+            this.MissionInfo.TabStop = false;
+            this.MissionInfo.Text = "5000 Gold";
+            this.MissionInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PanelSkill
             // 
@@ -105,7 +146,7 @@ namespace CookHelper
             this.PanelSkill.Controls.Add(this.SkillInfoPanel);
             this.PanelSkill.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PanelSkill.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PanelSkill.Location = new System.Drawing.Point(0, 213);
+            this.PanelSkill.Location = new System.Drawing.Point(0, 373);
             this.PanelSkill.Name = "PanelSkill";
             this.PanelSkill.Size = new System.Drawing.Size(234, 144);
             this.PanelSkill.TabIndex = 68;
@@ -151,9 +192,9 @@ namespace CookHelper
             // 
             this.ItemPic.BackColor = System.Drawing.SystemColors.Control;
             this.ItemPic.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ItemPic.Location = new System.Drawing.Point(0, 26);
+            this.ItemPic.Location = new System.Drawing.Point(0, 52);
             this.ItemPic.Name = "ItemPic";
-            this.ItemPic.Size = new System.Drawing.Size(234, 56);
+            this.ItemPic.Size = new System.Drawing.Size(234, 61);
             this.ItemPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.ItemPic.TabIndex = 64;
             this.ItemPic.TabStop = false;
@@ -164,9 +205,9 @@ namespace CookHelper
             this.PanelNPC.Controls.Add(this.panel1);
             this.PanelNPC.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelNPC.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.PanelNPC.Location = new System.Drawing.Point(0, 82);
+            this.PanelNPC.Location = new System.Drawing.Point(0, 113);
             this.PanelNPC.Name = "PanelNPC";
-            this.PanelNPC.Size = new System.Drawing.Size(234, 131);
+            this.PanelNPC.Size = new System.Drawing.Size(234, 149);
             this.PanelNPC.TabIndex = 69;
             this.PanelNPC.TabStop = false;
             this.PanelNPC.Text = "贩卖NPC";
@@ -177,7 +218,7 @@ namespace CookHelper
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 65);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(228, 63);
+            this.panel2.Size = new System.Drawing.Size(228, 81);
             this.panel2.TabIndex = 56;
             // 
             // NPC
@@ -191,7 +232,7 @@ namespace CookHelper
             this.NPC.Name = "NPC";
             this.NPC.ReadOnly = true;
             this.NPC.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.NPC.Size = new System.Drawing.Size(228, 63);
+            this.NPC.Size = new System.Drawing.Size(228, 81);
             this.NPC.TabIndex = 53;
             this.NPC.TabStop = false;
             this.NPC.Text = "敦巴伦 格莉纳斯\r\n敦巴伦 格莉纳斯\r\n敦巴伦 格莉纳斯\r\n敦巴伦 格莉纳斯\r\n敦巴伦 格莉纳斯";
@@ -246,57 +287,33 @@ namespace CookHelper
             this.Price.Text = "5000 Gold";
             this.Price.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // MissionInfo
+            // ItemID
             // 
-            this.MissionInfo.BackColor = System.Drawing.SystemColors.Control;
-            this.MissionInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.MissionInfo.Dock = System.Windows.Forms.DockStyle.Top;
-            this.MissionInfo.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.MissionInfo.Location = new System.Drawing.Point(3, 25);
-            this.MissionInfo.Name = "MissionInfo";
-            this.MissionInfo.ReadOnly = true;
-            this.MissionInfo.Size = new System.Drawing.Size(228, 19);
-            this.MissionInfo.TabIndex = 67;
-            this.MissionInfo.TabStop = false;
-            this.MissionInfo.Text = "5000 Gold";
-            this.MissionInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // MissionInfoPanel
-            // 
-            this.MissionInfoPanel.Controls.Add(this.SampleCheck);
-            this.MissionInfoPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.MissionInfoPanel.Location = new System.Drawing.Point(3, 44);
-            this.MissionInfoPanel.Name = "MissionInfoPanel";
-            this.MissionInfoPanel.Size = new System.Drawing.Size(228, 64);
-            this.MissionInfoPanel.TabIndex = 68;
-            // 
-            // SampleCheck
-            // 
-            this.SampleCheck.Appearance = System.Windows.Forms.Appearance.Button;
-            this.SampleCheck.AutoSize = true;
-            this.SampleCheck.Dock = System.Windows.Forms.DockStyle.Top;
-            this.SampleCheck.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.SampleCheck.Location = new System.Drawing.Point(0, 0);
-            this.SampleCheck.Name = "SampleCheck";
-            this.SampleCheck.Size = new System.Drawing.Size(228, 30);
-            this.SampleCheck.TabIndex = 52;
-            this.SampleCheck.TabStop = false;
-            this.SampleCheck.Text = "道具信息";
-            this.SampleCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.SampleCheck.UseVisualStyleBackColor = true;
-            this.SampleCheck.Visible = false;
+            this.ItemID.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.ItemID.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ItemID.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ItemID.Font = new System.Drawing.Font("微软雅黑", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ItemID.Location = new System.Drawing.Point(0, 26);
+            this.ItemID.Name = "ItemID";
+            this.ItemID.ReadOnly = true;
+            this.ItemID.Size = new System.Drawing.Size(234, 26);
+            this.ItemID.TabIndex = 70;
+            this.ItemID.TabStop = false;
+            this.ItemID.Text = "ClassID";
+            this.ItemID.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // MaterialForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(234, 500);
+            this.ClientSize = new System.Drawing.Size(234, 549);
             this.Controls.Add(this.PanelNPC);
-            this.Controls.Add(this.PanelSkill);
             this.Controls.Add(this.PanelMission);
             this.Controls.Add(this.ItemPic);
-            this.Controls.Add(this.Closer);
+            this.Controls.Add(this.ItemID);
             this.Controls.Add(this.ItemName);
+            this.Controls.Add(this.PanelSkill);
+            this.Controls.Add(this.Closer);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
@@ -307,6 +324,8 @@ namespace CookHelper
             this.Load += new System.EventHandler(this.MaterialForm_Load);
             this.PanelMission.ResumeLayout(false);
             this.PanelMission.PerformLayout();
+            this.MissionInfoPanel.ResumeLayout(false);
+            this.MissionInfoPanel.PerformLayout();
             this.PanelSkill.ResumeLayout(false);
             this.PanelSkill.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SkillPic)).EndInit();
@@ -317,8 +336,6 @@ namespace CookHelper
             this.panel1.ResumeLayout(false);
             this.PanelAtt2.ResumeLayout(false);
             this.PanelAtt2.PerformLayout();
-            this.MissionInfoPanel.ResumeLayout(false);
-            this.MissionInfoPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -343,5 +360,6 @@ namespace CookHelper
         private System.Windows.Forms.Panel MissionInfoPanel;
         private System.Windows.Forms.CheckBox SampleCheck;
         private System.Windows.Forms.TextBox MissionInfo;
+        private System.Windows.Forms.TextBox ItemID;
     }
 }

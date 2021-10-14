@@ -10,8 +10,6 @@ namespace CookHelper.Data
     {
         private XDocument favorite;
         public event EventHandler ItemAdded;
-        public event EventHandler ItemRemoved;
-
         public FavoriteManager(string filename)
         {
             favorite = XDocument.Load(filename);

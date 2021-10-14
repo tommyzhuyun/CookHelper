@@ -16,10 +16,10 @@ namespace CookHelper.Data
 
         public Manager()
         {
-            recipe = new CookingRecipe();
-            itemdb = new ItemDB();
-            db = new ItemDBChina();
-            BaseItem = new BaseItem();
+            recipe = new CookingRecipe("DataBase/cookingrecipe.xml");
+            itemdb = new ItemDB("DataBase/itemdb.xml");
+            db = new ItemDBChina("DataBase/itemdb.china.txt");
+            BaseItem = new BaseItem("DataBase/Shop.xml", "DataBase/Mission.xml", "DataBase/Skill.xml");
             favorite = null;
         }
 

@@ -26,11 +26,22 @@ namespace CookHelper
         public MaterialForm(Sorting RecipeMenu, Manager manager) : this(RecipeMenu, manager, null)
         {        }
 
+        private void MaterialForm_Load(object sender, EventArgs e)
+        {
+            InitializeForm();
+        }
+
+        private void Closer_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
         private readonly List<Control> ControlList = new List<Control>();
         private void InitializeForm()
         {
             Text = RecipeMenu.Name;
             ItemName.Text = Text;
+            ItemID.Text = "ClassID: " + RecipeMenu.ClassID.ToString();
             ItemPic.Image = manager.GetImageFromId(RecipeMenu.ClassID);
 
             var ItemCouldBuy = manager.BaseItem.ItemCouldBuy(RecipeMenu.ClassID.ToString());
@@ -66,14 +77,16 @@ namespace CookHelper
                 foreach(var item in resource)
                 {
                     Sorting sorting = new Sorting(item.Name, item.ClassIDInt, false, null, manager.ReadItemDBFromID(item.ClassID));
-                    CheckBox checkBox = new CheckBox();
-                    checkBox.Checked = false;
-                    checkBox.Appearance = this.SampleCheck.Appearance;
-                    checkBox.Dock = this.SampleCheck.Dock;
-                    checkBox.Font = this.SampleCheck.Font;
-                    checkBox.Size = this.SampleCheck.Size;
-                    checkBox.Tag = sorting;
-                    checkBox.Text = item.Name +" "+ item.ExtraInfo;
+                    CheckBox checkBox = new CheckBox
+                    {
+                        Checked = false,
+                        Appearance = this.SampleCheck.Appearance,
+                        Dock = this.SampleCheck.Dock,
+                        Font = this.SampleCheck.Font,
+                        Size = this.SampleCheck.Size,
+                        Tag = sorting,
+                        Text = item.Name + " " + item.ExtraInfo
+                    };
                     checkBox.CheckedChanged += MissionItemCheck_CheckedChanged;
 
                     MissionInfoPanel.Controls.Add(checkBox);
@@ -93,17 +106,17 @@ namespace CookHelper
             }
 
             var Skill = manager.BaseItem.ItemCouldSkill(RecipeMenu.ClassID.ToString());
-            if (Skill.Count > 0) {
+            if (Skill.Count > 0)
+            {
                 GETITEM getitem = Skill[0];
                 SkillPic.Image?.Dispose();
                 SkillPic.Image = Image.FromFile($"img/Skill/{getitem.Info}.png");
-               
 
                 var Resultitem = getitem.Item.Find(x => x.ClassID == RecipeMenu.ClassID.ToString());
                 SkillInfo.Text = getitem.SkillName + "\r\n" + Resultitem.ExtraInfo;
 
                 var resource = Resultitem.SourceItem;
-                if(resource.Count == 0)
+                if (resource.Count == 0)
                 {
                     SkillInfoPanel.Visible = false;
                     PanelSkill.Size = new Size(PanelSkill.Width, PanelSkill.Height - SkillInfoPanel.Size.Height);
@@ -113,14 +126,16 @@ namespace CookHelper
                     foreach (var item in resource)
                     {
                         Sorting sorting = new Sorting(item.Name, item.ClassIDInt, false, null, manager.ReadItemDBFromID(item.ClassID));
-                        CheckBox checkBox = new CheckBox();
-                        checkBox.Checked = false;
-                        checkBox.Appearance = this.SampleCheck.Appearance;
-                        checkBox.Dock = this.SampleCheck.Dock;
-                        checkBox.Font = this.SampleCheck.Font;
-                        checkBox.Size = this.SampleCheck.Size;
-                        checkBox.Tag = sorting;
-                        checkBox.Text = item.Name + " " + item.ExtraInfo; 
+                        CheckBox checkBox = new CheckBox
+                        {
+                            Checked = false,
+                            Appearance = this.SampleCheck.Appearance,
+                            Dock = this.SampleCheck.Dock,
+                            Font = this.SampleCheck.Font,
+                            Size = this.SampleCheck.Size,
+                            Tag = sorting,
+                            Text = item.Name + " " + item.ExtraInfo
+                        };
                         checkBox.CheckedChanged += MissionItemCheck_CheckedChanged;
 
                         SkillInfoPanel.Controls.Add(checkBox);
@@ -135,12 +150,59 @@ namespace CookHelper
             }
             else
             {
-                PanelSkill.Visible = false;
-                this.Size = new Size(this.Size.Width, this.Size.Height - PanelSkill.Size.Height);
+                if (RecipeMenu.IsSuccess)
+                {
+                    SkillPic.Image?.Dispose();
+                    SkillPic.Image = Image.FromFile($"img/Skill/10020.png");
+                    SkillInfo.Text = "料理";
+                    CheckBox checkBox = new CheckBox
+                    {
+                        Checked = false,
+                        Appearance = this.SampleCheck.Appearance,
+                        Dock = this.SampleCheck.Dock,
+                        Font = this.SampleCheck.Font,
+                        Size = this.SampleCheck.Size,
+                        Tag = RecipeMenu,
+                        Text = RecipeMenu.Name,
+                    };
+                    checkBox.CheckedChanged += MenuItem_CheckedChanged; ;
+                    SkillInfoPanel.Controls.Add(checkBox);
+                    ControlList.Add(checkBox);
+                }
+                else
+                {
+                    PanelSkill.Visible = false;
+                    this.Size = new Size(this.Size.Width, this.Size.Height - PanelSkill.Size.Height);
+                }
             }
         }
 
-        private readonly List<MaterialForm> ElemForm = new List<MaterialForm>();
+        private void MenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox check = (CheckBox)sender;
+            Sorting sorting = (Sorting)check.Tag;
+
+            if (check.Checked)
+            {
+                MenuForm MnForm = new MenuForm(sorting, manager, check);
+                MenuForms.Add(MnForm);
+                MnForm.FormClosed += MenuForm_FormClosed;
+                MnForm.Show();
+                MnForm.Location = new System.Drawing.Point(this.Location.X + this.Size.Width, this.Location.Y);
+            }
+            else
+            {
+                MenuForm MaterialForm = MenuForms.Find(x => x.ControlOwner == check);
+                MenuForms.Remove(MaterialForm);
+                if (MaterialForm != null)
+                {
+                    MaterialForm.FormClosed -= MenuForm_FormClosed;
+                    MaterialForm?.Close();
+                }
+            }
+        }
+        private readonly List<MenuForm> MenuForms = new List<MenuForm>();
+        private readonly List<MaterialForm> ElemForms = new List<MaterialForm>();
         private void MissionItemCheck_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox check = (CheckBox)sender;
@@ -149,15 +211,15 @@ namespace CookHelper
             if (check.Checked)
             {
                 MaterialForm MaterialForm = new MaterialForm(sorting, manager, check);
-                ElemForm.Add(MaterialForm);
+                ElemForms.Add(MaterialForm);
                 MaterialForm.FormClosed += MenuForm_FormClosed;
                 MaterialForm.Show();
                 MaterialForm.Location = new System.Drawing.Point(this.Location.X + this.Size.Width, this.Location.Y);
             }
             else
             {
-                MaterialForm MaterialForm = ElemForm.Find(x => x.ControlOwner == check);
-                ElemForm.Remove(MaterialForm);
+                MaterialForm MaterialForm = ElemForms.Find(x => x.ControlOwner == check);
+                ElemForms.Remove(MaterialForm);
                 if (MaterialForm != null)
                 {
                     MaterialForm.FormClosed -= MenuForm_FormClosed;
@@ -175,26 +237,29 @@ namespace CookHelper
                 ((CheckBox)ControlOwner).Checked = false;
         }
 
-
-        private void MaterialForm_Load(object sender, EventArgs e)
-        {
-            InitializeForm();
-        }
-
-
-        private void Closer_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void MaterialForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            while (ElemForm.Count > 0) 
+            while (ElemForms.Count > 0) 
             {
-                var fm = ElemForm[0];
-                ElemForm.RemoveAt(0);
+                var fm = ElemForms[0];
+                ElemForms.RemoveAt(0);
                 fm?.Close();
                 fm?.Dispose();
+            }
+            while (MenuForms.Count > 0)
+            {
+                var fm = MenuForms[0];
+                MenuForms.RemoveAt(0);
+                fm?.Close();
+                fm?.Dispose();
+            }
+        }
+
+        public void FavoriteUpdate(bool enable)
+        {
+            foreach(var menu in MenuForms)
+            {
+                menu?.FavoriteUpdate(enable);
             }
         }
     }

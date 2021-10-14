@@ -127,15 +127,19 @@ namespace CookHelper
         {
             Favorite.Enabled = true;
             this.Show();
+            FileReaded.Text = "已关闭收藏夹";
+            if (recipe != null)
+            {
+                recipe.FavoriteUpdate(false);
+            }
         }
-
 
         private void List_OnLine(object sender, EventArgs e)
         {
             FileReaded.Text = "已加载收藏夹";
             if(recipe != null)
             {
-                recipe.FavoriteUpdate();
+                recipe.FavoriteUpdate(true);
             }
 
         }

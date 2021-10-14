@@ -29,9 +29,13 @@ namespace CookHelper
             Ordering(Menuer);
         }
 
-        public void FavoriteUpdate()
+        public void FavoriteUpdate(bool enable)
         {
-            FavoriteAdd.Enabled = true;
+            FavoriteAdd.Enabled = enable;
+            if (MenuForm != null)
+            {
+                MenuForm.FavoriteUpdate(enable);
+            }
         }
 
         public void Ordering(List<Sorting> Searched)
@@ -133,6 +137,7 @@ namespace CookHelper
         private void Closer_Click(object sender, EventArgs e)
         {
             MenuForm?.Close();
+            MenuForm?.Dispose();
             Close();
         }
 

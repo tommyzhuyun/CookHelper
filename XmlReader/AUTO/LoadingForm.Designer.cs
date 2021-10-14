@@ -40,6 +40,7 @@ namespace CookHelper
             this.Favorite = new System.Windows.Forms.Button();
             this.AutoHide = new System.Windows.Forms.CheckBox();
             this.FileReaded = new System.Windows.Forms.Label();
+            this.Message = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -129,11 +130,22 @@ namespace CookHelper
             this.FileReaded.TabIndex = 38;
             this.FileReaded.Text = "未载入收藏夹";
             // 
+            // Message
+            // 
+            this.Message.AutoSize = true;
+            this.Message.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.Message.Location = new System.Drawing.Point(12, 97);
+            this.Message.Name = "Message";
+            this.Message.Size = new System.Drawing.Size(223, 22);
+            this.Message.TabIndex = 39;
+            this.Message.Text = "By 鸡蛋甲天下(潘妮) 1943495203";
+            // 
             // LoadingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 102);
+            this.ClientSize = new System.Drawing.Size(275, 124);
+            this.Controls.Add(this.Message);
             this.Controls.Add(this.FileReaded);
             this.Controls.Add(this.AutoHide);
             this.Controls.Add(this.Favorite);
@@ -168,5 +180,6 @@ namespace CookHelper
         private System.Windows.Forms.ToolStripLabel LoadingLabel;
         private System.Windows.Forms.CheckBox AutoHide;
         private System.Windows.Forms.Label FileReaded;
+        private System.Windows.Forms.Label Message;
     }
 }

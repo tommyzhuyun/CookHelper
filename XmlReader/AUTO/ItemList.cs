@@ -8,16 +8,16 @@ namespace CookHelper
 {
     public partial class ItemList : Form
     {
-        public List<FoodMenu> FoodMenus;
+        public List<ItemListTotal> FoodMenus;
         public readonly Manager manager;
         public event EventHandler OnLine;
-        public readonly FoodMenu ExampleMenu;
+        public readonly ItemListTotal ExampleMenu;
         public ItemList(Manager manager)
         {
             this.manager = manager;
             InitializeComponent();
-            FoodMenus = new List<FoodMenu>();
-            ExampleMenu = new FoodMenu(ExamplePanel, ExamplePic, ExampleCheckBox, ExampleLabel);
+            FoodMenus = new List<ItemListTotal>();
+            ExampleMenu = new ItemListTotal(ExamplePanel, ExamplePic, ExampleCheckBox, ExampleLabel);
         }
 
         private void RecipeList_Load(object sender, EventArgs e)
@@ -27,8 +27,7 @@ namespace CookHelper
 
         protected void AddMenu(RESULTITEM Item)
         {
-            Console.WriteLine(Item.ClassID);
-            FoodMenu fm = new FoodMenu(ExampleMenu, Location, Item);
+            ItemListTotal fm = new ItemListTotal(ExampleMenu, Location, Item);
             fm.MenuPic.Image = manager.GetImageFromId(Item.ClassID);
             FoodMenus.Add(fm);
             FoodMenuPanel.Controls.Add(fm.MenuPanel);
@@ -36,7 +35,6 @@ namespace CookHelper
 
         protected void LoadMenu(List<RESULTITEM> Item)
         {
-            //Point Location = ExamplePanel.Location;
             foreach (RESULTITEM ID in Item)
             {
                 AddMenu(ID);
@@ -47,22 +45,11 @@ namespace CookHelper
         {
             while (FoodMenus.Count > 0)
             {
-                FoodMenu food = FoodMenus[0];
+                ItemListTotal food = FoodMenus[0];
                 FoodMenus.RemoveAt(0);
                 manager.favorite.RemoveItem(food.ID);
                 FoodMenuPanel.Controls.Remove(food.MenuPanel);
                 food.Dispose();
-            }
-        }
-
-        private void Favorite_ItemRemoved(object sender, EventArgs e)
-        {
-            if (sender is RESULTITEM item)
-            {
-                var menu = FoodMenus.Find(x => x.ID == item);
-                FoodMenus.Remove(menu);
-                FoodMenuPanel.Controls.Remove(menu.MenuPanel);
-                menu.Dispose();
             }
         }
 
@@ -74,15 +61,14 @@ namespace CookHelper
             }
         }
 
-        
-
-
         private void LoadFile_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.FileName = "Favorite.xml";
-            openFileDialog.Filter = "XML文件(*.xml)|*.xml";
-            openFileDialog.InitialDirectory = ".";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                FileName = "Favorite.xml",
+                Filter = "XML文件(*.xml)|*.xml",
+                InitialDirectory = "."
+            };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 manager.Update(openFileDialog.FileName);
@@ -90,7 +76,6 @@ namespace CookHelper
                 {
                     LoadInfo.Text = "载入完成";
                     manager.favorite.ItemAdded += Favorite_ItemAdded;
-                    manager.favorite.ItemRemoved += Favorite_ItemRemoved;
                     this.DialogResult = DialogResult.OK;
                     OnLine(this, EventArgs.Empty);
                     LoadMenu(manager.favorite.ReadItem());
@@ -110,14 +95,16 @@ namespace CookHelper
         {
             if (manager.favorite != null)
             {
-                SaveFileDialog saveFileDialog = new SaveFileDialog();
-                saveFileDialog.FileName = "Favorite.xml";
-                saveFileDialog.Filter = "XML文件(*.xml)|*.xml";
-                saveFileDialog.InitialDirectory = ".";
-                saveFileDialog.Title = "请选择保存的位置";
-                saveFileDialog.RestoreDirectory = true;
-                saveFileDialog.OverwritePrompt = true;
-                saveFileDialog.CheckPathExists = true;
+                SaveFileDialog saveFileDialog = new SaveFileDialog
+                {
+                    FileName = "Favorite.xml",
+                    Filter = "XML文件(*.xml)|*.xml",
+                    InitialDirectory = System.IO.Directory.GetCurrentDirectory(),
+                    Title = "请选择保存的位置",
+                    RestoreDirectory = true,
+                    OverwritePrompt = true,
+                    CheckPathExists = true
+                };
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     manager.favorite.Save(saveFileDialog.FileName);
@@ -136,7 +123,6 @@ namespace CookHelper
             RemoveAllMenu();
             manager.Update(FavoriteManager.Create());
             manager.favorite.ItemAdded += Favorite_ItemAdded;
-            manager.favorite.ItemRemoved += Favorite_ItemRemoved;
             this.DialogResult = DialogResult.OK;
             OnLine(this, EventArgs.Empty);
             LoadInfo.Text = "新建";
@@ -196,7 +182,7 @@ namespace CookHelper
     }
 
 
-    public class FoodMenu : IDisposable
+    public class ItemListTotal : IDisposable
     {
         public readonly Panel MenuPanel;
         public readonly PictureBox MenuPic;
@@ -212,7 +198,7 @@ namespace CookHelper
             MenuLabel.Dispose();
         }
 
-        public FoodMenu(Panel ExamplePanel, PictureBox ExamplePic, CheckBox ExampleCheck, TextBox ExampleLabel)
+        public ItemListTotal(Panel ExamplePanel, PictureBox ExamplePic, CheckBox ExampleCheck, TextBox ExampleLabel)
         {
             MenuPanel = ExamplePanel;
             MenuPic = ExamplePic;
@@ -220,7 +206,7 @@ namespace CookHelper
             MenuLabel = ExampleLabel;
         }
 
-        public FoodMenu(FoodMenu Example, Point location, RESULTITEM ID)
+        public ItemListTotal(ItemListTotal Example, Point location, RESULTITEM ID)
         {
             this.ID = ID;
             MenuPanel = new Panel();
