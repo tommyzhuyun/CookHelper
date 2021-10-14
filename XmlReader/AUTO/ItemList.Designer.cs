@@ -1,5 +1,5 @@
 ﻿
-namespace XmlReader.AUTO
+namespace CookHelper
 {
     partial class ItemList
     {
@@ -29,79 +29,165 @@ namespace XmlReader.AUTO
         /// </summary>
         private void InitializeComponent()
         {
-            this.FoodMenuPanel = new System.Windows.Forms.Panel();
-            this.ExamplePanel = new System.Windows.Forms.Panel();
+            this.CloseButton = new System.Windows.Forms.Button();
+            this.LoadFile = new System.Windows.Forms.Button();
+            this.SaveFile = new System.Windows.Forms.Button();
+            this.DeleteFile = new System.Windows.Forms.Button();
+            this.Statistic = new System.Windows.Forms.Button();
+            this.CreateFile = new System.Windows.Forms.Button();
+            this.ChooseAll = new System.Windows.Forms.Button();
+            this.InverseChoose = new System.Windows.Forms.Button();
+            this.LoadInfo = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.ExampleLabel2 = new System.Windows.Forms.TextBox();
+            this.ExamplePanel = new System.Windows.Forms.Panel();
             this.ExampleLabel = new System.Windows.Forms.TextBox();
             this.ExamplePic = new System.Windows.Forms.PictureBox();
             this.ExampleCheckBox = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.FoodMenuPanel.SuspendLayout();
-            this.ExamplePanel.SuspendLayout();
+            this.FoodMenuPanel = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.ExamplePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ExamplePic)).BeginInit();
+            this.FoodMenuPanel.SuspendLayout();
             this.SuspendLayout();
             // 
-            // FoodMenuPanel
+            // CloseButton
             // 
-            this.FoodMenuPanel.AutoScroll = true;
-            this.FoodMenuPanel.BackColor = System.Drawing.Color.White;
-            this.FoodMenuPanel.Controls.Add(this.ExamplePanel);
-            this.FoodMenuPanel.Dock = System.Windows.Forms.DockStyle.Left;
-            this.FoodMenuPanel.Location = new System.Drawing.Point(0, 0);
-            this.FoodMenuPanel.Name = "FoodMenuPanel";
-            this.FoodMenuPanel.Size = new System.Drawing.Size(310, 402);
-            this.FoodMenuPanel.TabIndex = 2;
+            this.CloseButton.Location = new System.Drawing.Point(3, 359);
+            this.CloseButton.Name = "CloseButton";
+            this.CloseButton.Size = new System.Drawing.Size(75, 30);
+            this.CloseButton.TabIndex = 3;
+            this.CloseButton.Text = "关闭";
+            this.CloseButton.UseVisualStyleBackColor = true;
+            this.CloseButton.Click += new System.EventHandler(this.CloseButton_Click);
+            // 
+            // LoadFile
+            // 
+            this.LoadFile.Location = new System.Drawing.Point(3, 169);
+            this.LoadFile.Name = "LoadFile";
+            this.LoadFile.Size = new System.Drawing.Size(75, 30);
+            this.LoadFile.TabIndex = 4;
+            this.LoadFile.Text = "载入";
+            this.LoadFile.UseVisualStyleBackColor = true;
+            this.LoadFile.Click += new System.EventHandler(this.LoadFile_Click);
+            // 
+            // SaveFile
+            // 
+            this.SaveFile.Enabled = false;
+            this.SaveFile.Location = new System.Drawing.Point(3, 241);
+            this.SaveFile.Name = "SaveFile";
+            this.SaveFile.Size = new System.Drawing.Size(75, 30);
+            this.SaveFile.TabIndex = 5;
+            this.SaveFile.Text = "保存";
+            this.SaveFile.UseVisualStyleBackColor = true;
+            this.SaveFile.Click += new System.EventHandler(this.SaveFile_Click);
+            // 
+            // DeleteFile
+            // 
+            this.DeleteFile.Enabled = false;
+            this.DeleteFile.Location = new System.Drawing.Point(3, 94);
+            this.DeleteFile.Name = "DeleteFile";
+            this.DeleteFile.Size = new System.Drawing.Size(75, 30);
+            this.DeleteFile.TabIndex = 6;
+            this.DeleteFile.Text = "删除";
+            this.DeleteFile.UseVisualStyleBackColor = true;
+            this.DeleteFile.Click += new System.EventHandler(this.DeleteFile_Click);
+            // 
+            // Statistic
+            // 
+            this.Statistic.Enabled = false;
+            this.Statistic.Location = new System.Drawing.Point(3, 308);
+            this.Statistic.Name = "Statistic";
+            this.Statistic.Size = new System.Drawing.Size(75, 30);
+            this.Statistic.TabIndex = 7;
+            this.Statistic.Text = "统计";
+            this.Statistic.UseVisualStyleBackColor = true;
+            this.Statistic.Click += new System.EventHandler(this.Statistic_Click);
+            // 
+            // CreateFile
+            // 
+            this.CreateFile.Location = new System.Drawing.Point(3, 205);
+            this.CreateFile.Name = "CreateFile";
+            this.CreateFile.Size = new System.Drawing.Size(75, 30);
+            this.CreateFile.TabIndex = 9;
+            this.CreateFile.Text = "新建";
+            this.CreateFile.UseVisualStyleBackColor = true;
+            this.CreateFile.Click += new System.EventHandler(this.CreateFile_Click);
+            // 
+            // ChooseAll
+            // 
+            this.ChooseAll.Enabled = false;
+            this.ChooseAll.Location = new System.Drawing.Point(3, 3);
+            this.ChooseAll.Name = "ChooseAll";
+            this.ChooseAll.Size = new System.Drawing.Size(75, 30);
+            this.ChooseAll.TabIndex = 10;
+            this.ChooseAll.Text = "全选";
+            this.ChooseAll.UseVisualStyleBackColor = true;
+            this.ChooseAll.Click += new System.EventHandler(this.ChooseAll_Click);
+            // 
+            // InverseChoose
+            // 
+            this.InverseChoose.Enabled = false;
+            this.InverseChoose.Location = new System.Drawing.Point(3, 39);
+            this.InverseChoose.Name = "InverseChoose";
+            this.InverseChoose.Size = new System.Drawing.Size(75, 30);
+            this.InverseChoose.TabIndex = 11;
+            this.InverseChoose.Text = "反选";
+            this.InverseChoose.UseVisualStyleBackColor = true;
+            this.InverseChoose.Click += new System.EventHandler(this.InverseChoose_Click);
+            // 
+            // LoadInfo
+            // 
+            this.LoadInfo.BackColor = System.Drawing.SystemColors.Control;
+            this.LoadInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.LoadInfo.Location = new System.Drawing.Point(8, 146);
+            this.LoadInfo.Name = "LoadInfo";
+            this.LoadInfo.ReadOnly = true;
+            this.LoadInfo.Size = new System.Drawing.Size(65, 16);
+            this.LoadInfo.TabIndex = 12;
+            this.LoadInfo.TabStop = false;
+            this.LoadInfo.Text = "未加载";
+            this.LoadInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.Statistic);
+            this.panel1.Controls.Add(this.LoadInfo);
+            this.panel1.Controls.Add(this.ChooseAll);
+            this.panel1.Controls.Add(this.CloseButton);
+            this.panel1.Controls.Add(this.SaveFile);
+            this.panel1.Controls.Add(this.CreateFile);
+            this.panel1.Controls.Add(this.DeleteFile);
+            this.panel1.Controls.Add(this.InverseChoose);
+            this.panel1.Controls.Add(this.LoadFile);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.panel1.Location = new System.Drawing.Point(300, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(81, 393);
+            this.panel1.TabIndex = 13;
             // 
             // ExamplePanel
             // 
             this.ExamplePanel.BackColor = System.Drawing.Color.OldLace;
-            this.ExamplePanel.Controls.Add(this.panel1);
+            this.ExamplePanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ExamplePanel.Controls.Add(this.ExampleLabel);
             this.ExamplePanel.Controls.Add(this.ExamplePic);
             this.ExamplePanel.Controls.Add(this.ExampleCheckBox);
-            this.ExamplePanel.Location = new System.Drawing.Point(4, 3);
+            this.ExamplePanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ExamplePanel.Location = new System.Drawing.Point(0, 0);
             this.ExamplePanel.Name = "ExamplePanel";
-            this.ExamplePanel.Size = new System.Drawing.Size(285, 56);
+            this.ExamplePanel.Size = new System.Drawing.Size(300, 56);
             this.ExamplePanel.TabIndex = 3;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.ExampleLabel2);
-            this.panel1.Controls.Add(this.ExampleLabel);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel1.Location = new System.Drawing.Point(85, 0);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(200, 56);
-            this.panel1.TabIndex = 7;
-            // 
-            // ExampleLabel2
-            // 
-            this.ExampleLabel2.BackColor = System.Drawing.Color.OldLace;
-            this.ExampleLabel2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ExampleLabel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ExampleLabel2.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ExampleLabel2.Location = new System.Drawing.Point(0, 22);
-            this.ExampleLabel2.Name = "ExampleLabel2";
-            this.ExampleLabel2.Size = new System.Drawing.Size(200, 22);
-            this.ExampleLabel2.TabIndex = 5;
-            this.ExampleLabel2.Text = "1个";
-            this.ExampleLabel2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ExampleLabel
             // 
             this.ExampleLabel.BackColor = System.Drawing.Color.OldLace;
             this.ExampleLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ExampleLabel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ExampleLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ExampleLabel.Location = new System.Drawing.Point(0, 0);
+            this.ExampleLabel.Location = new System.Drawing.Point(85, 14);
             this.ExampleLabel.Name = "ExampleLabel";
+            this.ExampleLabel.ReadOnly = true;
             this.ExampleLabel.Size = new System.Drawing.Size(200, 22);
-            this.ExampleLabel.TabIndex = 4;
+            this.ExampleLabel.TabIndex = 9;
             this.ExampleLabel.Text = "胡椒味浓烈的烤丝绸旗鱼";
             this.ExampleLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -109,10 +195,9 @@ namespace XmlReader.AUTO
             // 
             this.ExamplePic.BackColor = System.Drawing.Color.OldLace;
             this.ExamplePic.Dock = System.Windows.Forms.DockStyle.Left;
-            this.ExamplePic.Image = global::XmlReader.Properties.Resources._50005;
             this.ExamplePic.Location = new System.Drawing.Point(15, 0);
             this.ExamplePic.Name = "ExamplePic";
-            this.ExamplePic.Size = new System.Drawing.Size(64, 56);
+            this.ExamplePic.Size = new System.Drawing.Size(64, 54);
             this.ExamplePic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.ExamplePic.TabIndex = 5;
             this.ExamplePic.TabStop = false;
@@ -123,67 +208,29 @@ namespace XmlReader.AUTO
             this.ExampleCheckBox.Dock = System.Windows.Forms.DockStyle.Left;
             this.ExampleCheckBox.Location = new System.Drawing.Point(0, 0);
             this.ExampleCheckBox.Name = "ExampleCheckBox";
-            this.ExampleCheckBox.Size = new System.Drawing.Size(15, 56);
+            this.ExampleCheckBox.Size = new System.Drawing.Size(15, 54);
             this.ExampleCheckBox.TabIndex = 4;
             this.ExampleCheckBox.TabStop = false;
             this.ExampleCheckBox.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // FoodMenuPanel
             // 
-            this.button1.Location = new System.Drawing.Point(328, 351);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(65, 40);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "关闭";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(328, 259);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(65, 40);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "载入";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(328, 305);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(65, 40);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "保存";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(328, 213);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(65, 40);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "删除";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(328, 12);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(65, 40);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "统计";
-            this.button5.UseVisualStyleBackColor = true;
+            this.FoodMenuPanel.AutoScroll = true;
+            this.FoodMenuPanel.BackColor = System.Drawing.Color.White;
+            this.FoodMenuPanel.Controls.Add(this.ExamplePanel);
+            this.FoodMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.FoodMenuPanel.Location = new System.Drawing.Point(0, 0);
+            this.FoodMenuPanel.Name = "FoodMenuPanel";
+            this.FoodMenuPanel.Size = new System.Drawing.Size(300, 393);
+            this.FoodMenuPanel.TabIndex = 2;
             // 
             // ItemList
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(405, 402);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(381, 393);
             this.Controls.Add(this.FoodMenuPanel);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
@@ -191,29 +238,31 @@ namespace XmlReader.AUTO
             this.Name = "ItemList";
             this.Text = "收藏夹";
             this.Load += new System.EventHandler(this.RecipeList_Load);
-            this.FoodMenuPanel.ResumeLayout(false);
-            this.ExamplePanel.ResumeLayout(false);
-            this.ExamplePanel.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.ExamplePanel.ResumeLayout(false);
+            this.ExamplePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ExamplePic)).EndInit();
+            this.FoodMenuPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel FoodMenuPanel;
-        private System.Windows.Forms.Panel ExamplePanel;
-        private System.Windows.Forms.CheckBox ExampleCheckBox;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button CloseButton;
+        private System.Windows.Forms.Button LoadFile;
+        private System.Windows.Forms.Button SaveFile;
+        private System.Windows.Forms.Button DeleteFile;
+        private System.Windows.Forms.Button Statistic;
+        private System.Windows.Forms.Button CreateFile;
+        private System.Windows.Forms.Button ChooseAll;
+        private System.Windows.Forms.Button InverseChoose;
+        private System.Windows.Forms.TextBox LoadInfo;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox ExampleLabel2;
+        private System.Windows.Forms.Panel ExamplePanel;
         private System.Windows.Forms.TextBox ExampleLabel;
         private System.Windows.Forms.PictureBox ExamplePic;
+        private System.Windows.Forms.CheckBox ExampleCheckBox;
+        private System.Windows.Forms.Panel FoodMenuPanel;
     }
 }

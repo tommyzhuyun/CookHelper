@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace XmlReader.Data
+namespace CookHelper.Data
 {
     public class MenuLists
     {

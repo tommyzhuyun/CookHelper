@@ -1,12 +1,13 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace XmlReader.Data
+namespace CookHelper.Data
 {
     public class CookingRecipe
     {
-        protected XDocument Recipe { private set; get; }
+        public XDocument Recipe { private set; get; }
 
         public CookingRecipe()
         {
@@ -18,23 +19,23 @@ namespace XmlReader.Data
             Recipe = XDocument.Load(name);
         }
 
-        public List<MENU> ReadMenus()
+        public List<MENU> ReadMenus(Func<MENU,int> CalDepth)
         {
             var Recipes = new List<MENU>();
             foreach (XElement RecipeElements in Recipe.Descendants("recipe"))
             {
                 MENU re = new MENU(RecipeElements);
-                re.UpdateDepth(ResultEqualToItem(re));
+                re.UpdateDepth(CalDepth(re));
                 Recipes.Add(re);
             }
             return Recipes;
         }
 
-        public SortedSet<string> ReadItems()
+        public SortedSet<string> ReadItems(Func<MENU, int> CalDepth)
         {
             SortedSet<string> items = new SortedSet<string>();
 
-            var Recipes = ReadMenus();
+            var Recipes = ReadMenus(CalDepth);
             foreach (var re in Recipes)
             {
                 items.Add(re.SuccessID);
@@ -77,29 +78,6 @@ namespace XmlReader.Data
             return Recipe.Descendants("recipe").
                 LastOrDefault((x) =>
                 x.Attribute("trash_item")?.Value == source?.ClassID.ToString()) != null;
-        }
-
-        public int ResultEqualToItem(MENU menu)
-        {
-            var RecipeElements = Recipe.Descendants("recipe");
-            var Essential = menu.Essential;
-            int[] depth = new int[Essential.Count];
-            int i = 0;
-            foreach (var es in Essential)
-            {
-                var found = RecipeElements.Where(x => x.Attribute("result_item")?.Value == es.ClassID.ToString());
-                if (found.Count() != 0)
-                {
-                    MENU m = new MENU(found.First());
-                    depth[i] = 1 + ResultEqualToItem(m);
-                }
-                else
-                {
-                    depth[i] = 1;
-                }
-                i++;
-            }
-            return depth.Sum();
         }
 
     }

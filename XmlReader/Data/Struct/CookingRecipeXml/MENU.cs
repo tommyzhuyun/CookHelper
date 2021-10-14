@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
-namespace XmlReader.Data
+namespace CookHelper.Data
 {
     public class MENU : XmlBase
     {

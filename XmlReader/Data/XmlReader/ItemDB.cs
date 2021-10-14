@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace XmlReader.Data
+namespace CookHelper.Data
 {
     public class ItemDB
     {

@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using XmlReader.Data;
+using CookHelper.Data;
 
-namespace XmlReader
+namespace CookHelper
 {
 
     static class Program

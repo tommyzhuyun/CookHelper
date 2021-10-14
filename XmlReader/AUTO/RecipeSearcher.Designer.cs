@@ -1,5 +1,5 @@
 ﻿
-namespace XmlReader
+namespace CookHelper
 {
     partial class RecipeSearcher
     {
@@ -50,6 +50,7 @@ namespace XmlReader
             this.RecipeName = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Closer = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic)).BeginInit();
@@ -277,12 +278,13 @@ namespace XmlReader
             // 
             this.FavoriteAdd.Enabled = false;
             this.FavoriteAdd.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FavoriteAdd.Location = new System.Drawing.Point(100, 157);
+            this.FavoriteAdd.Location = new System.Drawing.Point(7, 197);
             this.FavoriteAdd.Name = "FavoriteAdd";
             this.FavoriteAdd.Size = new System.Drawing.Size(75, 30);
             this.FavoriteAdd.TabIndex = 36;
             this.FavoriteAdd.Text = "添加收藏";
             this.FavoriteAdd.UseVisualStyleBackColor = true;
+            this.FavoriteAdd.Click += new System.EventHandler(this.FavoriteAdd_Click);
             // 
             // Auto
             // 
@@ -357,11 +359,21 @@ namespace XmlReader
             this.Closer.UseVisualStyleBackColor = true;
             this.Closer.Click += new System.EventHandler(this.Closer_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(188, 392);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(140, 17);
+            this.label2.TabIndex = 36;
+            this.label2.Text = "在打开搜藏夹后才可添加";
+            // 
             // RecipeSearcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(371, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.Closer);
             this.Controls.Add(this.SearchBox);
             this.Controls.Add(this.label3);
@@ -411,5 +423,6 @@ namespace XmlReader
         private System.Windows.Forms.Button FavoriteAdd;
         private System.Windows.Forms.TextBox Other;
         private System.Windows.Forms.TextBox Deepth;
+        private System.Windows.Forms.Label label2;
     }
 }

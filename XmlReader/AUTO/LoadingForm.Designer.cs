@@ -1,5 +1,5 @@
 ﻿
-namespace XmlReader
+namespace CookHelper
 {
     partial class LoadingForm
     {
@@ -33,12 +33,13 @@ namespace XmlReader
             this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.LoadingLabel = new System.Windows.Forms.ToolStripLabel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearcherButton = new System.Windows.Forms.Button();
             this.Favorite = new System.Windows.Forms.Button();
-            this.LoadingLabel = new System.Windows.Forms.ToolStripLabel();
             this.AutoHide = new System.Windows.Forms.CheckBox();
+            this.FileReaded = new System.Windows.Forms.Label();
             this.toolStrip2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -59,7 +60,7 @@ namespace XmlReader
             this.LoadingLabel});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(233, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(275, 25);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -67,6 +68,12 @@ namespace XmlReader
             // 
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(120, 22);
+            // 
+            // LoadingLabel
+            // 
+            this.LoadingLabel.Name = "LoadingLabel";
+            this.LoadingLabel.Size = new System.Drawing.Size(91, 22);
+            this.LoadingLabel.Text = "NowLoading...";
             // 
             // contextMenuStrip1
             // 
@@ -94,7 +101,6 @@ namespace XmlReader
             // 
             // Favorite
             // 
-            this.Favorite.Enabled = false;
             this.Favorite.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Favorite.Location = new System.Drawing.Point(12, 64);
             this.Favorite.Name = "Favorite";
@@ -104,17 +110,9 @@ namespace XmlReader
             this.Favorite.UseVisualStyleBackColor = true;
             this.Favorite.Click += new System.EventHandler(this.Favorite_Click);
             // 
-            // LoadingLabel
-            // 
-            this.LoadingLabel.Name = "LoadingLabel";
-            this.LoadingLabel.Size = new System.Drawing.Size(91, 22);
-            this.LoadingLabel.Text = "NowLoading...";
-            // 
             // AutoHide
             // 
             this.AutoHide.AutoSize = true;
-            this.AutoHide.Checked = true;
-            this.AutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.AutoHide.Location = new System.Drawing.Point(119, 32);
             this.AutoHide.Name = "AutoHide";
             this.AutoHide.Size = new System.Drawing.Size(84, 24);
@@ -122,21 +120,33 @@ namespace XmlReader
             this.AutoHide.Text = "自动隐藏";
             this.AutoHide.UseVisualStyleBackColor = true;
             // 
+            // FileReaded
+            // 
+            this.FileReaded.AutoSize = true;
+            this.FileReaded.Location = new System.Drawing.Point(119, 69);
+            this.FileReaded.Name = "FileReaded";
+            this.FileReaded.Size = new System.Drawing.Size(93, 20);
+            this.FileReaded.TabIndex = 38;
+            this.FileReaded.Text = "未载入收藏夹";
+            // 
             // LoadingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(233, 99);
+            this.ClientSize = new System.Drawing.Size(275, 102);
+            this.Controls.Add(this.FileReaded);
             this.Controls.Add(this.AutoHide);
             this.Controls.Add(this.Favorite);
             this.Controls.Add(this.SearcherButton);
             this.Controls.Add(this.toolStrip2);
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Location = new System.Drawing.Point(150, 100);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.MaximizeBox = false;
             this.Name = "LoadingForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "料理助手";
             this.Load += new System.EventHandler(this.LoadingForm_Load);
             this.toolStrip2.ResumeLayout(false);
@@ -157,5 +167,6 @@ namespace XmlReader
         private System.Windows.Forms.Button Favorite;
         private System.Windows.Forms.ToolStripLabel LoadingLabel;
         private System.Windows.Forms.CheckBox AutoHide;
+        private System.Windows.Forms.Label FileReaded;
     }
 }

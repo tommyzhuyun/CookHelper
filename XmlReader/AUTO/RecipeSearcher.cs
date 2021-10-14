@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using XmlReader.Data;
+using CookHelper.Data;
 
-namespace XmlReader
+namespace CookHelper
 {
     public partial class RecipeSearcher : Form
     {
@@ -18,6 +18,7 @@ namespace XmlReader
             this.manager = manager;
             this.Menuer = Menuer;
             InitializeComponent();
+            
             Technique.SelectedIndex = 0;
             Chosener.SelectedIndex = 0;
         }
@@ -26,6 +27,11 @@ namespace XmlReader
         {
             listBox.DataSource = Menuer;
             Ordering(Menuer);
+        }
+
+        public void FavoriteUpdate()
+        {
+            FavoriteAdd.Enabled = true;
         }
 
         public void Ordering(List<Sorting> Searched)
@@ -96,8 +102,14 @@ namespace XmlReader
                     break;
             }
 
-            if(Searched.Count != 0)
+            if (Searched.Count != 0)
+            {
                 Ordering(Searched);
+                if (manager.favorite != null)
+                {
+                    FavoriteAdd.Enabled = true;
+                }
+            }
             else
             {
                 Other.Text = "NAN";
@@ -107,6 +119,7 @@ namespace XmlReader
                 ChoosedNum.Text = "NAN";
                 Deepth.Text = "NAN";
                 MenuOpen.Enabled = false;
+                FavoriteAdd.Enabled = false;
                 if (MenuOpened)
                 {
                     MenuOpened = false;
@@ -164,6 +177,7 @@ namespace XmlReader
                     MenuForm.UpdateMenu(KV);
                 }
             }
+
         }
 
         private void SearchBox_TextChanged(object sender, EventArgs e)
@@ -213,6 +227,14 @@ namespace XmlReader
         {
             MenuOpened = false;
             MenuOpen.Text = "详细菜单";
+        }
+
+        private void FavoriteAdd_Click(object sender, EventArgs e)
+        {
+            if (listBox.SelectedItem is Sorting KV)
+            {
+                manager.favorite.AddItem(KV.ClassID.ToString(), KV.Name);
+            }
         }
     }
 }

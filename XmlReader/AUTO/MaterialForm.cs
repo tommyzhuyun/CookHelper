@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using XmlReader.Data;
+using CookHelper.Data;
 
-namespace XmlReader
+namespace CookHelper
 {
     public partial class MaterialForm : Form
     {

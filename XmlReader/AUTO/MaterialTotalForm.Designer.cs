@@ -1,5 +1,5 @@
 ﻿
-namespace XmlReader.AUTO
+namespace CookHelper
 {
     partial class MaterialTotalForm
     {
@@ -30,10 +30,10 @@ namespace XmlReader.AUTO
         private void InitializeComponent()
         {
             this.panel4 = new System.Windows.Forms.Panel();
-            this.ItemPic3 = new System.Windows.Forms.PictureBox();
-            this.ItemFrom3 = new System.Windows.Forms.CheckBox();
-            this.ItemValue3 = new System.Windows.Forms.TextBox();
             this.ItemText3 = new System.Windows.Forms.TextBox();
+            this.ItemValue3 = new System.Windows.Forms.TextBox();
+            this.ItemFrom3 = new System.Windows.Forms.CheckBox();
+            this.ItemPic3 = new System.Windows.Forms.PictureBox();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemPic3)).BeginInit();
             this.SuspendLayout();
@@ -51,17 +51,34 @@ namespace XmlReader.AUTO
             this.panel4.Size = new System.Drawing.Size(90, 150);
             this.panel4.TabIndex = 28;
             // 
-            // ItemPic3
+            // ItemText3
             // 
-            this.ItemPic3.BackColor = System.Drawing.Color.White;
-            this.ItemPic3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.ItemPic3.InitialImage = null;
-            this.ItemPic3.Location = new System.Drawing.Point(0, 0);
-            this.ItemPic3.Name = "ItemPic3";
-            this.ItemPic3.Size = new System.Drawing.Size(86, 61);
-            this.ItemPic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.ItemPic3.TabIndex = 0;
-            this.ItemPic3.TabStop = false;
+            this.ItemText3.BackColor = System.Drawing.Color.White;
+            this.ItemText3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.ItemText3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ItemText3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ItemText3.Location = new System.Drawing.Point(0, 57);
+            this.ItemText3.Multiline = true;
+            this.ItemText3.Name = "ItemText3";
+            this.ItemText3.ReadOnly = true;
+            this.ItemText3.Size = new System.Drawing.Size(86, 33);
+            this.ItemText3.TabIndex = 5;
+            this.ItemText3.TabStop = false;
+            this.ItemText3.Text = "旗鱼";
+            this.ItemText3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // ItemValue3
+            // 
+            this.ItemValue3.BackColor = System.Drawing.Color.White;
+            this.ItemValue3.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.ItemValue3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ItemValue3.Location = new System.Drawing.Point(0, 90);
+            this.ItemValue3.Name = "ItemValue3";
+            this.ItemValue3.Size = new System.Drawing.Size(86, 26);
+            this.ItemValue3.TabIndex = 4;
+            this.ItemValue3.TabStop = false;
+            this.ItemValue3.Text = "10个";
+            this.ItemValue3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ItemFrom3
             // 
@@ -80,34 +97,17 @@ namespace XmlReader.AUTO
             this.ItemFrom3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.ItemFrom3.UseVisualStyleBackColor = true;
             // 
-            // ItemValue3
+            // ItemPic3
             // 
-            this.ItemValue3.BackColor = System.Drawing.Color.White;
-            this.ItemValue3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ItemValue3.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ItemValue3.Location = new System.Drawing.Point(0, 90);
-            this.ItemValue3.Name = "ItemValue3";
-            this.ItemValue3.Size = new System.Drawing.Size(86, 26);
-            this.ItemValue3.TabIndex = 4;
-            this.ItemValue3.TabStop = false;
-            this.ItemValue3.Text = "10个";
-            this.ItemValue3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // ItemText3
-            // 
-            this.ItemText3.BackColor = System.Drawing.Color.White;
-            this.ItemText3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.ItemText3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.ItemText3.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ItemText3.Location = new System.Drawing.Point(0, 57);
-            this.ItemText3.Multiline = true;
-            this.ItemText3.Name = "ItemText3";
-            this.ItemText3.ReadOnly = true;
-            this.ItemText3.Size = new System.Drawing.Size(86, 33);
-            this.ItemText3.TabIndex = 5;
-            this.ItemText3.TabStop = false;
-            this.ItemText3.Text = "旗鱼";
-            this.ItemText3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.ItemPic3.BackColor = System.Drawing.Color.White;
+            this.ItemPic3.Dock = System.Windows.Forms.DockStyle.Top;
+            this.ItemPic3.InitialImage = null;
+            this.ItemPic3.Location = new System.Drawing.Point(0, 0);
+            this.ItemPic3.Name = "ItemPic3";
+            this.ItemPic3.Size = new System.Drawing.Size(86, 61);
+            this.ItemPic3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.ItemPic3.TabIndex = 0;
+            this.ItemPic3.TabStop = false;
             // 
             // MaterialTotalForm
             // 
@@ -117,8 +117,11 @@ namespace XmlReader.AUTO
             this.Controls.Add(this.panel4);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "MaterialTotalForm";
             this.Text = "MaterialTotalForm";
+            this.Load += new System.EventHandler(this.MaterialTotalForm_Load);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemPic3)).EndInit();

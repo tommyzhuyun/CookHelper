@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
-using XmlReader.Data;
+using CookHelper.Data;
 
-namespace XmlReader
+namespace CookHelper
 {
     public partial class MenuForm :Form
     {
@@ -20,7 +20,10 @@ namespace XmlReader
             this.manager = manager;
             this.ControlOwner = Owner;
             InitializeComponent();
-
+            if (manager.favorite != null)
+            {
+                FavoriteAdd.Enabled = true;
+            }
         }
 
         private void InitializeForm()
@@ -289,6 +292,11 @@ namespace XmlReader
                     }
                 }
             }
+        }
+
+        private void FavoriteAdd_Click(object sender, EventArgs e)
+        {
+            manager.favorite.AddItem(RecipeMenu.ClassID.ToString(),RecipeMenu.Name);
         }
 
         /*

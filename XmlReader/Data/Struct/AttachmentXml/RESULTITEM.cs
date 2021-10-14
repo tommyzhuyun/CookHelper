@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace XmlReader.Data
+namespace CookHelper.Data
 {
     public class RESULTITEM : XmlBase
     {
@@ -55,6 +55,11 @@ namespace XmlReader.Data
                 }
                return source;
             }
+        }
+
+        public void Remove()
+        {
+            this.XElement.Remove();
         }
 
     }

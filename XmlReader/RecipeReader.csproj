@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3BEF2E7A-EA4E-4E36-83AF-02B42A94995B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>XmlReader</RootNamespace>
-    <AssemblyName>XmlReader</AssemblyName>
+    <RootNamespace>CookHelper</RootNamespace>
+    <AssemblyName>CookHelper</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -68,13 +68,11 @@
     <Compile Include="AUTO\MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\XmlReader\FavoriteManager.cs" />
     <Compile Include="Data\Struct\AttachmentXml\SOURCEITEM.cs" />
     <Compile Include="Data\Struct\AttachmentXml\RESULTITEM.cs" />
     <Compile Include="Data\Struct\CookingRecipeXml\MenuLists.cs" />
     <Compile Include="Data\Struct\AttachmentXml\GETITEM.cs" />
-    <Compile Include="Data\Struct\DynamicControl.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="Data\XmlReader\BaseItem.cs" />
     <Compile Include="Data\Struct\Sorting.cs" />
     <Compile Include="Data\XmlReader\CookingRecipe.cs" />

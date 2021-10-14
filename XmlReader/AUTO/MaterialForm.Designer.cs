@@ -1,5 +1,5 @@
 ﻿
-namespace XmlReader
+namespace CookHelper
 {
     partial class MaterialForm
     {

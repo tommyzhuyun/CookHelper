@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 
-namespace XmlReader.Data
+namespace CookHelper.Data
 {
     public class Manager
     {
@@ -11,6 +12,7 @@ namespace XmlReader.Data
         public readonly ItemDB itemdb;
         public readonly ItemDBChina db;
         public readonly BaseItem BaseItem;
+        public FavoriteManager favorite;
 
         public Manager()
         {
@@ -18,7 +20,26 @@ namespace XmlReader.Data
             itemdb = new ItemDB();
             db = new ItemDBChina();
             BaseItem = new BaseItem();
+            favorite = null;
         }
+
+        public void Update(string filename)
+        {
+            try
+            {
+                favorite = new FavoriteManager(filename);
+            }
+            catch (Exception)
+            {
+
+            }
+        }
+
+        public void Update(FavoriteManager favorite)
+        {
+            this.favorite = favorite;
+        }
+
 
         public string ClassIDtoName(string id)
         {
@@ -66,14 +87,14 @@ namespace XmlReader.Data
             }
         }
 
-        public Dictionary<string,string> GetFoodEffect(int id)
+        public Dictionary<string, string> GetFoodEffect(int id)
         {
             Dictionary<string, string> ED = new Dictionary<string, string>();
             ITEM item = itemdb.ReadItemDBFromID(id);
             if (item == null)
                 return ED;
             BUFFER buffer = item.FoodEffect;
-            if (buffer == null) 
+            if (buffer == null)
                 return ED;
             foreach (var effect in buffer.Effects)
             {
@@ -84,8 +105,39 @@ namespace XmlReader.Data
 
         public List<MENU> ReadRecipe()
         {
-            return recipe.ReadMenus();
+            return recipe.ReadMenus(GetDepth);
         }
+
+        public int GetDepth(MENU menu)
+        {
+            var RecipeElements = recipe.Recipe.Descendants("recipe");
+            var Essential = menu.Essential;
+            int[] depth = new int[Essential.Count];
+            int i = 0;
+            foreach (var es in Essential)
+            {
+                if (BaseItem.HasItem(es.ClassID))
+                {
+                    depth[i] = 1;
+                }
+                else
+                {
+                    var found = RecipeElements.Where(x => x.Attribute("result_item")?.Value == es.ClassID.ToString());
+                    if (found.Count() != 0)
+                    {
+                        MENU m = new MENU(found.First());
+                        depth[i] = 1 + GetDepth(m);
+                    }
+                    else
+                    {
+                        depth[i] = 1;
+                    }
+                }
+                i++;
+            }
+            return depth.Sum();
+        }
+
 
         public MENU ReadFirstRecipe(string id)
         {

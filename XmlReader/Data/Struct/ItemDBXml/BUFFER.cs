@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Xml.Linq;
 
-namespace XmlReader.Data
+namespace CookHelper.Data
 {
     public class BUFFER : XmlBase
     {
