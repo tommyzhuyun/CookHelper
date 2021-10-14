@@ -138,6 +138,8 @@ namespace CookHelper.Data
             return depth.Sum();
         }
 
+        
+
         public bool IsBase(string ClassID)
         {
             return BaseItem.HasItem(ClassID);
@@ -191,6 +193,72 @@ namespace CookHelper.Data
                 IsMenu = false;
             Sorting sorter = new Sorting(ClassIDtoName(source.ClassID), source.ClassIDInt, IsMenu, menu, item);
             return sorter;
+        }
+
+        public Sorting GetSorting(List<Sorting> sbase,int ClassID)
+        {
+            return sbase.Find(x => x.ClassID == ClassID);
+        }
+
+
+        public List<Sorting> GetBaseItem(Sorting sort)
+        {
+            if (sort == null)
+                throw new NullReferenceException("sort is null");
+            List<Sorting> source = new List<Sorting>();
+            if (sort.IsMenu && sort.Menu != null)
+            {
+                var list = sort.Menu.Essential;
+                foreach(var li in list)
+                {
+                    Sorting a = GetSourceSorting(li);
+                    var loop = GetBaseItem(a);
+                    foreach(var lo in loop)
+                    {
+                        source.Add(lo);
+                    }
+                }
+            }else if (!sort.IsMenu)
+            {
+                source.Add(sort);
+            }
+            return source;
+        }
+
+        public List<Statistic> CountOnSorting(List<Sorting> sortings)
+        {
+            List<Statistic> counton = new List<Statistic>();
+            foreach(var sort in sortings)
+            {
+                var check = counton.FirstOrDefault(x => x.Sorting.ClassID == sort.ClassID);
+                if (check != null)
+                {
+                    check.CountOn();
+                }
+                else
+                {
+                    Status status = Status.UnKown;
+                    if (BaseItem.ItemCanBuy(sort.ClassID.ToString()))
+                    {
+                        status = Status.CanBuy;
+                    }
+                    else if (BaseItem.ItemCanMission(sort.ClassID.ToString()))
+                    {
+                        status = Status.CanMission;
+                    }
+                    else if (BaseItem.ItemCanSkill(sort.ClassID.ToString()))
+                    {
+                        status = Status.CanSkill;
+                    }else if (sort.IsMenu)
+                    {
+                        status = Status.CanCook;
+                    }
+                    counton.Add(new Statistic(sort, status));
+                }
+            }
+
+            counton.Sort((a, b) => a.Status - b.Status);
+            return counton;
         }
 
     }

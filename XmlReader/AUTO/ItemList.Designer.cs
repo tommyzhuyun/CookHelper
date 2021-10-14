@@ -62,7 +62,7 @@ namespace CookHelper
             // 
             // LoadFile
             // 
-            this.LoadFile.Location = new System.Drawing.Point(3, 169);
+            this.LoadFile.Location = new System.Drawing.Point(3, 82);
             this.LoadFile.Name = "LoadFile";
             this.LoadFile.Size = new System.Drawing.Size(75, 30);
             this.LoadFile.TabIndex = 4;
@@ -73,7 +73,7 @@ namespace CookHelper
             // SaveFile
             // 
             this.SaveFile.Enabled = false;
-            this.SaveFile.Location = new System.Drawing.Point(3, 241);
+            this.SaveFile.Location = new System.Drawing.Point(3, 154);
             this.SaveFile.Name = "SaveFile";
             this.SaveFile.Size = new System.Drawing.Size(75, 30);
             this.SaveFile.TabIndex = 5;
@@ -84,7 +84,7 @@ namespace CookHelper
             // DeleteFile
             // 
             this.DeleteFile.Enabled = false;
-            this.DeleteFile.Location = new System.Drawing.Point(3, 94);
+            this.DeleteFile.Location = new System.Drawing.Point(3, 7);
             this.DeleteFile.Name = "DeleteFile";
             this.DeleteFile.Size = new System.Drawing.Size(75, 30);
             this.DeleteFile.TabIndex = 6;
@@ -105,7 +105,7 @@ namespace CookHelper
             // 
             // CreateFile
             // 
-            this.CreateFile.Location = new System.Drawing.Point(3, 205);
+            this.CreateFile.Location = new System.Drawing.Point(3, 118);
             this.CreateFile.Name = "CreateFile";
             this.CreateFile.Size = new System.Drawing.Size(75, 30);
             this.CreateFile.TabIndex = 9;
@@ -116,7 +116,7 @@ namespace CookHelper
             // ChooseAll
             // 
             this.ChooseAll.Enabled = false;
-            this.ChooseAll.Location = new System.Drawing.Point(3, 3);
+            this.ChooseAll.Location = new System.Drawing.Point(3, 217);
             this.ChooseAll.Name = "ChooseAll";
             this.ChooseAll.Size = new System.Drawing.Size(75, 30);
             this.ChooseAll.TabIndex = 10;
@@ -127,7 +127,7 @@ namespace CookHelper
             // InverseChoose
             // 
             this.InverseChoose.Enabled = false;
-            this.InverseChoose.Location = new System.Drawing.Point(3, 39);
+            this.InverseChoose.Location = new System.Drawing.Point(3, 253);
             this.InverseChoose.Name = "InverseChoose";
             this.InverseChoose.Size = new System.Drawing.Size(75, 30);
             this.InverseChoose.TabIndex = 11;
@@ -139,7 +139,7 @@ namespace CookHelper
             // 
             this.LoadInfo.BackColor = System.Drawing.SystemColors.Control;
             this.LoadInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LoadInfo.Location = new System.Drawing.Point(8, 146);
+            this.LoadInfo.Location = new System.Drawing.Point(8, 59);
             this.LoadInfo.Name = "LoadInfo";
             this.LoadInfo.ReadOnly = true;
             this.LoadInfo.Size = new System.Drawing.Size(65, 16);

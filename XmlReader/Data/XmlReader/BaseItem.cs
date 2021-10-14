@@ -39,6 +39,33 @@ namespace CookHelper.Data
             return false;
         }
 
+        public bool ItemCanBuy(string ID)
+        {
+            var a1 = Shopper.Descendants("Shops").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
+            if (a1 > 0)
+                return true;
+            else
+                return false;
+        }
+
+        public bool ItemCanMission(string ID)
+        {
+            var a2 = Mission.Descendants("Missions").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
+            if (a2 > 0)
+                return true;
+            else
+                return false;
+        }
+        public bool ItemCanSkill(string ID)
+        {
+            var a3 = Skiller.Descendants("Skills").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
+            if (a3 > 0)
+                return true;
+            else
+                return false;
+        }
+        
+
         public List<GETITEM> ItemCouldBuy(string ID)
         {
             return ItemInSide(Shopper.Descendants("Shops"), ID);

@@ -29,14 +29,29 @@ namespace CookHelper
         /// </summary>
         private void InitializeComponent()
         {
+            this.ListPanel = new System.Windows.Forms.Panel();
             this.SamplePanel = new System.Windows.Forms.Panel();
             this.SampleCheck = new System.Windows.Forms.CheckBox();
             this.SampleValue = new System.Windows.Forms.TextBox();
             this.SampleText = new System.Windows.Forms.TextBox();
             this.SamplePic = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.OnTop = new System.Windows.Forms.CheckBox();
+            this.ListPanel.SuspendLayout();
             this.SamplePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SamplePic)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // ListPanel
+            // 
+            this.ListPanel.AutoScroll = true;
+            this.ListPanel.Controls.Add(this.SamplePanel);
+            this.ListPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ListPanel.Location = new System.Drawing.Point(0, 28);
+            this.ListPanel.Name = "ListPanel";
+            this.ListPanel.Size = new System.Drawing.Size(752, 163);
+            this.ListPanel.TabIndex = 30;
             // 
             // SamplePanel
             // 
@@ -49,8 +64,8 @@ namespace CookHelper
             this.SamplePanel.Dock = System.Windows.Forms.DockStyle.Left;
             this.SamplePanel.Location = new System.Drawing.Point(0, 0);
             this.SamplePanel.Name = "SamplePanel";
-            this.SamplePanel.Size = new System.Drawing.Size(90, 172);
-            this.SamplePanel.TabIndex = 29;
+            this.SamplePanel.Size = new System.Drawing.Size(90, 163);
+            this.SamplePanel.TabIndex = 30;
             this.SamplePanel.Visible = false;
             // 
             // SampleCheck
@@ -69,7 +84,6 @@ namespace CookHelper
             this.SampleCheck.Text = "查询来源";
             this.SampleCheck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.SampleCheck.UseVisualStyleBackColor = true;
-            this.SampleCheck.CheckedChanged += new System.EventHandler(this.SampleCheck_CheckedChanged);
             // 
             // SampleValue
             // 
@@ -112,13 +126,33 @@ namespace CookHelper
             this.SamplePic.TabIndex = 0;
             this.SamplePic.TabStop = false;
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.OnTop);
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(752, 28);
+            this.panel1.TabIndex = 31;
+            // 
+            // OnTop
+            // 
+            this.OnTop.AutoSize = true;
+            this.OnTop.Location = new System.Drawing.Point(12, 4);
+            this.OnTop.Name = "OnTop";
+            this.OnTop.Size = new System.Drawing.Size(51, 21);
+            this.OnTop.TabIndex = 0;
+            this.OnTop.Text = "置顶";
+            this.OnTop.UseVisualStyleBackColor = true;
+            this.OnTop.CheckedChanged += new System.EventHandler(this.OnTop_CheckedChanged);
+            // 
             // MaterialTotalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(566, 172);
-            this.Controls.Add(this.SamplePanel);
+            this.ClientSize = new System.Drawing.Size(752, 191);
+            this.Controls.Add(this.ListPanel);
+            this.Controls.Add(this.panel1);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
@@ -127,19 +161,25 @@ namespace CookHelper
             this.Text = "MaterialTotalForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MaterialTotalForm_FormClosing);
             this.Load += new System.EventHandler(this.MaterialTotalForm_Load);
+            this.ListPanel.ResumeLayout(false);
             this.SamplePanel.ResumeLayout(false);
             this.SamplePanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SamplePic)).EndInit();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.Panel ListPanel;
         private System.Windows.Forms.Panel SamplePanel;
         private System.Windows.Forms.CheckBox SampleCheck;
         private System.Windows.Forms.TextBox SampleValue;
         private System.Windows.Forms.TextBox SampleText;
         private System.Windows.Forms.PictureBox SamplePic;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.CheckBox OnTop;
     }
 }

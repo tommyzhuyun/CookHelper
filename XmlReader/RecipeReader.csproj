@@ -68,6 +68,7 @@
     <Compile Include="AUTO\MenuForm.Designer.cs">
       <DependentUpon>MenuForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\Struct\Statistic.cs" />
     <Compile Include="Data\XmlReader\FavoriteManager.cs" />
     <Compile Include="Data\Struct\AttachmentXml\SOURCEITEM.cs" />
     <Compile Include="Data\Struct\AttachmentXml\RESULTITEM.cs" />
@@ -76,7 +77,6 @@
     <Compile Include="Data\XmlReader\BaseItem.cs" />
     <Compile Include="Data\Struct\Sorting.cs" />
     <Compile Include="Data\XmlReader\CookingRecipe.cs" />
-    <Compile Include="Data\Enum\EffectName.cs" />
     <Compile Include="Data\XmlReader\ItemDB.cs" />
     <Compile Include="Data\XmlReader\ItemDBChina.cs" />
     <Compile Include="Data\Manager.cs" />

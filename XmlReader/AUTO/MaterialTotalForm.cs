@@ -13,10 +13,10 @@ namespace CookHelper
     public partial class MaterialTotalForm : Form
     {
         public readonly Manager manager;
-        public List<Sorting> ItemList;
+        public List<Statistic> ItemList;
         public readonly MaterialTotal Example;
 
-        public MaterialTotalForm(Manager manager,List<Sorting> rs)
+        public MaterialTotalForm(Manager manager,List<Statistic> rs)
         {
             this.manager = manager;
             this.ItemList = rs;
@@ -26,20 +26,19 @@ namespace CookHelper
 
         private void MaterialTotalForm_Load(object sender, EventArgs e)
         {
-            MaterialTotalForm_Update(ItemList);
+            MaterialTotalForm_Update();
         }
 
-        public void MaterialTotalForm_Update(List<Sorting> rs)
+        public void MaterialTotalForm_Update()
         {
-            this.ItemList = rs;
             foreach (var list in ItemList)
             {
                 MaterialTotal material = new MaterialTotal(Example, list);
-                material.MenuPic.Image = manager.GetImageFromId(list.ClassID);
+                material.MenuPic.Image = manager.GetImageFromId(list.Sorting.ClassID);
                 material.MenuCheck.CheckedChanged += SampleCheck_CheckedChanged;
-                material.MenuCheck.Tag = "-----------------------------------------------------------------------------------";
+                material.MenuCheck.Tag = list;
                 Total.Add(material);
-                this.Controls.Add(material.MenuPanel);
+                ListPanel.Controls.Add(material.MenuPanel);
             }
         }
 
@@ -50,7 +49,7 @@ namespace CookHelper
             {
                 MaterialTotal total = Total[0];
                 Total.RemoveAt(0);
-                this.Controls.Remove(total.MenuPanel);
+                ListPanel.Controls.Remove(total.MenuPanel);
                 total.Dispose();
             }
         }
@@ -78,14 +77,14 @@ namespace CookHelper
         private void SampleCheck_CheckedChanged(object sender, EventArgs e)
         {
             CheckBox check = (CheckBox)sender;
-            if (!(check.Tag is Sorting sorting))
+            if (!(check.Tag is Statistic sorting))
                 return;
 
             if (check.Checked)
             {
-                if (sorting.IsMenu)
+                if (sorting.Sorting.IsMenu)
                 {
-                    MenuForm MenForm = new MenuForm(sorting, manager, check);
+                    MenuForm MenForm = new MenuForm(sorting.Sorting, manager, check);
                     MnForm.Add(MenForm);
                     MenForm.FormClosing += ControlForm_FormClosing;
                     MenForm.Show();
@@ -93,7 +92,7 @@ namespace CookHelper
                 }
                 else
                 {
-                    MaterialForm MatForm = new MaterialForm(sorting, manager, check);
+                    MaterialForm MatForm = new MaterialForm(sorting.Sorting, manager, check);
                     MtForm.Add(MatForm);
                     MatForm.FormClosing += ControlForm_FormClosing;
                     MatForm.Show();
@@ -102,7 +101,7 @@ namespace CookHelper
             }
             else
             {
-                if (sorting.IsMenu)
+                if (sorting.Sorting.IsMenu)
                 {
                     MenuForm MenForm = MnForm.Find(x => x.ControlOwner == check);
                     if (MenForm != null)
@@ -146,6 +145,14 @@ namespace CookHelper
                 fm?.Dispose();
             }
         }
+
+        private void OnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            if (OnTop.Checked)
+                this.TopMost = true;
+            else
+                this.TopMost = false;
+        }
     }
 
     public class MaterialTotal : IDisposable
@@ -175,9 +182,9 @@ namespace CookHelper
             MenuValue = ExampleValue;
         }
 
-        public MaterialTotal(MaterialTotal Example, Sorting ID)
+        public MaterialTotal(MaterialTotal Example, Statistic ID)
         {
-            this.ID = ID;
+            this.ID = ID.Sorting;
             MenuPanel = new Panel();
 
             MenuPic = new PictureBox
@@ -188,7 +195,7 @@ namespace CookHelper
                 Size = Example.MenuPic.Size,
                 SizeMode = Example.MenuPic.SizeMode,
                 TabStop = false,
-                Name = ID.Name,
+                Name = ID.Sorting.Name,
             };
             MenuCheck = new CheckBox
             {
@@ -216,8 +223,7 @@ namespace CookHelper
                 TextAlign = Example.MenuText.TextAlign,
                 Multiline = Example.MenuText.Multiline,
                 TabStop = false,
-                Name = ID.Name,
-                Text = ID.Name,
+                Text = ID.Sorting.Name,
             };
             MenuValue = new TextBox
             {
@@ -232,8 +238,7 @@ namespace CookHelper
                 TextAlign = Example.MenuValue.TextAlign,
                 Multiline = Example.MenuValue.Multiline,
                 TabStop = false,
-                Name = ID.Name,
-                Text = ID.Name,
+                Text = ID.Amount + "个",
             };
 
             
@@ -245,7 +250,6 @@ namespace CookHelper
             MenuPanel.BackColor = Example.MenuPanel.BackColor;
             MenuPanel.BorderStyle = Example.MenuPanel.BorderStyle;
             //MenuPanel.Location = location;
-            MenuPanel.Name = ID.Name;
             MenuPanel.Size = Example.MenuPanel.Size;
             MenuPanel.TabStop = false;
             MenuPanel.Visible = true;

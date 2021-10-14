@@ -21,14 +21,14 @@ namespace CookHelper
             Sorting = new List<Sorting>();
             ExampleMenu = new ItemListTotal(ExamplePanel, ExamplePic, ExampleCheckBox, ExampleLabel);
         }
-
+        
         public void UpdateSorting(List<Sorting> Sorting)
         {
             this.Sorting = Sorting;
             Statistic.Tag = true;
             Statistic.Text = "统计";
         }
-
+        
         private void RecipeList_Load(object sender, EventArgs e)
         {
             ExamplePanel.Visible = false;
@@ -183,10 +183,10 @@ namespace CookHelper
         {
             if (Sorting.Count == 0)
             {
-                bool stus = false;
+                bool WorkDown = false;
                 if (Statistic.Tag is bool boolean)
-                    stus = boolean;
-                if (stus)
+                    WorkDown = boolean;
+                if (!WorkDown)
                 {
                     Statistic.Enabled = false;
                     Statistic.Text = "Load.Err";
@@ -197,18 +197,22 @@ namespace CookHelper
             List<Sorting> result = new List<Sorting>();
             foreach (var menu in FoodMenus)
             {
-                var find = Sorting.FindAll(x => 
-                                    (x.Menu.IsSuccess(menu.ResultItem.ClassID) || x.Menu.IsTrash(menu.ResultItem.ClassID)) 
-                                    && (!x.IsMenu || manager.IsBase(x.ClassID.ToString())));
+                if (menu.MenuCheck.Checked)
+                {
+                    var Sorting = manager.GetSorting(this.Sorting, menu.ResultItem.ClassIDInt);
+                    var find = manager.GetBaseItem(Sorting);
 
-                foreach(var f in find)
-                    result.Add(f);
+                    foreach (var f in find)
+                        result.Add(f);
+                }
             }
+            //result.Sort((a, b) => a.Item.);
 
-            MaterialTotalForm materialTotalForm = new MaterialTotalForm(manager, result);
+            MaterialTotalForm materialTotalForm = new MaterialTotalForm(manager, manager.CountOnSorting(result));
             materialTotalForm.Show();
             materialTotalForm.Location = new Point(this.Location.X, this.Bottom);
         }
+
     }
 
 

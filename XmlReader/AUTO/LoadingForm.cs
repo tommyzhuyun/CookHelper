@@ -26,9 +26,7 @@ namespace CookHelper
         private void LoadingForm_Load(object sender, EventArgs e)
         {
             this.BackgroundWorker.RunWorkerAsync();
-
         }
-
 
         private void Init(MENU menu)
         {
