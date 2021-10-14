@@ -30,7 +30,6 @@ namespace CookHelper
         private void InitializeComponent()
         {
             this.MenuSelect = new System.Windows.Forms.ComboBox();
-            this.MatrialList = new System.Windows.Forms.CheckBox();
             this.RecipeName = new System.Windows.Forms.TextBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.ItemText3 = new System.Windows.Forms.TextBox();
@@ -79,23 +78,6 @@ namespace CookHelper
             this.MenuSelect.TabIndex = 24;
             this.MenuSelect.TabStop = false;
             this.MenuSelect.SelectedIndexChanged += new System.EventHandler(this.MenuSelect_SelectedIndexChanged);
-            // 
-            // MatrialList
-            // 
-            this.MatrialList.Appearance = System.Windows.Forms.Appearance.Button;
-            this.MatrialList.AutoSize = true;
-            this.MatrialList.Cursor = System.Windows.Forms.Cursors.Default;
-            this.MatrialList.Enabled = false;
-            this.MatrialList.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.MatrialList.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.MatrialList.Location = new System.Drawing.Point(221, 359);
-            this.MatrialList.Name = "MatrialList";
-            this.MatrialList.Size = new System.Drawing.Size(75, 30);
-            this.MatrialList.TabIndex = 30;
-            this.MatrialList.TabStop = false;
-            this.MatrialList.Text = "材料清单";
-            this.MatrialList.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.MatrialList.UseVisualStyleBackColor = true;
             // 
             // RecipeName
             // 
@@ -387,7 +369,7 @@ namespace CookHelper
             this.FavoriteAdd.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FavoriteAdd.Location = new System.Drawing.Point(144, 395);
             this.FavoriteAdd.Name = "FavoriteAdd";
-            this.FavoriteAdd.Size = new System.Drawing.Size(74, 30);
+            this.FavoriteAdd.Size = new System.Drawing.Size(75, 30);
             this.FavoriteAdd.TabIndex = 37;
             this.FavoriteAdd.Text = "添加收藏";
             this.FavoriteAdd.UseVisualStyleBackColor = true;
@@ -398,9 +380,9 @@ namespace CookHelper
             this.button2.Enabled = false;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(144, 359);
+            this.button2.Location = new System.Drawing.Point(221, 359);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(74, 30);
+            this.button2.Size = new System.Drawing.Size(75, 30);
             this.button2.TabIndex = 38;
             this.button2.TabStop = false;
             this.button2.Text = "比例尺";
@@ -416,7 +398,6 @@ namespace CookHelper
             this.Controls.Add(this.Closer);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.MenuSelect);
-            this.Controls.Add(this.MatrialList);
             this.Controls.Add(this.RecipeName);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
@@ -453,7 +434,6 @@ namespace CookHelper
         #endregion
 
         private System.Windows.Forms.ComboBox MenuSelect;
-        private System.Windows.Forms.CheckBox MatrialList;
         private System.Windows.Forms.TextBox RecipeName;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox ItemText3;

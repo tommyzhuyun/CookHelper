@@ -31,63 +31,27 @@ namespace CookHelper
         {
             this.components = new System.ComponentModel.Container();
             this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
-            this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.LoadingLabel = new System.Windows.Forms.ToolStripLabel();
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.SearcherButton = new System.Windows.Forms.Button();
             this.Favorite = new System.Windows.Forms.Button();
             this.AutoHide = new System.Windows.Forms.CheckBox();
             this.FileReaded = new System.Windows.Forms.Label();
             this.Message = new System.Windows.Forms.Label();
-            this.toolStrip2.SuspendLayout();
+            this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.LoadingLabel = new System.Windows.Forms.ToolStripLabel();
+            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.contextMenuStrip1.SuspendLayout();
+            this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
             // BackgroundWorker
             // 
             this.BackgroundWorker.WorkerReportsProgress = true;
+            this.BackgroundWorker.WorkerSupportsCancellation = true;
             this.BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
             this.BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
             this.BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
-            // 
-            // toolStrip2
-            // 
-            this.toolStrip2.CanOverflow = false;
-            this.toolStrip2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ProgressBar,
-            this.LoadingLabel});
-            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(275, 25);
-            this.toolStrip2.TabIndex = 2;
-            this.toolStrip2.Text = "toolStrip2";
-            // 
-            // ProgressBar
-            // 
-            this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(120, 22);
-            // 
-            // LoadingLabel
-            // 
-            this.LoadingLabel.Name = "LoadingLabel";
-            this.LoadingLabel.Size = new System.Drawing.Size(91, 22);
-            this.LoadingLabel.Text = "NowLoading...";
-            // 
-            // contextMenuStrip1
-            // 
-            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.关闭ToolStripMenuItem});
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
-            // 
-            // 关闭ToolStripMenuItem
-            // 
-            this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
-            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
-            this.关闭ToolStripMenuItem.Text = "关闭";
             // 
             // SearcherButton
             // 
@@ -140,6 +104,43 @@ namespace CookHelper
             this.Message.TabIndex = 39;
             this.Message.Text = "By 鸡蛋甲天下(潘妮) 1943495203";
             // 
+            // 关闭ToolStripMenuItem
+            // 
+            this.关闭ToolStripMenuItem.Name = "关闭ToolStripMenuItem";
+            this.关闭ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.关闭ToolStripMenuItem.Text = "关闭";
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.关闭ToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(101, 26);
+            // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(120, 22);
+            // 
+            // LoadingLabel
+            // 
+            this.LoadingLabel.Name = "LoadingLabel";
+            this.LoadingLabel.Size = new System.Drawing.Size(91, 22);
+            this.LoadingLabel.Text = "NowLoading...";
+            // 
+            // toolStrip2
+            // 
+            this.toolStrip2.CanOverflow = false;
+            this.toolStrip2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProgressBar,
+            this.LoadingLabel});
+            this.toolStrip2.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip2.Name = "toolStrip2";
+            this.toolStrip2.Size = new System.Drawing.Size(275, 25);
+            this.toolStrip2.TabIndex = 2;
+            this.toolStrip2.Text = "toolStrip2";
+            // 
             // LoadingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -160,10 +161,11 @@ namespace CookHelper
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "料理助手";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoadingForm_FormClosing);
             this.Load += new System.EventHandler(this.LoadingForm_Load);
+            this.contextMenuStrip1.ResumeLayout(false);
             this.toolStrip2.ResumeLayout(false);
             this.toolStrip2.PerformLayout();
-            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -171,15 +173,15 @@ namespace CookHelper
 
         #endregion
         private System.ComponentModel.BackgroundWorker BackgroundWorker;
-        private System.Windows.Forms.ToolStrip toolStrip2;
-        private System.Windows.Forms.ToolStripProgressBar ProgressBar;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem;
         private System.Windows.Forms.Button SearcherButton;
         private System.Windows.Forms.Button Favorite;
-        private System.Windows.Forms.ToolStripLabel LoadingLabel;
         private System.Windows.Forms.CheckBox AutoHide;
         private System.Windows.Forms.Label FileReaded;
         private System.Windows.Forms.Label Message;
+        private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripProgressBar ProgressBar;
+        private System.Windows.Forms.ToolStripLabel LoadingLabel;
+        private System.Windows.Forms.ToolStrip toolStrip2;
     }
 }

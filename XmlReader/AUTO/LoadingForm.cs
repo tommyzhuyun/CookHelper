@@ -58,6 +58,11 @@ namespace CookHelper
             this.BackgroundWorker.ReportProgress(Count * 100 / All);
             foreach (var m in MENUS)
             {
+                if (BackgroundWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
                 Init(m);
                 Count++;
                 this.BackgroundWorker.ReportProgress(Count * 100 / All);
@@ -67,7 +72,8 @@ namespace CookHelper
 
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
-            this.ProgressBar.Value = e.ProgressPercentage;
+            if (!BackgroundWorker.CancellationPending)
+                this.ProgressBar.Value = e.ProgressPercentage;
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -138,6 +144,11 @@ namespace CookHelper
                 recipe.FavoriteUpdate(true);
             }
 
+        }
+
+        private void LoadingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.BackgroundWorker.CancelAsync();
         }
     }
 }
