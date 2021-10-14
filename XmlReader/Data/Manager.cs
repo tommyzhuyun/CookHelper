@@ -138,6 +138,10 @@ namespace CookHelper.Data
             return depth.Sum();
         }
 
+        public bool IsBase(string ClassID)
+        {
+            return BaseItem.HasItem(ClassID);
+        }
 
         public MENU ReadFirstRecipe(string id)
         {

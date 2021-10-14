@@ -51,7 +51,6 @@ namespace CookHelper
             this.ResultPic = new System.Windows.Forms.PictureBox();
             this.Technique = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.Closer = new System.Windows.Forms.Button();
             this.FavoriteAdd = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -371,19 +370,6 @@ namespace CookHelper
             this.pictureBox6.TabIndex = 31;
             this.pictureBox6.TabStop = false;
             // 
-            // button1
-            // 
-            this.button1.Enabled = false;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button1.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button1.Location = new System.Drawing.Point(221, 323);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 30);
-            this.button1.TabIndex = 32;
-            this.button1.TabStop = false;
-            this.button1.Text = "比例修正";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // Closer
             // 
             this.Closer.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
@@ -412,9 +398,9 @@ namespace CookHelper
             this.button2.Enabled = false;
             this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.button2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(143, 323);
+            this.button2.Location = new System.Drawing.Point(144, 359);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 30);
+            this.button2.Size = new System.Drawing.Size(74, 30);
             this.button2.TabIndex = 38;
             this.button2.TabStop = false;
             this.button2.Text = "比例尺";
@@ -428,7 +414,6 @@ namespace CookHelper
             this.Controls.Add(this.button2);
             this.Controls.Add(this.FavoriteAdd);
             this.Controls.Add(this.Closer);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.MenuSelect);
             this.Controls.Add(this.MatrialList);
@@ -489,7 +474,6 @@ namespace CookHelper
         private System.Windows.Forms.PictureBox ResultPic;
         private System.Windows.Forms.PictureBox Technique;
         private System.Windows.Forms.PictureBox pictureBox6;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button Closer;
         private System.Windows.Forms.Button FavoriteAdd;
         private System.Windows.Forms.Button button2;

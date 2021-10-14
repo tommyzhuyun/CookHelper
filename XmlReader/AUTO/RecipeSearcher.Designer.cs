@@ -366,7 +366,7 @@ namespace CookHelper
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(140, 17);
             this.label2.TabIndex = 36;
-            this.label2.Text = "在打开搜藏夹后才可添加";
+            this.label2.Text = "在打开收藏夹后才可添加";
             // 
             // RecipeSearcher
             // 

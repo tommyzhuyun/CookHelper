@@ -9,6 +9,7 @@ namespace CookHelper
     public partial class ItemList : Form
     {
         public List<ItemListTotal> FoodMenus;
+        public List<Sorting> Sorting;
         public readonly Manager manager;
         public event EventHandler OnLine;
         public readonly ItemListTotal ExampleMenu;
@@ -17,7 +18,15 @@ namespace CookHelper
             this.manager = manager;
             InitializeComponent();
             FoodMenus = new List<ItemListTotal>();
+            Sorting = new List<Sorting>();
             ExampleMenu = new ItemListTotal(ExamplePanel, ExamplePic, ExampleCheckBox, ExampleLabel);
+        }
+
+        public void UpdateSorting(List<Sorting> Sorting)
+        {
+            this.Sorting = Sorting;
+            Statistic.Tag = true;
+            Statistic.Text = "统计";
         }
 
         private void RecipeList_Load(object sender, EventArgs e)
@@ -27,7 +36,7 @@ namespace CookHelper
 
         protected void AddMenu(RESULTITEM Item)
         {
-            ItemListTotal fm = new ItemListTotal(ExampleMenu, Location, Item);
+            ItemListTotal fm = new ItemListTotal(ExampleMenu, Item);
             fm.MenuPic.Image = manager.GetImageFromId(Item.ClassID);
             FoodMenus.Add(fm);
             FoodMenuPanel.Controls.Add(fm.MenuPanel);
@@ -47,7 +56,7 @@ namespace CookHelper
             {
                 ItemListTotal food = FoodMenus[0];
                 FoodMenus.RemoveAt(0);
-                manager.favorite.RemoveItem(food.ID);
+                manager.favorite.RemoveItem(food.ResultItem);
                 FoodMenuPanel.Controls.Remove(food.MenuPanel);
                 food.Dispose();
             }
@@ -146,7 +155,7 @@ namespace CookHelper
             {
                 var item = list[0];
                 list.RemoveAt(0);
-                manager.favorite.RemoveItem(item.ID);
+                manager.favorite.RemoveItem(item.ResultItem);
                 FoodMenus.Remove(item);
                 FoodMenuPanel.Controls.Remove(item.MenuPanel);
                 item.Dispose();
@@ -172,9 +181,30 @@ namespace CookHelper
 
         private void Statistic_Click(object sender, EventArgs e)
         {
-            List<RESULTITEM> result = new List<RESULTITEM>();
+            if (Sorting.Count == 0)
+            {
+                bool stus = false;
+                if (Statistic.Tag is bool boolean)
+                    stus = boolean;
+                if (stus)
+                {
+                    Statistic.Enabled = false;
+                    Statistic.Text = "Load.Err";
+                }
+                return;
+            }
+
+            List<Sorting> result = new List<Sorting>();
             foreach (var menu in FoodMenus)
-                result.Add(menu.ID);
+            {
+                var find = Sorting.FindAll(x => 
+                                    (x.Menu.IsSuccess(menu.ResultItem.ClassID) || x.Menu.IsTrash(menu.ResultItem.ClassID)) 
+                                    && (!x.IsMenu || manager.IsBase(x.ClassID.ToString())));
+
+                foreach(var f in find)
+                    result.Add(f);
+            }
+
             MaterialTotalForm materialTotalForm = new MaterialTotalForm(manager, result);
             materialTotalForm.Show();
             materialTotalForm.Location = new Point(this.Location.X, this.Bottom);
@@ -188,7 +218,7 @@ namespace CookHelper
         public readonly PictureBox MenuPic;
         public readonly CheckBox MenuCheck;
         public readonly TextBox MenuLabel;
-        public readonly RESULTITEM ID;
+        public readonly RESULTITEM ResultItem;
 
         public void Dispose()
         {
@@ -206,9 +236,9 @@ namespace CookHelper
             MenuLabel = ExampleLabel;
         }
 
-        public ItemListTotal(ItemListTotal Example, Point location, RESULTITEM ID)
+        public ItemListTotal(ItemListTotal Example, RESULTITEM ID)
         {
-            this.ID = ID;
+            this.ResultItem = ID;
             MenuPanel = new Panel();
 
             MenuPic = new PictureBox
@@ -252,7 +282,7 @@ namespace CookHelper
             MenuPanel.Dock = Example.MenuPanel.Dock;
             MenuPanel.BackColor = Example.MenuPanel.BackColor;
             MenuPanel.BorderStyle = Example.MenuPanel.BorderStyle;
-            MenuPanel.Location = location;
+            //MenuPanel.Location = location;
             MenuPanel.Name = ID.Name;
             MenuPanel.Size = Example.MenuPanel.Size;
             MenuPanel.TabStop = false;

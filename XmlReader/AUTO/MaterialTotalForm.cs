@@ -13,23 +13,139 @@ namespace CookHelper
     public partial class MaterialTotalForm : Form
     {
         public readonly Manager manager;
-        public readonly List<RESULTITEM> ItemList;
+        public List<Sorting> ItemList;
+        public readonly MaterialTotal Example;
 
-        public MaterialTotalForm(Manager manager,List<RESULTITEM> rs)
+        public MaterialTotalForm(Manager manager,List<Sorting> rs)
         {
             this.manager = manager;
             this.ItemList = rs;
             InitializeComponent();
+            Example = new MaterialTotal(SamplePanel, SamplePic, SampleText, SampleValue, SampleCheck);
         }
 
         private void MaterialTotalForm_Load(object sender, EventArgs e)
         {
+            MaterialTotalForm_Update(ItemList);
+        }
 
+        public void MaterialTotalForm_Update(List<Sorting> rs)
+        {
+            this.ItemList = rs;
+            foreach (var list in ItemList)
+            {
+                MaterialTotal material = new MaterialTotal(Example, list);
+                material.MenuPic.Image = manager.GetImageFromId(list.ClassID);
+                material.MenuCheck.CheckedChanged += SampleCheck_CheckedChanged;
+                material.MenuCheck.Tag = "-----------------------------------------------------------------------------------";
+                Total.Add(material);
+                this.Controls.Add(material.MenuPanel);
+            }
+        }
+
+        private readonly List<MaterialTotal> Total = new List<MaterialTotal>();
+        public void Clear()
+        {
+            while(Total.Count > 0)
+            {
+                MaterialTotal total = Total[0];
+                Total.RemoveAt(0);
+                this.Controls.Remove(total.MenuPanel);
+                total.Dispose();
+            }
+        }
+
+        private readonly List<MenuForm> MnForm = new List<MenuForm>();
+        private readonly List<MaterialForm> MtForm = new List<MaterialForm>();
+
+        private void ControlForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Control ControlOwner = null;
+            if (sender is MaterialForm material)
+            {
+                ControlOwner = material.ControlOwner;
+            }
+            else if (sender is MenuForm menu)
+            {
+                ControlOwner = menu.ControlOwner;
+            }
+
+            if (ControlOwner != null)
+                ((CheckBox)ControlOwner).Checked = false;
 
         }
 
+        private void SampleCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox check = (CheckBox)sender;
+            if (!(check.Tag is Sorting sorting))
+                return;
 
+            if (check.Checked)
+            {
+                if (sorting.IsMenu)
+                {
+                    MenuForm MenForm = new MenuForm(sorting, manager, check);
+                    MnForm.Add(MenForm);
+                    MenForm.FormClosing += ControlForm_FormClosing;
+                    MenForm.Show();
+                    MenForm.Location = new System.Drawing.Point(this.Location.X + this.Size.Width, this.Location.Y);
+                }
+                else
+                {
+                    MaterialForm MatForm = new MaterialForm(sorting, manager, check);
+                    MtForm.Add(MatForm);
+                    MatForm.FormClosing += ControlForm_FormClosing;
+                    MatForm.Show();
+                    MatForm.Location = new System.Drawing.Point(this.Location.X + this.Size.Width, this.Location.Y);
+                }
+            }
+            else
+            {
+                if (sorting.IsMenu)
+                {
+                    MenuForm MenForm = MnForm.Find(x => x.ControlOwner == check);
+                    if (MenForm != null)
+                    {
+                        MnForm.Remove(MenForm);
+                        MenForm.FormClosing -= ControlForm_FormClosing;
+                        MenForm?.Close();
+                        MenForm?.Dispose();
+                    }
+                }
+                else
+                {
+                    MaterialForm MatForm = MtForm.Find(x => x.ControlOwner == check);
+                    if (MatForm != null)
+                    {
+                        MtForm.Remove(MatForm);
+                        MatForm.FormClosing -= ControlForm_FormClosing;
+                        MatForm?.Close();
+                        MatForm?.Dispose();
+                    }
+                }
+            }
 
+        }
+
+        private void MaterialTotalForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Clear();
+            while (MnForm.Count > 0)
+            {
+                var fm = MnForm[0];
+                MnForm.RemoveAt(0);
+                fm?.Close();
+                fm?.Dispose();
+            }
+            while (MtForm.Count > 0)
+            {
+                var fm = MtForm[0];
+                MtForm.RemoveAt(0);
+                fm?.Close();
+                fm?.Dispose();
+            }
+        }
     }
 
     public class MaterialTotal : IDisposable
@@ -39,7 +155,7 @@ namespace CookHelper
         public readonly CheckBox MenuCheck;
         public readonly TextBox MenuText;
         public readonly TextBox MenuValue;
-        public readonly RESULTITEM ID;
+        public readonly Sorting ID;
 
         public void Dispose()
         {
@@ -59,7 +175,7 @@ namespace CookHelper
             MenuValue = ExampleValue;
         }
 
-        public MaterialTotal(MaterialTotal Example, Point location, RESULTITEM ID)
+        public MaterialTotal(MaterialTotal Example, Sorting ID)
         {
             this.ID = ID;
             MenuPanel = new Panel();
@@ -77,12 +193,15 @@ namespace CookHelper
             MenuCheck = new CheckBox
             {
                 AutoSize = true,
+                Appearance = Example.MenuCheck.Appearance,
                 Location = Example.MenuCheck.Location,
                 Dock = Example.MenuCheck.Dock,
                 Size = Example.MenuCheck.Size,
+                TextAlign = Example.MenuCheck.TextAlign,
                 UseVisualStyleBackColor = true,
                 TabStop = false,
-                Name = ID.Name,
+                Name = Example.MenuCheck.Text,
+                Text = Example.MenuCheck.Text,
             };
             MenuText = new TextBox
             {
@@ -94,6 +213,8 @@ namespace CookHelper
                 Font = Example.MenuText.Font,
                 Location = Example.MenuText.Location,
                 Size = Example.MenuText.Size,
+                TextAlign = Example.MenuText.TextAlign,
+                Multiline = Example.MenuText.Multiline,
                 TabStop = false,
                 Name = ID.Name,
                 Text = ID.Name,
@@ -108,19 +229,22 @@ namespace CookHelper
                 Font = Example.MenuValue.Font,
                 Location = Example.MenuValue.Location,
                 Size = Example.MenuValue.Size,
+                TextAlign = Example.MenuValue.TextAlign,
+                Multiline = Example.MenuValue.Multiline,
                 TabStop = false,
                 Name = ID.Name,
                 Text = ID.Name,
             };
 
-            MenuPanel.Controls.Add(MenuPic);
+            
             MenuPanel.Controls.Add(MenuCheck);
-            MenuPanel.Controls.Add(MenuText);
             MenuPanel.Controls.Add(MenuValue);
+            MenuPanel.Controls.Add(MenuText);
+            MenuPanel.Controls.Add(MenuPic);
             MenuPanel.Dock = Example.MenuPanel.Dock;
             MenuPanel.BackColor = Example.MenuPanel.BackColor;
             MenuPanel.BorderStyle = Example.MenuPanel.BorderStyle;
-            MenuPanel.Location = location;
+            //MenuPanel.Location = location;
             MenuPanel.Name = ID.Name;
             MenuPanel.Size = Example.MenuPanel.Size;
             MenuPanel.TabStop = false;

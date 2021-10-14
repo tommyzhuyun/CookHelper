@@ -26,16 +26,7 @@ namespace CookHelper
         private void LoadingForm_Load(object sender, EventArgs e)
         {
             this.BackgroundWorker.RunWorkerAsync();
-            /*
-            bool exist = File.Exists("Favorite.xml");
-            if (exist)
-            {
-                manager.Update("Favorite.xml");
-                if (manager.favorite != null)
-                {
-                    FileReaded.Text = "已加载收藏夹";
-                }
-            }*/
+
         }
 
 
@@ -87,6 +78,8 @@ namespace CookHelper
             LoadingLabel.Text = "Done.";
             SearcherButton.Enabled = true;
             SearcherButton.Text = "打开清单";
+            if (list != null)
+                list.UpdateSorting(Menuer);
         }
 
 
@@ -108,10 +101,10 @@ namespace CookHelper
             SearcherButton.Enabled = true;
             this.Show();
         }
-
+        ItemList list = null;
         private void Favorite_Click(object sender, EventArgs e)
         {
-            ItemList list = new ItemList(manager);
+            list = new ItemList(manager);
             list.Show();
             list.OnLine += List_OnLine;
             list.Location = new System.Drawing.Point(Bounds.Right - list.Bounds.Width, Bounds.Bottom);
@@ -120,6 +113,10 @@ namespace CookHelper
                 this.Hide();
             }
             list.FormClosed += List_FormClosed;
+            if (!BackgroundWorker.IsBusy)
+            {
+                list.UpdateSorting(Menuer);
+            }
             Favorite.Enabled = false;
         }
 
@@ -132,6 +129,7 @@ namespace CookHelper
             {
                 recipe.FavoriteUpdate(false);
             }
+            list = null;
         }
 
         private void List_OnLine(object sender, EventArgs e)
@@ -141,6 +139,16 @@ namespace CookHelper
             {
                 recipe.FavoriteUpdate(true);
             }
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int ClassID = 50104;
+
+
+
+
 
         }
     }

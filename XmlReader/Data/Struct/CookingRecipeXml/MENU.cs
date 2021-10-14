@@ -99,6 +99,16 @@ namespace CookHelper.Data
             return SuccessIDInt == ClassID;
         }
 
+        public bool IsTrash(string ClassID)
+        {
+            return TrashID == ClassID;
+        }
+
+        public bool IsTrash(int ClassID)
+        {
+            return TrashIDInt == ClassID;
+        }
+
         public string TrashID
         {
             get
