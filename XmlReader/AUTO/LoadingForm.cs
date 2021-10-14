@@ -139,15 +139,5 @@ namespace CookHelper
             }
 
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            int ClassID = 50104;
-
-
-
-
-
-        }
     }
 }

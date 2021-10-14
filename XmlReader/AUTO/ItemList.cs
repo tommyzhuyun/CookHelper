@@ -93,6 +93,7 @@ namespace CookHelper
                     DeleteFile.Enabled = true;
                     SaveFile.Enabled = true;
                     Statistic.Enabled = true;
+                    Loading.Text = "静态";
                 }
                 else
                     LoadInfo.Text = "载入失败";
@@ -140,6 +141,7 @@ namespace CookHelper
             DeleteFile.Enabled = true;
             SaveFile.Enabled = true;
             Statistic.Enabled = true;
+            Loading.Text = "静态";
         }
 
         private void DeleteFile_Click(object sender, EventArgs e)
@@ -181,6 +183,9 @@ namespace CookHelper
 
         private void Statistic_Click(object sender, EventArgs e)
         {
+            ProgressBar.Value = 0;
+            Loading.Text = "加载中.";
+            Loading.Update();
             if (Sorting.Count == 0)
             {
                 bool WorkDown = false;
@@ -190,11 +195,20 @@ namespace CookHelper
                 {
                     Statistic.Enabled = false;
                     Statistic.Text = "Load.Err";
+                    Loading.Text = "未知错误";
+                    Loading.Update();
                 }
                 return;
             }
+            this.Statistic.Enabled = false;
+            this.BackgroundWorker.RunWorkerAsync();
+        }
+        private List<Statistic> data = new List<Statistic>();
 
+        private void BackgroundWorker_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
             List<Sorting> result = new List<Sorting>();
+            int Count = 0, All = FoodMenus.Count;
             foreach (var menu in FoodMenus)
             {
                 if (menu.MenuCheck.Checked)
@@ -205,14 +219,26 @@ namespace CookHelper
                     foreach (var f in find)
                         result.Add(f);
                 }
+                Count++;
+                this.BackgroundWorker.ReportProgress(Count * 95 / All);
             }
-            //result.Sort((a, b) => a.Item.);
-
-            MaterialTotalForm materialTotalForm = new MaterialTotalForm(manager, manager.CountOnSorting(result));
-            materialTotalForm.Show();
-            materialTotalForm.Location = new Point(this.Location.X, this.Bottom);
+            data = manager.CountOnSorting(result);
+            this.BackgroundWorker.ReportProgress(100);
         }
 
+        private void BackgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
+        {
+            ProgressBar.Value = e.ProgressPercentage;
+        }
+
+        private void BackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            MaterialTotalForm materialTotalForm = new MaterialTotalForm(manager, data);
+            materialTotalForm.Show();
+            materialTotalForm.Location = new Point(this.Location.X, this.Bottom);
+            Loading.Text = "统计完成";
+            this.Statistic.Enabled = true;
+        }
     }
 
 
@@ -258,8 +284,8 @@ namespace CookHelper
             MenuCheck = new CheckBox
             {
                 AutoSize = true,
-                Location = Example.MenuCheck.Location,
                 Dock = Example.MenuCheck.Dock,
+                Location = Example.MenuCheck.Location,
                 Size = Example.MenuCheck.Size,
                 UseVisualStyleBackColor = true,
                 TabStop = false,

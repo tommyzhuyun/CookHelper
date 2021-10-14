@@ -26,8 +26,8 @@ namespace CookHelper.Data
     public enum Status
     {
         CanBuy,
-        CanMission,
         CanSkill,
+        CanMission,
         CanCook,
         UnKown
     }

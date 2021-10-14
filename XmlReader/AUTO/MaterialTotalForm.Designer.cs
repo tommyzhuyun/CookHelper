@@ -37,6 +37,7 @@ namespace CookHelper
             this.SamplePic = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.OnTop = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
             this.ListPanel.SuspendLayout();
             this.SamplePanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SamplePic)).BeginInit();
@@ -128,6 +129,7 @@ namespace CookHelper
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.OnTop);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -146,6 +148,15 @@ namespace CookHelper
             this.OnTop.UseVisualStyleBackColor = true;
             this.OnTop.CheckedChanged += new System.EventHandler(this.OnTop_CheckedChanged);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(82, 5);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(364, 17);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "排序方式：未知 → 可料理 → 任务卷轴获取 → 可采集 → 商店购买";
+            // 
             // MaterialTotalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
@@ -158,7 +169,7 @@ namespace CookHelper
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MaterialTotalForm";
-            this.Text = "MaterialTotalForm";
+            this.Text = "材料统计窗口";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MaterialTotalForm_FormClosing);
             this.Load += new System.EventHandler(this.MaterialTotalForm_Load);
             this.ListPanel.ResumeLayout(false);
@@ -181,5 +192,6 @@ namespace CookHelper
         private System.Windows.Forms.PictureBox SamplePic;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.CheckBox OnTop;
+        private System.Windows.Forms.Label label1;
     }
 }
