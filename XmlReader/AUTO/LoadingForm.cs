@@ -16,10 +16,10 @@ namespace CookHelper
         public List<Sorting> Menuer;
         private RecipeSearcher recipe = null;
 
-        public LoadingForm()
+        public LoadingForm(Manager manager)
         {
             InitializeComponent();
-            this.manager = new Manager();
+            this.manager = manager;
             Menuer = new List<Sorting>();
         }
 
@@ -92,10 +92,6 @@ namespace CookHelper
             recipe = new RecipeSearcher(manager, Menuer);
             recipe.Show();
             recipe.Location = new System.Drawing.Point(Bounds.Right, Bounds.Y);
-            if (AutoHide.Checked)
-            {
-                this.Hide();
-            }
             recipe.FormClosed += Recipe_FormClosed;
             SearcherButton.Enabled = false;
         }
@@ -112,10 +108,6 @@ namespace CookHelper
             list.Show();
             list.OnLine += List_OnLine;
             list.Location = new System.Drawing.Point(Bounds.Right - list.Bounds.Width, Bounds.Bottom);
-            if (AutoHide.Checked)
-            {
-                this.Hide();
-            }
             list.FormClosed += List_FormClosed;
             if (!BackgroundWorker.IsBusy)
             {
@@ -150,5 +142,6 @@ namespace CookHelper
         {
             this.BackgroundWorker.CancelAsync();
         }
+
     }
 }

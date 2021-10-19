@@ -46,6 +46,18 @@ namespace CookHelper.Data
                     return Menu.IsSuccess(ClassID);
             }
         }
+
+        public bool IsEvent
+        {
+            get
+            {
+                if (Menu == null)
+                    return false;
+                else
+                    return Menu.Locale != null || Menu.Event != null;
+            }
+        }
+
         public bool HasEffect(string EffectName)
         {
             if (Effect != null)

@@ -183,4 +183,111 @@ namespace XmlReader.Data
             writer.Close();
         }
     }
+        public static void NoImage(Manager manager)
+        {
+            Dictionary<string, string> set = new Dictionary<string, string>();
+            var men = manager.ReadRecipe();
+            foreach (var m in men)
+            {
+                var item = m.Essential;
+                string succ = m.SuccessID;
+                string fail = m.TrashID;
+                string info =  m.Locale + m.Event;
+                if (info == null || info == "")
+                {
+                    info = "";
+                }
+                else
+                    continue;
+
+                if (succ != null && !set.ContainsKey(succ))
+                {
+                    Image image = manager.GetImageFromId(succ);
+
+                    if (image == null)
+                    {
+                        image?.Dispose();
+                        string name = manager.ClassIDtoName(succ);
+                        set.Add(succ, name+info);
+                    }
+                    
+                }
+                if (fail != null && !set.ContainsKey(fail))
+                {
+                    Image image = manager.GetImageFromId(fail);
+
+                    if (image == null)
+                    {
+                        image?.Dispose();
+                        string name = manager.ClassIDtoName(fail);
+                        set.Add(fail, name + info);
+                    }
+                    
+                }
+
+                foreach (var it in item)
+                {
+                    string id = it.ClassID;
+                    Image image = manager.GetImageFromId(id);
+
+                    if (image != null)
+                    {
+                        image?.Dispose();
+                        continue;
+                    }
+                    
+                    if (!set.ContainsKey(id))
+                    {
+                        string name = manager.ClassIDtoName(id);
+                        set.Add(id, name + info);
+                    }
+                }
+            }
+
+            String csv = String.Join(
+                    Environment.NewLine,
+                    set.Select(d => $"{d.Key};{d.Value};")
+                    );
+            System.IO.File.WriteAllText("./NoImage.csv", csv);
+        }
+
+
+
+        public static void Unknow(Manager manager)
+        {
+            SortedDictionary<string, string> set = new SortedDictionary<string, string>();
+            var men = manager.ReadRecipe();
+            foreach (var m in men)
+            {
+                var item = m.Essential;
+                foreach (var it in item)
+                {
+                    string id = it.ClassID;
+                    if (manager.IsMenu(id))
+                    {
+                        continue;
+                    }
+                    if (manager.IsBase(id))
+                    {
+                        continue;
+                    }
+
+                    if (!set.ContainsKey(id))
+                    {
+                        string name = manager.ClassIDtoName(id);
+                        string info = m.Locale + m.Event;
+                        if (info != "")
+                            set.Add(id, $"<Item ResultID=\"{id}\" ResultName=\"{name}\" ExtraInfo=\"{info}\" />");
+                        else
+                            set.Add(id, $"<Item ResultID=\"{id}\" ResultName=\"{name}\" ExtraInfo=\"\" />");
+                    }
+                }
+            }
+            
+            String csv = String.Join(
+                    Environment.NewLine,
+                    set.Select(d => $"{d.Value}")
+                    );
+            System.IO.File.WriteAllText("./Unknow.csv", csv);
+        }
 }

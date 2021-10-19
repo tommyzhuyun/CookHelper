@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -22,16 +24,25 @@ namespace CookHelper
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            /*int ClassID = 50118;
-            Manager manager = new Manager();
-            MENU menu = manager.ReadFirstRecipe(ClassID.ToString());
-            ITEM item = manager.ReadItemDBFromID(ClassID.ToString());
-            Sorting sorter = new Sorting(manager.ClassIDtoName(ClassID.ToString()), ClassID, false, menu, item);
-            Application.Run(new MaterialForm(sorter,manager));
-            */
-            Application.Run(new LoadingForm());
-
+            Manager manager;
+            try
+            {
+                manager = new Manager();
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("数据库载入失败，程序无法启动：\r\n" + e.Message);
+                return;
+            }
+            if(manager == null)
+            {
+                MessageBox.Show("NULL异常错误");
+                return;
+            }
+            Application.Run(new LoadingForm(manager));
         }
+
+
 
     }
 }

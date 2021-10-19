@@ -29,6 +29,7 @@ namespace CookHelper
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MaterialForm));
             this.ItemName = new System.Windows.Forms.TextBox();
             this.Closer = new System.Windows.Forms.Button();
             this.PanelMission = new System.Windows.Forms.GroupBox();
@@ -136,7 +137,6 @@ namespace CookHelper
             this.MissionInfo.Size = new System.Drawing.Size(228, 19);
             this.MissionInfo.TabIndex = 67;
             this.MissionInfo.TabStop = false;
-            this.MissionInfo.Text = "5000 Gold";
             this.MissionInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PanelSkill
@@ -163,10 +163,10 @@ namespace CookHelper
             this.SkillInfo.Multiline = true;
             this.SkillInfo.Name = "SkillInfo";
             this.SkillInfo.ReadOnly = true;
+            this.SkillInfo.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.SkillInfo.Size = new System.Drawing.Size(168, 56);
             this.SkillInfo.TabIndex = 66;
             this.SkillInfo.TabStop = false;
-            this.SkillInfo.Text = "5000 Gold";
             this.SkillInfo.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // SkillPic
@@ -235,7 +235,7 @@ namespace CookHelper
             this.NPC.Size = new System.Drawing.Size(228, 81);
             this.NPC.TabIndex = 53;
             this.NPC.TabStop = false;
-            this.NPC.Text = "敦巴伦 格莉纳斯\r\n敦巴伦 格莉纳斯\r\n敦巴伦 格莉纳斯\r\n敦巴伦 格莉纳斯\r\n敦巴伦 格莉纳斯";
+            this.NPC.Text = "\r\n";
             this.NPC.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // panel1
@@ -269,7 +269,6 @@ namespace CookHelper
             this.PriceWed.Size = new System.Drawing.Size(228, 19);
             this.PriceWed.TabIndex = 41;
             this.PriceWed.TabStop = false;
-            this.PriceWed.Text = "5000 Gold";
             this.PriceWed.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Price
@@ -284,7 +283,6 @@ namespace CookHelper
             this.Price.Size = new System.Drawing.Size(228, 19);
             this.Price.TabIndex = 39;
             this.Price.TabStop = false;
-            this.Price.Text = "5000 Gold";
             this.Price.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // ItemID
@@ -315,6 +313,7 @@ namespace CookHelper
             this.Controls.Add(this.PanelSkill);
             this.Controls.Add(this.Closer);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;

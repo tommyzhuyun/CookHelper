@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text;
 using System.Windows.Forms;
 
 namespace CookHelper
@@ -67,8 +68,38 @@ namespace CookHelper
             if(sender is RESULTITEM item)
             {
                 AddMenu(item);
+                StatusUp();
             }
         }
+
+        private void StatusUp()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+            foreach(var li in EFFECT.NameList)
+            {
+                dictionary.Add(li, 0);
+            }
+
+            foreach (var RecipeMenu in FoodMenus)
+            {
+                foreach (var Effect in manager.ReadMenuEffect(RecipeMenu.ResultItem.ClassID))
+                {
+                    
+                    dictionary[Effect.Name] += Effect.AmountInt;
+                }
+            }
+            StringBuilder sb = new StringBuilder("庆典料理属性： ");
+
+            foreach(var dic in dictionary)
+            {
+                if(dic.Value != 0)
+                    sb.Append($"\r\n{dic.Key} {dic.Value}");
+            }
+
+            SumUp.Text = sb.ToString();
+        }
+
+
 
         private void LoadFile_Click(object sender, EventArgs e)
         {
@@ -80,6 +111,7 @@ namespace CookHelper
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                RemoveAllMenu();
                 manager.Update(openFileDialog.FileName);
                 if (manager.favorite != null)
                 {
@@ -94,6 +126,7 @@ namespace CookHelper
                     SaveFile.Enabled = true;
                     Statistic.Enabled = true;
                     Loading.Text = "静态";
+                    StatusUp();
                 }
                 else
                     LoadInfo.Text = "载入失败";
@@ -131,6 +164,7 @@ namespace CookHelper
         private void CreateFile_Click(object sender, EventArgs e)
         {
             RemoveAllMenu();
+            SumUp.Text = "";
             manager.Update(FavoriteManager.Create());
             manager.favorite.ItemAdded += Favorite_ItemAdded;
             this.DialogResult = DialogResult.OK;
@@ -162,7 +196,7 @@ namespace CookHelper
                 FoodMenuPanel.Controls.Remove(item.MenuPanel);
                 item.Dispose();
             }
-
+            StatusUp();
         }
 
         private void ChooseAll_Click(object sender, EventArgs e)
@@ -200,7 +234,18 @@ namespace CookHelper
                 }
                 return;
             }
-            this.Statistic.Enabled = false;
+            Statistic.Enabled = false;
+            DeleteFile.Enabled = false;
+            LoadFile.Enabled = false;
+            CreateFile.Enabled = false;
+            SaveFile.Enabled = false;
+            InverseChoose.Enabled = false;
+            ChooseAll.Enabled = false;
+            foreach (var menu in FoodMenus)
+            {
+                menu.MenuCheck.Enabled = false;
+            }
+
             this.BackgroundWorker.RunWorkerAsync();
         }
         private List<Statistic> data = new List<Statistic>();
@@ -211,6 +256,11 @@ namespace CookHelper
             int Count = 0, All = FoodMenus.Count;
             foreach (var menu in FoodMenus)
             {
+                if (BackgroundWorker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    return;
+                }
                 if (menu.MenuCheck.Checked)
                 {
                     var Sorting = manager.GetSorting(this.Sorting, menu.ResultItem.ClassIDInt);
@@ -228,7 +278,8 @@ namespace CookHelper
 
         private void BackgroundWorker_ProgressChanged(object sender, System.ComponentModel.ProgressChangedEventArgs e)
         {
-            ProgressBar.Value = e.ProgressPercentage;
+            if (!BackgroundWorker.CancellationPending)
+                ProgressBar.Value = e.ProgressPercentage;
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
@@ -238,7 +289,24 @@ namespace CookHelper
             materialTotalForm.Location = new Point(this.Location.X, this.Bottom);
             Loading.Text = "统计完成";
             this.Statistic.Enabled = true;
+            Statistic.Enabled = true;
+            DeleteFile.Enabled = true;
+            LoadFile.Enabled = true;
+            CreateFile.Enabled = true;
+            SaveFile.Enabled = true;
+            InverseChoose.Enabled = true;
+            ChooseAll.Enabled = true;
+            foreach (var menu in FoodMenus)
+            {
+                menu.MenuCheck.Enabled = true;
+            }
         }
+
+        private void ItemList_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            BackgroundWorker.CancelAsync();
+        }
+
     }
 
 

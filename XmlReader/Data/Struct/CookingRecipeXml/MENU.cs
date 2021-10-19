@@ -56,6 +56,35 @@ namespace CookHelper.Data
             { "fillet", "切片" }
         };
 
+        public string ActionRank
+        {
+            get
+            {
+                return ActionAndRank[Action];
+            }
+        }
+        /// <summary>
+        /// 最大生命值, 最大魔法值.....魔法保护
+        /// </summary>
+        public static Dictionary<string, string> ActionAndRank = new Dictionary<string, string>
+        {
+            { "mix", "混合" },
+            { "cook_with_strong_fire", "煎(火)" },
+            { "steam", "煮(火)" },
+            { "boil", "烧(火)" },
+            { "fry_with_much_oil", "炸(火)" },
+            { "fry", "炒(火)" },
+            { "knead", "和面" },
+            { "make_noodle", "做面条" },
+            { "make_pasta", "制作意大利面" },
+            { "make_jam", "制做果酱(火)" },
+            { "make_pie", "制做派" },
+            { "steamed_dish", "蒸煮(火)" },
+            { "make_pizza", "制作披萨" },
+            { "ferment", "发酵" },
+            { "sousvide", "水浴法(火)" },
+            { "fillet", "切片" }
+        };
 
         public string MenuID
         {

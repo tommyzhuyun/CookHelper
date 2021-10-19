@@ -64,7 +64,13 @@ namespace CookHelper.Data
             }
             else
             {
-                return null;
+                if (File.Exists("./img/item/unknow.png"))
+                {
+                    Image image = Image.FromFile("./img/item/unknow.png");
+                    return image;
+                }
+                else
+                    return null;
             }
         }
 
@@ -181,6 +187,10 @@ namespace CookHelper.Data
             return recipe.IsMenu(source);
         }
 
+        public bool IsMenu(string ClassID)
+        {
+            return recipe.IsMenu(ClassID);
+        }
         public Sorting GetSourceSorting(MENUSOURCE source)
         {
             bool IsSuccess = recipe.IsSuccess(source);
@@ -259,6 +269,18 @@ namespace CookHelper.Data
 
             counton.Sort((a, b) => a.Status - b.Status);
             return counton;
+        }
+
+        public List<EFFECT> ReadMenuEffect(string menu)
+        {
+            var db = itemdb.ReadItemDBFromID(menu);
+            if (db == null)
+                return new List<EFFECT>();
+            var foodeffect = db.FoodEffect;
+            if (foodeffect != null)
+                return foodeffect.Effects;
+            else
+                return new List<EFFECT>();
         }
 
     }

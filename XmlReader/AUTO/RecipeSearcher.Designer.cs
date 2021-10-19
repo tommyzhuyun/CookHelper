@@ -29,6 +29,7 @@ namespace CookHelper
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecipeSearcher));
             this.listBox = new System.Windows.Forms.ListBox();
             this.Technique = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -111,7 +112,7 @@ namespace CookHelper
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 21);
             this.label1.TabIndex = 4;
-            this.label1.Text = "料理方法：";
+            this.label1.Text = "料理种类：";
             // 
             // panel1
             // 
@@ -155,8 +156,8 @@ namespace CookHelper
             this.Chosener.FormattingEnabled = true;
             this.Chosener.Items.AddRange(new object[] {
             "全部",
+            "默认",
             "深度",
-            "失败产物",
             "上身",
             "下身",
             "体重",
@@ -174,7 +175,9 @@ namespace CookHelper
             "保护",
             "魔法攻击力",
             "魔法防御力",
-            "魔法保护"});
+            "魔法保护",
+            "失败产物",
+            "活动产物"});
             this.Chosener.Location = new System.Drawing.Point(0, 28);
             this.Chosener.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Chosener.Name = "Chosener";
@@ -303,6 +306,7 @@ namespace CookHelper
             this.ChoosedNum.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ChoosedNum.Dock = System.Windows.Forms.DockStyle.Top;
             this.ChoosedNum.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.ChoosedNum.ForeColor = System.Drawing.Color.Maroon;
             this.ChoosedNum.Location = new System.Drawing.Point(3, 85);
             this.ChoosedNum.Name = "ChoosedNum";
             this.ChoosedNum.ReadOnly = true;
@@ -366,7 +370,7 @@ namespace CookHelper
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(140, 17);
             this.label2.TabIndex = 36;
-            this.label2.Text = "在打开收藏夹后才可添加";
+            this.label2.Text = "在载入收藏夹后才可添加";
             // 
             // RecipeSearcher
             // 
@@ -384,10 +388,12 @@ namespace CookHelper
             this.Controls.Add(this.listBox);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "RecipeSearcher";
             this.Text = "料理搜索";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RecipeSearcher_FormClosing);
             this.Load += new System.EventHandler(this.RecipeSearcher_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

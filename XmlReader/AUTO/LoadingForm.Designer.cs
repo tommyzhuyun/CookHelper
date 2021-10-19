@@ -30,10 +30,10 @@ namespace CookHelper
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoadingForm));
             this.BackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.SearcherButton = new System.Windows.Forms.Button();
             this.Favorite = new System.Windows.Forms.Button();
-            this.AutoHide = new System.Windows.Forms.CheckBox();
             this.FileReaded = new System.Windows.Forms.Label();
             this.Message = new System.Windows.Forms.Label();
             this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,16 +74,6 @@ namespace CookHelper
             this.Favorite.Text = "打开收藏夹";
             this.Favorite.UseVisualStyleBackColor = true;
             this.Favorite.Click += new System.EventHandler(this.Favorite_Click);
-            // 
-            // AutoHide
-            // 
-            this.AutoHide.AutoSize = true;
-            this.AutoHide.Location = new System.Drawing.Point(119, 32);
-            this.AutoHide.Name = "AutoHide";
-            this.AutoHide.Size = new System.Drawing.Size(84, 24);
-            this.AutoHide.TabIndex = 37;
-            this.AutoHide.Text = "自动隐藏";
-            this.AutoHide.UseVisualStyleBackColor = true;
             // 
             // FileReaded
             // 
@@ -148,19 +138,19 @@ namespace CookHelper
             this.ClientSize = new System.Drawing.Size(275, 124);
             this.Controls.Add(this.Message);
             this.Controls.Add(this.FileReaded);
-            this.Controls.Add(this.AutoHide);
             this.Controls.Add(this.Favorite);
             this.Controls.Add(this.SearcherButton);
             this.Controls.Add(this.toolStrip2);
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Location = new System.Drawing.Point(150, 100);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Location = new System.Drawing.Point(190, 100);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.MaximizeBox = false;
             this.Name = "LoadingForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "料理助手";
+            this.Text = "料理助手V1.1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoadingForm_FormClosing);
             this.Load += new System.EventHandler(this.LoadingForm_Load);
             this.contextMenuStrip1.ResumeLayout(false);
@@ -175,7 +165,6 @@ namespace CookHelper
         private System.ComponentModel.BackgroundWorker BackgroundWorker;
         private System.Windows.Forms.Button SearcherButton;
         private System.Windows.Forms.Button Favorite;
-        private System.Windows.Forms.CheckBox AutoHide;
         private System.Windows.Forms.Label FileReaded;
         private System.Windows.Forms.Label Message;
         private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem;

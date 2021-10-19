@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using CookHelper.Data;
@@ -31,9 +32,51 @@ namespace CookHelper
         {
             this.Text = "菜单 : " + RecipeMenu.Menu.ActionName;
             RecipeName.Text = RecipeMenu.Name;
+            ResultPic.Image?.Dispose();
+            Technique.Image?.Dispose();
+            LeftHand.Image?.Dispose();
+            RightHand.Image?.Dispose();
             ResultPic.Image = manager.GetImageFromId(RecipeMenu.ClassID);
             Technique.Image = manager.GetImageFromAction(RecipeMenu.Menu.ActionName);
-            
+            switch (RecipeMenu.Menu.Action)
+            {
+                case "cook_with_strong_fire":
+                case "steam":
+                case "boil":
+                case "fry_with_much_oil":
+                case "fry":
+                case "make_jam":
+                case "steamed_dish":
+                    LeftHand.Image = manager.GetImageFromId("40044");
+                    RightHand.Image = manager.GetImageFromId("40305");//锅
+                    break;
+                case "mix":
+                    LeftHand.Image = manager.GetImageFromId("40042"); // 菜刀
+                    RightHand.Image = manager.GetImageFromId("46005");
+                    break;
+                case "knead":
+                case "make_noodle":
+                case "make_pasta":
+                case "make_pie":
+                case "make_pizza":
+                    LeftHand.Image = manager.GetImageFromId("40043");
+                    RightHand.Image = manager.GetImageFromId("46005");
+                    break;
+                case "ferment":
+                    LeftHand.Image = manager.GetImageFromId("41406");//发酵容器
+                    RightHand.Image = manager.GetImageFromId("46005");
+                    break;
+                case "sousvide":
+                    LeftHand.Image = manager.GetImageFromId("41407");//水浴法专用真空容器
+                    RightHand.Image = manager.GetImageFromId("46005");
+                    break;
+                case "fillet":
+                    LeftHand.Image = manager.GetImageFromId("41408");//长菜刀
+                    RightHand.Image = manager.GetImageFromId("46005");
+                    break;
+            }
+            LeftHand.Refresh();
+            RightHand.Refresh();
 
             StringBuilder sb = new StringBuilder("ClassID: "+RecipeMenu.ClassID.ToString());
             if (RecipeMenu.Buffer != null)
@@ -213,8 +256,14 @@ namespace CookHelper
             {
                 var fm = MnForm[0];
                 MnForm.RemoveAt(0);
-                fm?.Close();
-                fm?.Dispose();
+                if (fm != null)
+                {
+                    if (!fm.TopMost)
+                    {
+                        fm?.Close();
+                        fm?.Dispose();
+                    }
+                }
             }
             while (MtForm.Count > 0) 
             {
@@ -311,6 +360,11 @@ namespace CookHelper
         private void FavoriteAdd_Click(object sender, EventArgs e)
         {
             manager.favorite.AddItem(RecipeMenu.ClassID.ToString(),RecipeMenu.Name);
+        }
+
+        private void OnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            TopMost = OnTop.Checked;
         }
     }
 }

@@ -20,7 +20,7 @@ namespace CookHelper
             InitializeComponent();
             
             Technique.SelectedIndex = 0;
-            Chosener.SelectedIndex = 0;
+            Chosener.SelectedIndex = 1;
         }
 
         private void RecipeSearcher_Load(object sender, EventArgs e)
@@ -46,8 +46,9 @@ namespace CookHelper
             switch (Chosener.Text)
             {
                 case "全部":
-                case "料理日记":
+                case "默认":
                 case "失败产物":
+                case "活动产物":
                     Searched.Sort((a, b) => AscendingOrder.Checked ? a.ClassID - b.ClassID : b.ClassID - a.ClassID);
                     break;
                 case "深度":
@@ -83,26 +84,31 @@ namespace CookHelper
             switch (Chosener.Text)
             {
                 case "全部":
-                case "料理日记":
                     Searched = Searched.FindAll(x => x.ClassID != 0);
                     break;
+                case "默认":
+                    Searched = Searched.FindAll(x => !x.IsEvent);
+                    break;
                 case "失败产物":
-                    Searched = Searched.FindAll(x => !x.IsSuccess);
+                    Searched = Searched.FindAll(x => !x.IsSuccess && !x.IsEvent);
+                    break;
+                case "活动产物":
+                    Searched = Searched.FindAll(x => x.IsEvent);
                     break;
                 case "深度":
-                    Searched = Searched.FindAll(x => x.Menu.Depth != 0);
+                    Searched = Searched.FindAll(x => x.Menu.Depth != 0 && !x.IsEvent);
                     break;
                 case "上身":
-                    Searched = Searched.FindAll(x => x.Item != null && x.Item.Upper != 0);
+                    Searched = Searched.FindAll(x => x.Item != null && x.Item.Upper != 0 && !x.IsEvent);
                     break;
                 case "下身":
-                    Searched = Searched.FindAll(x => x.Item != null && x.Item.Lower != 0);
+                    Searched = Searched.FindAll(x => x.Item != null && x.Item.Lower != 0 && !x.IsEvent);
                     break;
                 case "体重":
-                    Searched = Searched.FindAll(x => x.Item != null && x.Item.Fatness != 0);
+                    Searched = Searched.FindAll(x => x.Item != null && x.Item.Fatness != 0 && !x.IsEvent);
                     break;
                 default:
-                    Searched = Searched.FindAll(x => x.HasEffect(Chosener.Text));
+                    Searched = Searched.FindAll(x => x.HasEffect(Chosener.Text) && !x.IsEvent);
                     break;
             }
 
@@ -136,8 +142,6 @@ namespace CookHelper
 
         private void Closer_Click(object sender, EventArgs e)
         {
-            MenuForm?.Close();
-            MenuForm?.Dispose();
             Close();
         }
 
@@ -152,13 +156,14 @@ namespace CookHelper
                 Pic.Refresh();
                 Deepth.Text = "深度 : " + KV.Menu.Depth;
 
-                if (Chosener.Text == "默认" || Chosener.Text == "深度")
+                if (Chosener.Text == "全部" || Chosener.Text == "默认" || Chosener.Text == "深度")
                     ChoosedNum.Text = "未筛选";
                 else
                 {
                     switch (Chosener.Text)
                     {
-                        case "料理日记":
+                        case "失败产物":
+                        case "活动产物":
                             ChoosedNum.Text = Chosener.Text;
                             break;
                         case "上身":
@@ -239,6 +244,18 @@ namespace CookHelper
             if (listBox.SelectedItem is Sorting KV)
             {
                 manager.favorite.AddItem(KV.ClassID.ToString(), KV.Name);
+            }
+        }
+
+        private void RecipeSearcher_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MenuForm != null)
+            {
+                if (!MenuForm.TopMost)
+                {
+                    MenuForm?.Close();
+                    MenuForm?.Dispose();
+                }
             }
         }
     }

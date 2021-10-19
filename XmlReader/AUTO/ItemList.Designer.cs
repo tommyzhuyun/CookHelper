@@ -29,6 +29,7 @@ namespace CookHelper
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemList));
             this.CloseButton = new System.Windows.Forms.Button();
             this.LoadFile = new System.Windows.Forms.Button();
             this.SaveFile = new System.Windows.Forms.Button();
@@ -39,6 +40,7 @@ namespace CookHelper
             this.InverseChoose = new System.Windows.Forms.Button();
             this.LoadInfo = new System.Windows.Forms.TextBox();
             this.ButtonPanel = new System.Windows.Forms.Panel();
+            this.SumUp = new System.Windows.Forms.TextBox();
             this.ProgressBar = new System.Windows.Forms.ProgressBar();
             this.Loading = new System.Windows.Forms.TextBox();
             this.ExamplePanel = new System.Windows.Forms.Panel();
@@ -55,9 +57,9 @@ namespace CookHelper
             // 
             // CloseButton
             // 
-            this.CloseButton.Location = new System.Drawing.Point(3, 359);
+            this.CloseButton.Location = new System.Drawing.Point(3, 360);
             this.CloseButton.Name = "CloseButton";
-            this.CloseButton.Size = new System.Drawing.Size(75, 30);
+            this.CloseButton.Size = new System.Drawing.Size(156, 30);
             this.CloseButton.TabIndex = 3;
             this.CloseButton.Text = "关闭";
             this.CloseButton.UseVisualStyleBackColor = true;
@@ -65,7 +67,7 @@ namespace CookHelper
             // 
             // LoadFile
             // 
-            this.LoadFile.Location = new System.Drawing.Point(3, 72);
+            this.LoadFile.Location = new System.Drawing.Point(84, 66);
             this.LoadFile.Name = "LoadFile";
             this.LoadFile.Size = new System.Drawing.Size(75, 30);
             this.LoadFile.TabIndex = 4;
@@ -76,7 +78,7 @@ namespace CookHelper
             // SaveFile
             // 
             this.SaveFile.Enabled = false;
-            this.SaveFile.Location = new System.Drawing.Point(3, 144);
+            this.SaveFile.Location = new System.Drawing.Point(3, 66);
             this.SaveFile.Name = "SaveFile";
             this.SaveFile.Size = new System.Drawing.Size(75, 30);
             this.SaveFile.TabIndex = 5;
@@ -98,7 +100,7 @@ namespace CookHelper
             // Statistic
             // 
             this.Statistic.Enabled = false;
-            this.Statistic.Location = new System.Drawing.Point(3, 288);
+            this.Statistic.Location = new System.Drawing.Point(3, 294);
             this.Statistic.Name = "Statistic";
             this.Statistic.Size = new System.Drawing.Size(75, 30);
             this.Statistic.TabIndex = 7;
@@ -108,7 +110,7 @@ namespace CookHelper
             // 
             // CreateFile
             // 
-            this.CreateFile.Location = new System.Drawing.Point(3, 108);
+            this.CreateFile.Location = new System.Drawing.Point(84, 7);
             this.CreateFile.Name = "CreateFile";
             this.CreateFile.Size = new System.Drawing.Size(75, 30);
             this.CreateFile.TabIndex = 9;
@@ -119,7 +121,7 @@ namespace CookHelper
             // ChooseAll
             // 
             this.ChooseAll.Enabled = false;
-            this.ChooseAll.Location = new System.Drawing.Point(3, 230);
+            this.ChooseAll.Location = new System.Drawing.Point(3, 102);
             this.ChooseAll.Name = "ChooseAll";
             this.ChooseAll.Size = new System.Drawing.Size(75, 30);
             this.ChooseAll.TabIndex = 10;
@@ -130,7 +132,7 @@ namespace CookHelper
             // InverseChoose
             // 
             this.InverseChoose.Enabled = false;
-            this.InverseChoose.Location = new System.Drawing.Point(3, 194);
+            this.InverseChoose.Location = new System.Drawing.Point(84, 102);
             this.InverseChoose.Name = "InverseChoose";
             this.InverseChoose.Size = new System.Drawing.Size(75, 30);
             this.InverseChoose.TabIndex = 11;
@@ -142,7 +144,7 @@ namespace CookHelper
             // 
             this.LoadInfo.BackColor = System.Drawing.SystemColors.Control;
             this.LoadInfo.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.LoadInfo.Location = new System.Drawing.Point(8, 49);
+            this.LoadInfo.Location = new System.Drawing.Point(87, 43);
             this.LoadInfo.Name = "LoadInfo";
             this.LoadInfo.ReadOnly = true;
             this.LoadInfo.Size = new System.Drawing.Size(65, 16);
@@ -153,6 +155,7 @@ namespace CookHelper
             // 
             // ButtonPanel
             // 
+            this.ButtonPanel.Controls.Add(this.SumUp);
             this.ButtonPanel.Controls.Add(this.ProgressBar);
             this.ButtonPanel.Controls.Add(this.Loading);
             this.ButtonPanel.Controls.Add(this.Statistic);
@@ -165,24 +168,35 @@ namespace CookHelper
             this.ButtonPanel.Controls.Add(this.InverseChoose);
             this.ButtonPanel.Controls.Add(this.LoadFile);
             this.ButtonPanel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.ButtonPanel.Location = new System.Drawing.Point(300, 0);
+            this.ButtonPanel.Location = new System.Drawing.Point(298, 0);
             this.ButtonPanel.Name = "ButtonPanel";
-            this.ButtonPanel.Size = new System.Drawing.Size(81, 393);
+            this.ButtonPanel.Size = new System.Drawing.Size(162, 393);
             this.ButtonPanel.TabIndex = 13;
+            // 
+            // SumUp
+            // 
+            this.SumUp.Location = new System.Drawing.Point(3, 138);
+            this.SumUp.Multiline = true;
+            this.SumUp.Name = "SumUp";
+            this.SumUp.ReadOnly = true;
+            this.SumUp.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.SumUp.Size = new System.Drawing.Size(156, 143);
+            this.SumUp.TabIndex = 15;
+            this.SumUp.TabStop = false;
             // 
             // ProgressBar
             // 
             this.ProgressBar.BackColor = System.Drawing.SystemColors.Control;
-            this.ProgressBar.Location = new System.Drawing.Point(3, 319);
+            this.ProgressBar.Location = new System.Drawing.Point(3, 331);
             this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(75, 23);
+            this.ProgressBar.Size = new System.Drawing.Size(156, 23);
             this.ProgressBar.TabIndex = 14;
             // 
             // Loading
             // 
             this.Loading.BackColor = System.Drawing.SystemColors.Control;
             this.Loading.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Loading.Location = new System.Drawing.Point(8, 266);
+            this.Loading.Location = new System.Drawing.Point(87, 301);
             this.Loading.Name = "Loading";
             this.Loading.ReadOnly = true;
             this.Loading.Size = new System.Drawing.Size(65, 16);
@@ -200,7 +214,7 @@ namespace CookHelper
             this.ExamplePanel.Dock = System.Windows.Forms.DockStyle.Top;
             this.ExamplePanel.Location = new System.Drawing.Point(0, 0);
             this.ExamplePanel.Name = "ExamplePanel";
-            this.ExamplePanel.Size = new System.Drawing.Size(300, 56);
+            this.ExamplePanel.Size = new System.Drawing.Size(298, 56);
             this.ExamplePanel.TabIndex = 3;
             // 
             // ExampleLabel
@@ -208,10 +222,10 @@ namespace CookHelper
             this.ExampleLabel.BackColor = System.Drawing.Color.OldLace;
             this.ExampleLabel.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.ExampleLabel.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.ExampleLabel.Location = new System.Drawing.Point(85, 14);
+            this.ExampleLabel.Location = new System.Drawing.Point(91, 14);
             this.ExampleLabel.Name = "ExampleLabel";
             this.ExampleLabel.ReadOnly = true;
-            this.ExampleLabel.Size = new System.Drawing.Size(200, 22);
+            this.ExampleLabel.Size = new System.Drawing.Size(183, 22);
             this.ExampleLabel.TabIndex = 9;
             this.ExampleLabel.Text = "胡椒味浓烈的烤丝绸旗鱼";
             this.ExampleLabel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -245,12 +259,13 @@ namespace CookHelper
             this.FoodMenuPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FoodMenuPanel.Location = new System.Drawing.Point(0, 0);
             this.FoodMenuPanel.Name = "FoodMenuPanel";
-            this.FoodMenuPanel.Size = new System.Drawing.Size(300, 393);
+            this.FoodMenuPanel.Size = new System.Drawing.Size(298, 393);
             this.FoodMenuPanel.TabIndex = 2;
             // 
             // BackgroundWorker
             // 
             this.BackgroundWorker.WorkerReportsProgress = true;
+            this.BackgroundWorker.WorkerSupportsCancellation = true;
             this.BackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BackgroundWorker_DoWork);
             this.BackgroundWorker.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.BackgroundWorker_ProgressChanged);
             this.BackgroundWorker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.BackgroundWorker_RunWorkerCompleted);
@@ -259,15 +274,17 @@ namespace CookHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(381, 393);
+            this.ClientSize = new System.Drawing.Size(460, 393);
             this.Controls.Add(this.FoodMenuPanel);
             this.Controls.Add(this.ButtonPanel);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "ItemList";
             this.Text = "收藏夹";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ItemList_FormClosing);
             this.Load += new System.EventHandler(this.RecipeList_Load);
             this.ButtonPanel.ResumeLayout(false);
             this.ButtonPanel.PerformLayout();
@@ -298,5 +315,6 @@ namespace CookHelper
         private System.Windows.Forms.TextBox Loading;
         private System.ComponentModel.BackgroundWorker BackgroundWorker;
         private System.Windows.Forms.ProgressBar ProgressBar;
+        private System.Windows.Forms.TextBox SumUp;
     }
 }

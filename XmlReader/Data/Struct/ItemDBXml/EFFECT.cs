@@ -77,5 +77,27 @@ namespace CookHelper.Data
             { "magic_defense", "魔法防御力" },
             { "magic_protect", "魔法保护" }
         };
+
+        /// <summary>
+        /// 最大生命值, 最大魔法值.....魔法保护
+        /// </summary>
+        public static List<string> NameList = new List<string>
+        {
+            "最大生命值" ,
+            "最大魔法值" ,
+            "最大体力值" ,
+            "力量" ,
+            "智力" ,
+            "敏捷" ,
+            "意志" ,
+            "幸运" ,
+            "最大攻击力" ,
+            "最小攻击力" ,
+            "防御" ,
+            "保护" ,
+            "魔法攻击力" ,
+            "魔法防御力" ,
+            "魔法保护" 
+        };
     }
 }

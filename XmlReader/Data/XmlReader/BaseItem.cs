@@ -14,12 +14,11 @@ namespace CookHelper.Data
         public BaseItem():this("Shop.xml", "Mission.xml", "Skill.xml")
         {        }
 
-        public BaseItem(string filename1, string filename2, string filename3)
+        public BaseItem(string Shopper, string Skiller, string Mission)
         {
-            Shopper = XDocument.Load(filename1);
-            Mission = XDocument.Load(filename2);
-            Skiller = XDocument.Load(filename3);
-            
+            this.Shopper = XDocument.Load(Shopper);
+            this.Mission = XDocument.Load(Skiller);
+            this.Skiller = XDocument.Load(Mission);
         }
 
         public bool HasItem(String ID)

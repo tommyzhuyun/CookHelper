@@ -67,6 +67,11 @@ namespace CookHelper.Data
             return IsSuccess(source) || IsTrash(source);
         }
 
+        public bool IsMenu(string ClassID)
+        {
+            return IsSuccess(ClassID) || IsTrash(ClassID);
+        }
+
         public bool IsSuccess(MENUSOURCE source)
         {
             return Recipe.Descendants("recipe").
@@ -78,6 +83,19 @@ namespace CookHelper.Data
             return Recipe.Descendants("recipe").
                 LastOrDefault((x) =>
                 x.Attribute("trash_item")?.Value == source?.ClassID.ToString()) != null;
+        }
+
+        public bool IsSuccess(string ClassID)
+        {
+            return Recipe.Descendants("recipe").
+                LastOrDefault((x) =>
+                x.Attribute("result_item")?.Value == ClassID) != null;
+        }
+        public bool IsTrash(string ClassID)
+        {
+            return Recipe.Descendants("recipe").
+                LastOrDefault((x) =>
+                x.Attribute("trash_item")?.Value == ClassID) != null;
         }
 
     }

@@ -148,10 +148,7 @@ namespace CookHelper
 
         private void OnTop_CheckedChanged(object sender, EventArgs e)
         {
-            if (OnTop.Checked)
-                this.TopMost = true;
-            else
-                this.TopMost = false;
+            TopMost = OnTop.Checked;
         }
     }
 

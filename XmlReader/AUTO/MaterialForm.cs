@@ -76,7 +76,12 @@ namespace CookHelper
                 MissionInfo.Text = getitem + " - " + items[0].ExtraInfo;
                 foreach(var item in resource)
                 {
-                    Sorting sorting = new Sorting(item.Name, item.ClassIDInt, false, null, manager.ReadItemDBFromID(item.ClassID));
+                    Sorting sorting;
+                    if (manager.IsMenu(item.ClassID))
+                        sorting = new Sorting(item.Name, item.ClassIDInt, true, manager.ReadFirstRecipe(item.ClassID), manager.ReadItemDBFromID(item.ClassID));
+                    else
+                        sorting = new Sorting(item.Name, item.ClassIDInt, false, null, manager.ReadItemDBFromID(item.ClassID));
+
                     CheckBox checkBox = new CheckBox
                     {
                         Checked = false,
@@ -125,7 +130,11 @@ namespace CookHelper
                 else
                     foreach (var item in resource)
                     {
-                        Sorting sorting = new Sorting(item.Name, item.ClassIDInt, false, null, manager.ReadItemDBFromID(item.ClassID));
+                        Sorting sorting;
+                        if (manager.IsMenu(item.ClassID))
+                            sorting = new Sorting(item.Name, item.ClassIDInt, true, manager.ReadFirstRecipe(item.ClassID), manager.ReadItemDBFromID(item.ClassID));
+                        else
+                            sorting = new Sorting(item.Name, item.ClassIDInt, false, null, manager.ReadItemDBFromID(item.ClassID));
                         CheckBox checkBox = new CheckBox
                         {
                             Checked = false,
@@ -150,7 +159,7 @@ namespace CookHelper
             }
             else
             {
-                if (RecipeMenu.IsSuccess)
+                if (RecipeMenu.IsMenu)
                 {
                     SkillPic.Image?.Dispose();
                     SkillPic.Image = Image.FromFile($"img/Skill/10020.png");
@@ -250,14 +259,24 @@ namespace CookHelper
             {
                 var fm = MenuForms[0];
                 MenuForms.RemoveAt(0);
-                fm?.Close();
-                fm?.Dispose();
+                if (fm != null)
+                {
+                    if (!fm.TopMost)
+                    {
+                        fm?.Close();
+                        fm?.Dispose();
+                    }
+                }
             }
         }
 
         public void FavoriteUpdate(bool enable)
         {
-            foreach(var menu in MenuForms)
+            foreach (var menu in ElemForms)
+            {
+                menu?.FavoriteUpdate(enable);
+            }
+            foreach (var menu in MenuForms)
             {
                 menu?.FavoriteUpdate(enable);
             }
