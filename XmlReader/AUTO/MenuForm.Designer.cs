@@ -375,7 +375,7 @@ namespace CookHelper
             // 
             this.FavoriteAdd.Enabled = false;
             this.FavoriteAdd.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FavoriteAdd.Location = new System.Drawing.Point(137, 387);
+            this.FavoriteAdd.Location = new System.Drawing.Point(137, 351);
             this.FavoriteAdd.Name = "FavoriteAdd";
             this.FavoriteAdd.Size = new System.Drawing.Size(75, 30);
             this.FavoriteAdd.TabIndex = 37;
@@ -400,7 +400,7 @@ namespace CookHelper
             // OnTop
             // 
             this.OnTop.AutoSize = true;
-            this.OnTop.Location = new System.Drawing.Point(159, 360);
+            this.OnTop.Location = new System.Drawing.Point(149, 394);
             this.OnTop.Name = "OnTop";
             this.OnTop.Size = new System.Drawing.Size(51, 21);
             this.OnTop.TabIndex = 39;

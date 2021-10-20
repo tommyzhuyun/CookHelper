@@ -172,7 +172,7 @@ namespace CookHelper
                     ItemValue2.Text = Math.Round(amount[1], 1).ToString();
                 else
                     ItemValue2.Text = "0/100";
-                Switch2.Enabled = true;
+                Switch1.Enabled = true;
             }
             else
             {
@@ -182,7 +182,7 @@ namespace CookHelper
                 ItemPic2.Image = null;
                 ItemText2.Text = "";
                 ItemValue2.Text = "";
-                Switch2.Enabled = false;
+                Switch1.Enabled = false;
             }
             if (menuList.m3 != null)
             {

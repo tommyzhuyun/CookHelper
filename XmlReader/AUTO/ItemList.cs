@@ -47,7 +47,8 @@ namespace CookHelper
 
         private void MenuCheck_CheckedChanged(object sender, EventArgs e)
         {
-            StatusUp();
+            if(!OnWorking)
+                StatusUp();
         }
 
         protected void LoadMenu(List<RESULTITEM> Item)
@@ -211,21 +212,28 @@ namespace CookHelper
             }
             StatusUp();
         }
+        private bool OnWorking = false;
 
         private void ChooseAll_Click(object sender, EventArgs e)
         {
-            foreach(var list in FoodMenus)
+            OnWorking = true;
+            foreach (var list in FoodMenus)
             {
                 list.MenuCheck.Checked = true;
             }
+            OnWorking = false;
+            StatusUp();
         }
 
         private void InverseChoose_Click(object sender, EventArgs e)
         {
+            OnWorking = true;
             foreach (var list in FoodMenus)
             {
                 list.MenuCheck.Checked = !list.MenuCheck.Checked;
             }
+            OnWorking = false;
+            StatusUp();
         }
 
         private void Statistic_Click(object sender, EventArgs e)
@@ -320,9 +328,10 @@ namespace CookHelper
             BackgroundWorker.CancelAsync();
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
 
+        private void OnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            TopMost = OnTop.Checked;
         }
     }
 

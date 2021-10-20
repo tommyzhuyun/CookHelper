@@ -25,8 +25,7 @@ namespace CookHelper
 
         private void RecipeSearcher_Load(object sender, EventArgs e)
         {
-            listBox.DataSource = Menuer;
-            Ordering(Menuer);
+            listBox.DataSource = Filter();
         }
 
         public void FavoriteUpdate(bool enable)

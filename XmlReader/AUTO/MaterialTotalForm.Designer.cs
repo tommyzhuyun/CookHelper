@@ -143,9 +143,9 @@ namespace CookHelper
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(82, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(364, 17);
+            this.label1.Size = new System.Drawing.Size(308, 17);
             this.label1.TabIndex = 1;
-            this.label1.Text = "排序方式：未知 → 可料理 → 任务卷轴获取 → 可采集 → 商店购买";
+            this.label1.Text = "排序方式：未知 → 任务卷轴获取 → 可采集 → 商店购买";
             // 
             // OnTop
             // 

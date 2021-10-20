@@ -345,7 +345,7 @@ namespace CookHelper
             // Closer
             // 
             this.Closer.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Closer.Location = new System.Drawing.Point(291, 397);
+            this.Closer.Location = new System.Drawing.Point(291, 392);
             this.Closer.Name = "Closer";
             this.Closer.Size = new System.Drawing.Size(75, 30);
             this.Closer.TabIndex = 35;
@@ -365,7 +365,7 @@ namespace CookHelper
             // OnTop
             // 
             this.OnTop.AutoSize = true;
-            this.OnTop.Location = new System.Drawing.Point(234, 404);
+            this.OnTop.Location = new System.Drawing.Point(226, 399);
             this.OnTop.Name = "OnTop";
             this.OnTop.Size = new System.Drawing.Size(51, 21);
             this.OnTop.TabIndex = 37;
@@ -378,7 +378,7 @@ namespace CookHelper
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 431);
+            this.ClientSize = new System.Drawing.Size(371, 429);
             this.Controls.Add(this.OnTop);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Closer);

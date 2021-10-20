@@ -162,7 +162,7 @@ namespace CookHelper
             this.Name = "LoadingForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "料理助手V1.1";
+            this.Text = "料理助手V1.2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoadingForm_FormClosing);
             this.Load += new System.EventHandler(this.LoadingForm_Load);
             this.contextMenuStrip1.ResumeLayout(false);
