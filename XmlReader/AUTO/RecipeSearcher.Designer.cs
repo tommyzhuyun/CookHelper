@@ -45,13 +45,13 @@ namespace CookHelper
             this.Other = new System.Windows.Forms.TextBox();
             this.Deepth = new System.Windows.Forms.TextBox();
             this.FavoriteAdd = new System.Windows.Forms.Button();
-            this.Auto = new System.Windows.Forms.Button();
             this.ChoosedNum = new System.Windows.Forms.TextBox();
             this.Pic = new System.Windows.Forms.PictureBox();
             this.RecipeName = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Closer = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
+            this.OnTop = new System.Windows.Forms.CheckBox();
             this.panel1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Pic)).BeginInit();
@@ -70,7 +70,7 @@ namespace CookHelper
             this.listBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.listBox.Name = "listBox";
             this.listBox.ScrollAlwaysVisible = true;
-            this.listBox.Size = new System.Drawing.Size(178, 384);
+            this.listBox.Size = new System.Drawing.Size(178, 364);
             this.listBox.TabIndex = 0;
             this.listBox.SelectedIndexChanged += new System.EventHandler(this.ListBox_SelectedIndexChanged);
             // 
@@ -201,10 +201,11 @@ namespace CookHelper
             // 
             this.MenuOpen.Enabled = false;
             this.MenuOpen.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.MenuOpen.Location = new System.Drawing.Point(100, 197);
+            this.MenuOpen.Location = new System.Drawing.Point(100, 157);
             this.MenuOpen.Name = "MenuOpen";
             this.MenuOpen.Size = new System.Drawing.Size(75, 30);
             this.MenuOpen.TabIndex = 8;
+            this.MenuOpen.TabStop = false;
             this.MenuOpen.Text = "详细菜单";
             this.MenuOpen.UseVisualStyleBackColor = true;
             this.MenuOpen.Click += new System.EventHandler(this.MenuOpen_Click);
@@ -233,7 +234,6 @@ namespace CookHelper
             this.tabPage1.Controls.Add(this.Other);
             this.tabPage1.Controls.Add(this.Deepth);
             this.tabPage1.Controls.Add(this.FavoriteAdd);
-            this.tabPage1.Controls.Add(this.Auto);
             this.tabPage1.Controls.Add(this.ChoosedNum);
             this.tabPage1.Controls.Add(this.Pic);
             this.tabPage1.Controls.Add(this.MenuOpen);
@@ -242,7 +242,7 @@ namespace CookHelper
             this.tabPage1.Location = new System.Drawing.Point(4, 26);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(182, 230);
+            this.tabPage1.Size = new System.Drawing.Size(182, 195);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "概要";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -281,24 +281,14 @@ namespace CookHelper
             // 
             this.FavoriteAdd.Enabled = false;
             this.FavoriteAdd.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FavoriteAdd.Location = new System.Drawing.Point(7, 197);
+            this.FavoriteAdd.Location = new System.Drawing.Point(6, 157);
             this.FavoriteAdd.Name = "FavoriteAdd";
             this.FavoriteAdd.Size = new System.Drawing.Size(75, 30);
             this.FavoriteAdd.TabIndex = 36;
+            this.FavoriteAdd.TabStop = false;
             this.FavoriteAdd.Text = "添加收藏";
             this.FavoriteAdd.UseVisualStyleBackColor = true;
             this.FavoriteAdd.Click += new System.EventHandler(this.FavoriteAdd_Click);
-            // 
-            // Auto
-            // 
-            this.Auto.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Auto.Location = new System.Drawing.Point(6, 157);
-            this.Auto.Name = "Auto";
-            this.Auto.Size = new System.Drawing.Size(75, 30);
-            this.Auto.TabIndex = 14;
-            this.Auto.Text = "全自动";
-            this.Auto.UseVisualStyleBackColor = true;
-            this.Auto.Visible = false;
             // 
             // ChoosedNum
             // 
@@ -349,13 +339,13 @@ namespace CookHelper
             this.tabControl1.Location = new System.Drawing.Point(180, 129);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(190, 260);
+            this.tabControl1.Size = new System.Drawing.Size(190, 225);
             this.tabControl1.TabIndex = 11;
             // 
             // Closer
             // 
             this.Closer.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Closer.Location = new System.Drawing.Point(291, 415);
+            this.Closer.Location = new System.Drawing.Point(291, 397);
             this.Closer.Name = "Closer";
             this.Closer.Size = new System.Drawing.Size(75, 30);
             this.Closer.TabIndex = 35;
@@ -366,17 +356,30 @@ namespace CookHelper
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(188, 392);
+            this.label2.Location = new System.Drawing.Point(188, 357);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(140, 17);
             this.label2.TabIndex = 36;
             this.label2.Text = "在载入收藏夹后才可添加";
             // 
+            // OnTop
+            // 
+            this.OnTop.AutoSize = true;
+            this.OnTop.Location = new System.Drawing.Point(234, 404);
+            this.OnTop.Name = "OnTop";
+            this.OnTop.Size = new System.Drawing.Size(51, 21);
+            this.OnTop.TabIndex = 37;
+            this.OnTop.TabStop = false;
+            this.OnTop.Text = "置顶";
+            this.OnTop.UseVisualStyleBackColor = true;
+            this.OnTop.CheckedChanged += new System.EventHandler(this.OnTop_CheckedChanged);
+            // 
             // RecipeSearcher
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 450);
+            this.ClientSize = new System.Drawing.Size(371, 431);
+            this.Controls.Add(this.OnTop);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.Closer);
             this.Controls.Add(this.SearchBox);
@@ -421,7 +424,6 @@ namespace CookHelper
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Button Auto;
         private System.Windows.Forms.TextBox ChoosedNum;
         private System.Windows.Forms.PictureBox Pic;
         private System.Windows.Forms.TextBox RecipeName;
@@ -430,5 +432,6 @@ namespace CookHelper
         private System.Windows.Forms.TextBox Other;
         private System.Windows.Forms.TextBox Deepth;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox OnTop;
     }
 }

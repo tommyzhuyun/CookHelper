@@ -50,13 +50,15 @@ namespace CookHelper
             this.ItemPic1 = new System.Windows.Forms.PictureBox();
             this.ResultPic = new System.Windows.Forms.PictureBox();
             this.Technique = new System.Windows.Forms.PictureBox();
-            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.RulerImg = new System.Windows.Forms.PictureBox();
             this.Closer = new System.Windows.Forms.Button();
             this.FavoriteAdd = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.CookRul = new System.Windows.Forms.Button();
             this.OnTop = new System.Windows.Forms.CheckBox();
             this.LeftHand = new System.Windows.Forms.PictureBox();
             this.RightHand = new System.Windows.Forms.PictureBox();
+            this.Switch1 = new System.Windows.Forms.Button();
+            this.Switch2 = new System.Windows.Forms.Button();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemPic3)).BeginInit();
             this.panel3.SuspendLayout();
@@ -65,7 +67,7 @@ namespace CookHelper
             ((System.ComponentModel.ISupportInitialize)(this.ItemPic1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Technique)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RulerImg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.LeftHand)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.RightHand)).BeginInit();
             this.SuspendLayout();
@@ -78,9 +80,9 @@ namespace CookHelper
             "默认方案",
             "方案一",
             "方案二"});
-            this.MenuSelect.Location = new System.Drawing.Point(144, 289);
+            this.MenuSelect.Location = new System.Drawing.Point(135, 278);
             this.MenuSelect.Name = "MenuSelect";
-            this.MenuSelect.Size = new System.Drawing.Size(152, 28);
+            this.MenuSelect.Size = new System.Drawing.Size(161, 28);
             this.MenuSelect.TabIndex = 24;
             this.MenuSelect.TabStop = false;
             this.MenuSelect.SelectedIndexChanged += new System.EventHandler(this.MenuSelect_SelectedIndexChanged);
@@ -90,7 +92,7 @@ namespace CookHelper
             this.RecipeName.BackColor = System.Drawing.SystemColors.Control;
             this.RecipeName.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.RecipeName.Font = new System.Drawing.Font("微软雅黑", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.RecipeName.Location = new System.Drawing.Point(88, 15);
+            this.RecipeName.Location = new System.Drawing.Point(80, 0);
             this.RecipeName.Name = "RecipeName";
             this.RecipeName.ReadOnly = true;
             this.RecipeName.Size = new System.Drawing.Size(210, 22);
@@ -107,7 +109,7 @@ namespace CookHelper
             this.panel4.Controls.Add(this.ItemValue3);
             this.panel4.Controls.Add(this.ItemFrom3);
             this.panel4.Controls.Add(this.ItemPic3);
-            this.panel4.Location = new System.Drawing.Point(205, 114);
+            this.panel4.Location = new System.Drawing.Point(210, 102);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(90, 150);
             this.panel4.TabIndex = 27;
@@ -179,7 +181,7 @@ namespace CookHelper
             this.panel3.Controls.Add(this.ItemValue2);
             this.panel3.Controls.Add(this.ItemFrom2);
             this.panel3.Controls.Add(this.ItemPic2);
-            this.panel3.Location = new System.Drawing.Point(109, 114);
+            this.panel3.Location = new System.Drawing.Point(105, 102);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(90, 150);
             this.panel3.TabIndex = 28;
@@ -247,7 +249,7 @@ namespace CookHelper
             // 
             this.Effect.BackColor = System.Drawing.SystemColors.Control;
             this.Effect.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Effect.Location = new System.Drawing.Point(12, 289);
+            this.Effect.Location = new System.Drawing.Point(0, 278);
             this.Effect.Multiline = true;
             this.Effect.Name = "Effect";
             this.Effect.ReadOnly = true;
@@ -265,7 +267,7 @@ namespace CookHelper
             this.panel2.Controls.Add(this.ItemValue1);
             this.panel2.Controls.Add(this.ItemFrom1);
             this.panel2.Controls.Add(this.ItemPic1);
-            this.panel2.Location = new System.Drawing.Point(13, 114);
+            this.panel2.Location = new System.Drawing.Point(0, 102);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(90, 150);
             this.panel2.TabIndex = 25;
@@ -333,7 +335,7 @@ namespace CookHelper
             // 
             this.ResultPic.BackColor = System.Drawing.SystemColors.Control;
             this.ResultPic.InitialImage = null;
-            this.ResultPic.Location = new System.Drawing.Point(156, 42);
+            this.ResultPic.Location = new System.Drawing.Point(149, 30);
             this.ResultPic.Name = "ResultPic";
             this.ResultPic.Size = new System.Drawing.Size(72, 66);
             this.ResultPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -342,29 +344,29 @@ namespace CookHelper
             // 
             // Technique
             // 
-            this.Technique.Location = new System.Drawing.Point(12, 12);
+            this.Technique.Location = new System.Drawing.Point(0, 0);
             this.Technique.Name = "Technique";
             this.Technique.Size = new System.Drawing.Size(72, 96);
             this.Technique.TabIndex = 26;
             this.Technique.TabStop = false;
             // 
-            // pictureBox6
+            // RulerImg
             // 
-            this.pictureBox6.BackColor = System.Drawing.Color.White;
-            this.pictureBox6.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox6.Location = new System.Drawing.Point(37, 269);
-            this.pictureBox6.Name = "pictureBox6";
-            this.pictureBox6.Size = new System.Drawing.Size(233, 14);
-            this.pictureBox6.TabIndex = 31;
-            this.pictureBox6.TabStop = false;
+            this.RulerImg.BackColor = System.Drawing.Color.White;
+            this.RulerImg.Location = new System.Drawing.Point(38, 258);
+            this.RulerImg.Name = "RulerImg";
+            this.RulerImg.Size = new System.Drawing.Size(232, 14);
+            this.RulerImg.TabIndex = 31;
+            this.RulerImg.TabStop = false;
             // 
             // Closer
             // 
             this.Closer.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Closer.Location = new System.Drawing.Point(221, 395);
+            this.Closer.Location = new System.Drawing.Point(218, 387);
             this.Closer.Name = "Closer";
             this.Closer.Size = new System.Drawing.Size(75, 30);
             this.Closer.TabIndex = 33;
+            this.Closer.TabStop = false;
             this.Closer.Text = "关闭";
             this.Closer.UseVisualStyleBackColor = true;
             this.Closer.Click += new System.EventHandler(this.Close_Click);
@@ -373,34 +375,36 @@ namespace CookHelper
             // 
             this.FavoriteAdd.Enabled = false;
             this.FavoriteAdd.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.FavoriteAdd.Location = new System.Drawing.Point(144, 395);
+            this.FavoriteAdd.Location = new System.Drawing.Point(137, 387);
             this.FavoriteAdd.Name = "FavoriteAdd";
             this.FavoriteAdd.Size = new System.Drawing.Size(75, 30);
             this.FavoriteAdd.TabIndex = 37;
+            this.FavoriteAdd.TabStop = false;
             this.FavoriteAdd.Text = "添加收藏";
             this.FavoriteAdd.UseVisualStyleBackColor = true;
             this.FavoriteAdd.Click += new System.EventHandler(this.FavoriteAdd_Click);
             // 
-            // button2
+            // CookRul
             // 
-            this.button2.Enabled = false;
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.button2.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.button2.Location = new System.Drawing.Point(221, 359);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 30);
-            this.button2.TabIndex = 38;
-            this.button2.TabStop = false;
-            this.button2.Text = "比例尺";
-            this.button2.UseVisualStyleBackColor = true;
+            this.CookRul.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.CookRul.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.CookRul.Location = new System.Drawing.Point(218, 351);
+            this.CookRul.Name = "CookRul";
+            this.CookRul.Size = new System.Drawing.Size(75, 30);
+            this.CookRul.TabIndex = 38;
+            this.CookRul.TabStop = false;
+            this.CookRul.Text = "比例尺";
+            this.CookRul.UseVisualStyleBackColor = true;
+            this.CookRul.Click += new System.EventHandler(this.CookRul_Click);
             // 
             // OnTop
             // 
             this.OnTop.AutoSize = true;
-            this.OnTop.Location = new System.Drawing.Point(156, 366);
+            this.OnTop.Location = new System.Drawing.Point(159, 360);
             this.OnTop.Name = "OnTop";
             this.OnTop.Size = new System.Drawing.Size(51, 21);
             this.OnTop.TabIndex = 39;
+            this.OnTop.TabStop = false;
             this.OnTop.Text = "置顶";
             this.OnTop.UseVisualStyleBackColor = true;
             this.OnTop.CheckedChanged += new System.EventHandler(this.OnTop_CheckedChanged);
@@ -408,8 +412,9 @@ namespace CookHelper
             // LeftHand
             // 
             this.LeftHand.BackColor = System.Drawing.SystemColors.Control;
+            this.LeftHand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.LeftHand.InitialImage = null;
-            this.LeftHand.Location = new System.Drawing.Point(90, 48);
+            this.LeftHand.Location = new System.Drawing.Point(83, 36);
             this.LeftHand.Name = "LeftHand";
             this.LeftHand.Size = new System.Drawing.Size(60, 60);
             this.LeftHand.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
@@ -419,26 +424,51 @@ namespace CookHelper
             // RightHand
             // 
             this.RightHand.BackColor = System.Drawing.SystemColors.Control;
+            this.RightHand.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.RightHand.InitialImage = null;
-            this.RightHand.Location = new System.Drawing.Point(233, 48);
+            this.RightHand.Location = new System.Drawing.Point(227, 36);
             this.RightHand.Name = "RightHand";
             this.RightHand.Size = new System.Drawing.Size(60, 60);
             this.RightHand.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.RightHand.TabIndex = 41;
             this.RightHand.TabStop = false;
             // 
+            // Switch1
+            // 
+            this.Switch1.Location = new System.Drawing.Point(89, 152);
+            this.Switch1.Name = "Switch1";
+            this.Switch1.Size = new System.Drawing.Size(16, 41);
+            this.Switch1.TabIndex = 42;
+            this.Switch1.TabStop = false;
+            this.Switch1.Text = "⇄";
+            this.Switch1.UseVisualStyleBackColor = true;
+            this.Switch1.Click += new System.EventHandler(this.Switch1_Click);
+            // 
+            // Switch2
+            // 
+            this.Switch2.Location = new System.Drawing.Point(194, 153);
+            this.Switch2.Name = "Switch2";
+            this.Switch2.Size = new System.Drawing.Size(16, 41);
+            this.Switch2.TabIndex = 43;
+            this.Switch2.TabStop = false;
+            this.Switch2.Text = "⇄";
+            this.Switch2.UseVisualStyleBackColor = true;
+            this.Switch2.Click += new System.EventHandler(this.Switch2_Click);
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(303, 435);
+            this.ClientSize = new System.Drawing.Size(300, 421);
+            this.Controls.Add(this.Switch2);
+            this.Controls.Add(this.Switch1);
             this.Controls.Add(this.RightHand);
             this.Controls.Add(this.LeftHand);
             this.Controls.Add(this.OnTop);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.CookRul);
             this.Controls.Add(this.FavoriteAdd);
             this.Controls.Add(this.Closer);
-            this.Controls.Add(this.pictureBox6);
+            this.Controls.Add(this.RulerImg);
             this.Controls.Add(this.MenuSelect);
             this.Controls.Add(this.RecipeName);
             this.Controls.Add(this.panel4);
@@ -452,7 +482,6 @@ namespace CookHelper
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "MenuForm";
             this.Text = "菜单";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuForm_FormClosing);
@@ -468,7 +497,7 @@ namespace CookHelper
             ((System.ComponentModel.ISupportInitialize)(this.ItemPic1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ResultPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Technique)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.RulerImg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.LeftHand)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.RightHand)).EndInit();
             this.ResumeLayout(false);
@@ -498,12 +527,14 @@ namespace CookHelper
         private System.Windows.Forms.PictureBox ItemPic1;
         private System.Windows.Forms.PictureBox ResultPic;
         private System.Windows.Forms.PictureBox Technique;
-        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.PictureBox RulerImg;
         private System.Windows.Forms.Button Closer;
         private System.Windows.Forms.Button FavoriteAdd;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button CookRul;
         private System.Windows.Forms.CheckBox OnTop;
         private System.Windows.Forms.PictureBox LeftHand;
         private System.Windows.Forms.PictureBox RightHand;
+        private System.Windows.Forms.Button Switch1;
+        private System.Windows.Forms.Button Switch2;
     }
 }

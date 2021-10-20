@@ -90,10 +90,10 @@ namespace CookHelper
         private void Searcher_Click(object sender, EventArgs e)
         {
             recipe = new RecipeSearcher(manager, Menuer);
-            recipe.Show();
-            recipe.Location = new System.Drawing.Point(Bounds.Right, Bounds.Y);
-            recipe.FormClosed += Recipe_FormClosed;
             SearcherButton.Enabled = false;
+            recipe.Show();
+            recipe.FormClosed += Recipe_FormClosed;
+            recipe.Location = new System.Drawing.Point(Bounds.Right, Bounds.Y);
         }
 
         private void Recipe_FormClosed(object sender, FormClosedEventArgs e)
@@ -143,5 +143,9 @@ namespace CookHelper
             this.BackgroundWorker.CancelAsync();
         }
 
+        private void HelpWord_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("notepad.exe", "ReadMe.txt");
+        }
     }
 }

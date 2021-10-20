@@ -87,6 +87,8 @@ namespace CookHelper
                     MenuForm MenForm = new MenuForm(sorting.Sorting, manager, check);
                     MnForm.Add(MenForm);
                     MenForm.FormClosing += ControlForm_FormClosing;
+                    MenForm.Parent = this;
+                    MenForm.TopLevel = false;
                     MenForm.Show();
                     MenForm.Location = new System.Drawing.Point(this.Location.X + this.Size.Width, this.Location.Y);
                 }
@@ -95,6 +97,8 @@ namespace CookHelper
                     MaterialForm MatForm = new MaterialForm(sorting.Sorting, manager, check);
                     MtForm.Add(MatForm);
                     MatForm.FormClosing += ControlForm_FormClosing;
+                    //MatForm.Parent = this;
+                    //MatForm.TopLevel = false;
                     MatForm.Show();
                     MatForm.Location = new System.Drawing.Point(this.Location.X + this.Size.Width, this.Location.Y);
                 }

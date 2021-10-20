@@ -7,9 +7,9 @@ namespace CookHelper.Data
 {
     public class MenuLists
     {
-        public readonly MENUSOURCE m1;
-        public readonly MENUSOURCE m2;
-        public readonly MENUSOURCE m3;
+        public MENUSOURCE m1;
+        public MENUSOURCE m2;
+        public MENUSOURCE m3;
         public MenuLists(MENUSOURCE[] ms)
         {
             if (ms.Length != 3)
@@ -40,6 +40,23 @@ namespace CookHelper.Data
             m3 = ms3;
         }
 
+        public void Switch12()
+        {
+            if (m2 == null)
+                return;
+            MENUSOURCE d = m2;
+            m2 = m1;
+            m1 = d;
+        }
+        public void Switch23()
+        {
+            if (m3 == null)
+                return;
+            MENUSOURCE d = m3;
+            m3 = m2;
+            m2 = d;
+        }
+
         public double[] Amount
         {
             get
@@ -53,6 +70,38 @@ namespace CookHelper.Data
                 if (m3 != null)
                     a[2] = (double)m3.AmountInt * 100 / sum;
                 return a;
+            }
+        }
+
+        public int M1Amount
+        {
+            get
+            {
+                if (m1 != null)
+                    return m1.AmountInt;
+                else
+                    return 0;
+            }
+        }
+
+        public int M2Amount
+        {
+            get
+            {
+                if (m2 != null)
+                    return m2.AmountInt;
+                else
+                    return 0;
+            }
+        }
+        public int M3Amount
+        {
+            get
+            {
+                if (m3 != null)
+                    return m3.AmountInt;
+                else
+                    return 0;
             }
         }
 

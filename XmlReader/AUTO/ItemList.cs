@@ -39,8 +39,15 @@ namespace CookHelper
         {
             ItemListTotal fm = new ItemListTotal(ExampleMenu, Item);
             fm.MenuPic.Image = manager.GetImageFromId(Item.ClassID);
+            fm.MenuCheck.Checked = true;
+            fm.MenuCheck.CheckedChanged += MenuCheck_CheckedChanged;
             FoodMenus.Add(fm);
             FoodMenuPanel.Controls.Add(fm.MenuPanel);
+        }
+
+        private void MenuCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            StatusUp();
         }
 
         protected void LoadMenu(List<RESULTITEM> Item)
@@ -80,22 +87,26 @@ namespace CookHelper
                 dictionary.Add(li, 0);
             }
 
+            int count = 0;
             foreach (var RecipeMenu in FoodMenus)
             {
-                foreach (var Effect in manager.ReadMenuEffect(RecipeMenu.ResultItem.ClassID))
+                if (RecipeMenu.MenuCheck.Checked)
                 {
-                    
-                    dictionary[Effect.Name] += Effect.AmountInt;
+                    count++;
+                    foreach (var Effect in manager.ReadMenuEffect(RecipeMenu.ResultItem.ClassID))
+                    {
+                        dictionary[Effect.Name] += Effect.AmountInt;
+                    }
                 }
             }
-            StringBuilder sb = new StringBuilder("庆典料理属性： ");
+
+            StringBuilder sb = new StringBuilder($"庆典料理：{count}/10");
 
             foreach(var dic in dictionary)
             {
                 if(dic.Value != 0)
                     sb.Append($"\r\n{dic.Key} {dic.Value}");
             }
-
             SumUp.Text = sb.ToString();
         }
 
@@ -107,7 +118,7 @@ namespace CookHelper
             {
                 FileName = "Favorite.xml",
                 Filter = "XML文件(*.xml)|*.xml",
-                InitialDirectory = "."
+                InitialDirectory = Environment.CurrentDirectory
             };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
@@ -126,6 +137,7 @@ namespace CookHelper
                     SaveFile.Enabled = true;
                     Statistic.Enabled = true;
                     Loading.Text = "静态";
+                    FoodMenuPanel.BackColor = Color.White;
                     StatusUp();
                 }
                 else
@@ -176,6 +188,7 @@ namespace CookHelper
             SaveFile.Enabled = true;
             Statistic.Enabled = true;
             Loading.Text = "静态";
+            FoodMenuPanel.BackColor = Color.White;
         }
 
         private void DeleteFile_Click(object sender, EventArgs e)
@@ -307,6 +320,10 @@ namespace CookHelper
             BackgroundWorker.CancelAsync();
         }
 
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 
 

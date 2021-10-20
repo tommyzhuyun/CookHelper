@@ -41,6 +41,7 @@ namespace CookHelper
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.LoadingLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.HelpWord = new System.Windows.Forms.Button();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -127,15 +128,26 @@ namespace CookHelper
             this.LoadingLabel});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(275, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(244, 25);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
+            // 
+            // HelpWord
+            // 
+            this.HelpWord.Location = new System.Drawing.Point(137, 28);
+            this.HelpWord.Name = "HelpWord";
+            this.HelpWord.Size = new System.Drawing.Size(75, 30);
+            this.HelpWord.TabIndex = 40;
+            this.HelpWord.Text = "帮助文档";
+            this.HelpWord.UseVisualStyleBackColor = true;
+            this.HelpWord.Click += new System.EventHandler(this.HelpWord_Click);
             // 
             // LoadingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(275, 124);
+            this.ClientSize = new System.Drawing.Size(244, 124);
+            this.Controls.Add(this.HelpWord);
             this.Controls.Add(this.Message);
             this.Controls.Add(this.FileReaded);
             this.Controls.Add(this.Favorite);
@@ -144,7 +156,7 @@ namespace CookHelper
             this.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Location = new System.Drawing.Point(190, 100);
+            this.Location = new System.Drawing.Point(200, 100);
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.MaximizeBox = false;
             this.Name = "LoadingForm";
@@ -172,5 +184,6 @@ namespace CookHelper
         private System.Windows.Forms.ToolStripProgressBar ProgressBar;
         private System.Windows.Forms.ToolStripLabel LoadingLabel;
         private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.Button HelpWord;
     }
 }

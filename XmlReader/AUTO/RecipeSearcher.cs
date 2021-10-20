@@ -225,6 +225,8 @@ namespace CookHelper
             {
                 MenuForm = new MenuForm(KV, manager,MenuOpen);
                 MenuForm.FormClosed += MenuForm_FormClosed;
+                //MenuForm.TopLevel = false;
+                //MenuForm.Parent = MenuOpen;
                 MenuForm.Show();
                 MenuForm.Location = new System.Drawing.Point(this.Location.X + this.Size.Width, this.Location.Y);
                 MenuOpen.Text = "关闭菜单";
@@ -257,6 +259,11 @@ namespace CookHelper
                     MenuForm?.Dispose();
                 }
             }
+        }
+
+        private void OnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            TopMost = OnTop.Checked;
         }
     }
 }

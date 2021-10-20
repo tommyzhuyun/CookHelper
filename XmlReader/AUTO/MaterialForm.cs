@@ -71,9 +71,9 @@ namespace CookHelper
             if (Mission.Count > 0)
             {
                 GETITEM getitem = Mission[0];
-                var items = getitem.Item;
-                var resource = items[0].SourceItem;
-                MissionInfo.Text = getitem + " - " + items[0].ExtraInfo;
+                var items = getitem.Item.Find(x => x.ClassID == RecipeMenu.ClassID.ToString());
+                var resource = items.SourceItem;
+                MissionInfo.Text = getitem + " - " + items.ExtraInfo;
                 foreach(var item in resource)
                 {
                     Sorting sorting;
