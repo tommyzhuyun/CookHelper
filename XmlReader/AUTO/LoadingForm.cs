@@ -17,6 +17,7 @@ namespace CookHelper
         {
             InitializeComponent();
             this.manager = manager;
+            HighDPI.Enabled = manager.HighDPI;
             Menuer = new List<Sorting>();
             MenuExist = new HashSet<int>();
         }
@@ -161,6 +162,11 @@ namespace CookHelper
         private void HelpWord_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("notepad.exe", "ReadMe.txt");
+        }
+
+        private void HighDPI_CheckedChanged(object sender, EventArgs e)
+        {
+            manager.OnDPIWorking = HighDPI.Checked;
         }
     }
 }

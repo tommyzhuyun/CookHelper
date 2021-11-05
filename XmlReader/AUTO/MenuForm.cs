@@ -284,9 +284,9 @@ namespace CookHelper
             if (CookRuler != null)
             {
                 if (IsSuccess)
-                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
+                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, manager.OnDPIWorking);
                 else
-                    CookRuler.Update(100, 0, 0, HighDPI.Checked);
+                    CookRuler.Update(100, 0, 0, manager.OnDPIWorking);
             }
         }
 
@@ -303,15 +303,6 @@ namespace CookHelper
             MenuSelect.SelectedIndex = 0;
             menuList = menuLists[MenuSelect.SelectedIndex];
             InitialItem();
-            
-            using (Graphics graphics = this.CreateGraphics())
-            {
-                float dpiX, dpiY;
-                dpiX = graphics.DpiX;
-                dpiY = graphics.DpiY;
-                if (dpiX != 96 || dpiY != 96)
-                    HighDPI.Enabled = true;
-            }
         }
 
         private void MenuSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -445,9 +436,9 @@ namespace CookHelper
             if (CookRuler == null)
             {
                 if (IsSuccess)
-                    CookRuler = new CookRuler(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
+                    CookRuler = new CookRuler(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, manager.OnDPIWorking);
                 else
-                    CookRuler = new CookRuler(100, 0, 0, HighDPI.Checked);
+                    CookRuler = new CookRuler(100, 0, 0, manager.OnDPIWorking);
                 CookRuler.Show();
                 CookRuler.FormClosing += CookRuler_FormClosing;
                 CookRuler.Location = new Point(this.Location.X + this.Size.Width - CookRuler.Size.Width, this.Location.Y + this.Size.Height - CookRuler.Size.Height);
@@ -472,9 +463,9 @@ namespace CookHelper
             if (CookRuler != null)
             {
                 if (IsSuccess)
-                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
+                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, manager.OnDPIWorking);
                 else
-                    CookRuler.Update(100, 0, 0, HighDPI.Checked);
+                    CookRuler.Update(100, 0, 0, manager.OnDPIWorking);
             }
         }
 
@@ -485,20 +476,9 @@ namespace CookHelper
             if (CookRuler != null)
             {
                 if (IsSuccess)
-                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
+                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, manager.OnDPIWorking);
                 else
-                    CookRuler.Update(100, 0, 0, HighDPI.Checked);
-            }
-        }
-
-        private void HighDPI_CheckedChanged(object sender, EventArgs e)
-        {
-            if (CookRuler != null)
-            {
-                if (IsSuccess)
-                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
-                else
-                    CookRuler.Update(100, 0, 0, HighDPI.Checked);
+                    CookRuler.Update(100, 0, 0, manager.OnDPIWorking);
             }
         }
     }

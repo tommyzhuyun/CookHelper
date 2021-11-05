@@ -59,7 +59,6 @@ namespace CookHelper
             this.RightHand = new System.Windows.Forms.PictureBox();
             this.Switch1 = new System.Windows.Forms.Button();
             this.Switch2 = new System.Windows.Forms.Button();
-            this.HighDPI = new System.Windows.Forms.CheckBox();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ItemPic3)).BeginInit();
             this.panel3.SuspendLayout();
@@ -456,24 +455,11 @@ namespace CookHelper
             this.Switch2.UseVisualStyleBackColor = true;
             this.Switch2.Click += new System.EventHandler(this.Switch2_Click);
             // 
-            // HighDPI
-            // 
-            this.HighDPI.AutoSize = true;
-            this.HighDPI.Enabled = false;
-            this.HighDPI.Location = new System.Drawing.Point(227, 324);
-            this.HighDPI.Name = "HighDPI";
-            this.HighDPI.Size = new System.Drawing.Size(59, 21);
-            this.HighDPI.TabIndex = 44;
-            this.HighDPI.Text = "高DPI";
-            this.HighDPI.UseVisualStyleBackColor = true;
-            this.HighDPI.CheckedChanged += new System.EventHandler(this.HighDPI_CheckedChanged);
-            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(300, 421);
-            this.Controls.Add(this.HighDPI);
             this.Controls.Add(this.Switch2);
             this.Controls.Add(this.Switch1);
             this.Controls.Add(this.RightHand);
@@ -550,6 +536,5 @@ namespace CookHelper
         private System.Windows.Forms.PictureBox RightHand;
         private System.Windows.Forms.Button Switch1;
         private System.Windows.Forms.Button Switch2;
-        private System.Windows.Forms.CheckBox HighDPI;
     }
 }

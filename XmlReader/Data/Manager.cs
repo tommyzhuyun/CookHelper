@@ -13,7 +13,8 @@ namespace CookHelper.Data
         public readonly ItemDBChina db;
         public readonly BaseItem BaseItem;
         public FavoriteManager favorite;
-
+        public float dpiX, dpiY;
+        public bool OnDPIWorking { set; get; }
         public Manager()
         {
             recipe = new CookingRecipe("DataBase/cookingrecipe.xml");
@@ -21,6 +22,12 @@ namespace CookHelper.Data
             db = new ItemDBChina("DataBase/itemdb.china.txt");
             BaseItem = new BaseItem("DataBase/Shop.xml", "DataBase/Mission.xml", "DataBase/Skill.xml");
             favorite = null;
+            using (Graphics graphics = Graphics.FromHwnd(IntPtr.Zero))
+            {
+                dpiX = graphics.DpiX;
+                dpiY = graphics.DpiY;
+            }
+            OnDPIWorking = false;
         }
 
         public void Update(string filename)
@@ -38,6 +45,13 @@ namespace CookHelper.Data
             this.favorite = favorite;
         }
 
+        public bool HighDPI
+        {
+            get
+            {
+                return dpiX != 96 || dpiY != 96;
+            }
+        }
 
         public string ClassIDtoName(string id)
         {
@@ -74,7 +88,19 @@ namespace CookHelper.Data
         private Image GetImage(string filename)
         {
             if (File.Exists(filename))
-                return Image.FromFile(filename);
+            {
+                Image get = Image.FromFile(filename);
+                if (!OnDPIWorking)
+                    return get;
+                Bitmap HighDPI = new Bitmap((int)(get.Width * dpiX / 96), (int)(get.Height * dpiX / 96));
+                using (Graphics g = Graphics.FromImage(HighDPI))
+                {
+                    g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                    g.DrawImage(get, 0, 0, HighDPI.Width, HighDPI.Height);
+                }
+                get.Dispose();
+                return HighDPI;
+            }
             else
                 return null;
         }

@@ -35,13 +35,14 @@ namespace CookHelper
             this.SearcherButton = new System.Windows.Forms.Button();
             this.Favorite = new System.Windows.Forms.Button();
             this.FileReaded = new System.Windows.Forms.Label();
-            this.Message = new System.Windows.Forms.Label();
             this.关闭ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
             this.LoadingLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip2 = new System.Windows.Forms.ToolStrip();
             this.HelpWord = new System.Windows.Forms.Button();
+            this.HighDPI = new System.Windows.Forms.CheckBox();
+            this.Message = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.toolStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +58,7 @@ namespace CookHelper
             // SearcherButton
             // 
             this.SearcherButton.Enabled = false;
-            this.SearcherButton.Location = new System.Drawing.Point(12, 28);
+            this.SearcherButton.Location = new System.Drawing.Point(5, 28);
             this.SearcherButton.Name = "SearcherButton";
             this.SearcherButton.Size = new System.Drawing.Size(101, 30);
             this.SearcherButton.TabIndex = 4;
@@ -68,7 +69,7 @@ namespace CookHelper
             // Favorite
             // 
             this.Favorite.Font = new System.Drawing.Font("微软雅黑", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.Favorite.Location = new System.Drawing.Point(12, 64);
+            this.Favorite.Location = new System.Drawing.Point(5, 64);
             this.Favorite.Name = "Favorite";
             this.Favorite.Size = new System.Drawing.Size(101, 30);
             this.Favorite.TabIndex = 36;
@@ -79,21 +80,11 @@ namespace CookHelper
             // FileReaded
             // 
             this.FileReaded.AutoSize = true;
-            this.FileReaded.Location = new System.Drawing.Point(119, 69);
+            this.FileReaded.Location = new System.Drawing.Point(112, 69);
             this.FileReaded.Name = "FileReaded";
             this.FileReaded.Size = new System.Drawing.Size(93, 20);
             this.FileReaded.TabIndex = 38;
             this.FileReaded.Text = "未载入收藏夹";
-            // 
-            // Message
-            // 
-            this.Message.AutoSize = true;
-            this.Message.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.Message.Location = new System.Drawing.Point(12, 97);
-            this.Message.Name = "Message";
-            this.Message.Size = new System.Drawing.Size(223, 22);
-            this.Message.TabIndex = 39;
-            this.Message.Text = "By 鸡蛋甲天下(潘妮) 1943495203";
             // 
             // 关闭ToolStripMenuItem
             // 
@@ -128,13 +119,13 @@ namespace CookHelper
             this.LoadingLabel});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(244, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(239, 25);
             this.toolStrip2.TabIndex = 2;
             this.toolStrip2.Text = "toolStrip2";
             // 
             // HelpWord
             // 
-            this.HelpWord.Location = new System.Drawing.Point(137, 28);
+            this.HelpWord.Location = new System.Drawing.Point(112, 28);
             this.HelpWord.Name = "HelpWord";
             this.HelpWord.Size = new System.Drawing.Size(75, 30);
             this.HelpWord.TabIndex = 40;
@@ -142,13 +133,43 @@ namespace CookHelper
             this.HelpWord.UseVisualStyleBackColor = true;
             this.HelpWord.Click += new System.EventHandler(this.HelpWord_Click);
             // 
+            // HighDPI
+            // 
+            this.HighDPI.AutoSize = true;
+            this.HighDPI.BackColor = System.Drawing.SystemColors.Control;
+            this.HighDPI.CheckAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.HighDPI.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.HighDPI.Location = new System.Drawing.Point(188, 25);
+            this.HighDPI.Name = "HighDPI";
+            this.HighDPI.Size = new System.Drawing.Size(51, 36);
+            this.HighDPI.TabIndex = 41;
+            this.HighDPI.TabStop = false;
+            this.HighDPI.Text = "高DPI";
+            this.HighDPI.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.HighDPI.UseVisualStyleBackColor = false;
+            this.HighDPI.CheckedChanged += new System.EventHandler(this.HighDPI_CheckedChanged);
+            // 
+            // Message
+            // 
+            this.Message.BackColor = System.Drawing.SystemColors.Control;
+            this.Message.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Message.Location = new System.Drawing.Point(0, 100);
+            this.Message.Name = "Message";
+            this.Message.ReadOnly = true;
+            this.Message.Size = new System.Drawing.Size(239, 19);
+            this.Message.TabIndex = 42;
+            this.Message.TabStop = false;
+            this.Message.Text = "By 鸡蛋甲天下(潘妮) 1943495203";
+            this.Message.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // LoadingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
-            this.ClientSize = new System.Drawing.Size(244, 124);
-            this.Controls.Add(this.HelpWord);
+            this.ClientSize = new System.Drawing.Size(239, 126);
             this.Controls.Add(this.Message);
+            this.Controls.Add(this.HighDPI);
+            this.Controls.Add(this.HelpWord);
             this.Controls.Add(this.FileReaded);
             this.Controls.Add(this.Favorite);
             this.Controls.Add(this.SearcherButton);
@@ -178,12 +199,13 @@ namespace CookHelper
         private System.Windows.Forms.Button SearcherButton;
         private System.Windows.Forms.Button Favorite;
         private System.Windows.Forms.Label FileReaded;
-        private System.Windows.Forms.Label Message;
         private System.Windows.Forms.ToolStripMenuItem 关闭ToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripProgressBar ProgressBar;
         private System.Windows.Forms.ToolStripLabel LoadingLabel;
         private System.Windows.Forms.ToolStrip toolStrip2;
         private System.Windows.Forms.Button HelpWord;
+        private System.Windows.Forms.CheckBox HighDPI;
+        private System.Windows.Forms.TextBox Message;
     }
 }
