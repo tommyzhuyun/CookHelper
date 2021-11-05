@@ -8,7 +8,7 @@ namespace CookHelper
 {
     public partial class LoadingForm : Form
     {
-        private Manager manager = null;
+        private readonly Manager manager;
         private readonly List<Sorting> Menuer;
         private readonly HashSet<int> MenuExist;
         private RecipeSearcher recipe = null;
@@ -18,13 +18,6 @@ namespace CookHelper
             InitializeComponent();
             this.manager = manager;
             HighDPI.Enabled = manager.HighDPI;
-            Menuer = new List<Sorting>();
-            MenuExist = new HashSet<int>();
-        }
-
-        public LoadingForm()
-        {
-            InitializeComponent();
             Menuer = new List<Sorting>();
             MenuExist = new HashSet<int>();
         }

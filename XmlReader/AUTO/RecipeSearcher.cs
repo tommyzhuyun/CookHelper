@@ -49,7 +49,7 @@ namespace CookHelper
                 case "活动产物":
                     Searched.Sort((a, b) => AscendingOrder.Checked ? a.ClassID - b.ClassID : b.ClassID - a.ClassID);
                     break;
-                case "料理日记统计":
+                case "中间步骤":
                     Searched.Sort((a, b) => AscendingOrder.Checked ? a.Menu.MenuBased - b.Menu.MenuBased : b.Menu.MenuBased - a.Menu.MenuBased);
                     break;
                 case "深度":
@@ -96,7 +96,7 @@ namespace CookHelper
                 case "活动产物":
                     Searched = Searched.FindAll(x => x.IsEvent);
                     break;
-                case "料理日记统计":
+                case "中间步骤":
                     Searched = Searched.FindAll(x => x.Menu.MenuBased != 0 && !x.IsEvent);
                     break;
                 case "深度":
@@ -179,8 +179,8 @@ namespace CookHelper
                         case "体重":
                             ChoosedNum.Text = Chosener.Text + " : " + KV.Item.Fatness;
                             break;
-                        case "料理日记统计":
-                            ChoosedNum.Text = "预准备 : " + KV.Menu.MenuBased + "个";
+                        case "中间步骤":
+                            ChoosedNum.Text = "被使用 : " + KV.Menu.MenuBased + "次";
                             break;
                         default:
                             ChoosedNum.Text = Chosener.Text + ": " + KV.EffectValue(Chosener.Text);

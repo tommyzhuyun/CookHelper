@@ -16,7 +16,7 @@ namespace CookHelper
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Manager manager = null;
+            Manager manager;
             try
             {
                 manager = new Manager();

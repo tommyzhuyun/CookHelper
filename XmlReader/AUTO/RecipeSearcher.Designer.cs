@@ -158,6 +158,7 @@ namespace CookHelper
             "全部",
             "默认",
             "深度",
+            "中间步骤",
             "上身",
             "下身",
             "体重",
@@ -176,7 +177,6 @@ namespace CookHelper
             "魔法攻击力",
             "魔法防御力",
             "魔法保护",
-            "料理日记统计",
             "失败产物",
             "活动产物"});
             this.Chosener.Location = new System.Drawing.Point(0, 28);

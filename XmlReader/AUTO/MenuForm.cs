@@ -80,6 +80,8 @@ namespace CookHelper
             RightHand.Refresh();
 
             StringBuilder sb = new StringBuilder("ClassID: " + RecipeMenu.ClassID.ToString());
+            if(RecipeMenu.Menu.MenuBased!=0)
+                sb.Append("\r\n有" + RecipeMenu.Menu.MenuBased.ToString() + "个料理需要它");
             if (RecipeMenu.Buffer != null)
                 sb.Append("\r\n持续时间 : " + RecipeMenu.Buffer.Duration_Sec.ToString());
             if (RecipeMenu.Item != null)
