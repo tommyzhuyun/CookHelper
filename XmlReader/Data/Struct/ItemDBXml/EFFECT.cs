@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace CookHelper.Data
@@ -9,7 +7,7 @@ namespace CookHelper.Data
     public class EFFECT : XmlBase
     {
         public EFFECT(XElement effect) : base(effect)
-        {        }
+        { }
 
         public string Param
         {
@@ -97,7 +95,7 @@ namespace CookHelper.Data
             "保护" ,
             "魔法攻击力" ,
             "魔法防御力" ,
-            "魔法保护" 
+            "魔法保护"
         };
     }
 }

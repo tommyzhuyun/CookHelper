@@ -1,13 +1,13 @@
-﻿using System;
+﻿using CookHelper.Data;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using CookHelper.Data;
 
 namespace CookHelper
 {
-    public partial class MenuForm :Form
+    public partial class MenuForm : Form
     {
         public Sorting RecipeMenu;
         private readonly Manager manager;
@@ -79,7 +79,7 @@ namespace CookHelper
             LeftHand.Refresh();
             RightHand.Refresh();
 
-            StringBuilder sb = new StringBuilder("ClassID: "+RecipeMenu.ClassID.ToString());
+            StringBuilder sb = new StringBuilder("ClassID: " + RecipeMenu.ClassID.ToString());
             if (RecipeMenu.Buffer != null)
                 sb.Append("\r\n持续时间 : " + RecipeMenu.Buffer.Duration_Sec.ToString());
             if (RecipeMenu.Item != null)
@@ -106,7 +106,7 @@ namespace CookHelper
             menuLists = new List<MenuLists>();
             var essential = RecipeMenu.Menu.Essential;
             var additional = RecipeMenu.Menu.Additional;
-            
+
             MenuLists ms = new MenuLists(essential);
             menuLists.Add(ms);
 
@@ -143,10 +143,10 @@ namespace CookHelper
 
         private void InitialItem()
         {
-            if (menuLists.Count <= MenuSelect.SelectedIndex) 
+            if (menuLists.Count <= MenuSelect.SelectedIndex)
                 return;
 
-           
+
             double[] amount = menuList.Amount;
             if (menuList.m1 != null)
             {
@@ -155,7 +155,7 @@ namespace CookHelper
                 ItemPic1.Image = manager.GetImageFromId(menuList.m1.ClassID);
                 ItemPic1.Refresh();
                 ItemText1.Text = manager.ClassIDtoName(menuList.m1.ClassID);
-                if(IsSuccess)
+                if (IsSuccess)
                     ItemValue1.Text = Math.Round(amount[0], 1).ToString();
                 else
                     ItemValue1.Text = "0/100";
@@ -201,7 +201,7 @@ namespace CookHelper
             else
             {
                 ItemFrom3.Tag = null;
-                ItemFrom3.Enabled = false; 
+                ItemFrom3.Enabled = false;
                 ItemPic3.Image?.Dispose();
                 ItemPic3.Image = null;
                 ItemText3.Text = "";
@@ -239,7 +239,7 @@ namespace CookHelper
                 point2 = Width;
                 point3 = Width;
             }
-           // Console.WriteLine(point1 + " " + point2 + " " + point3);
+            // Console.WriteLine(point1 + " " + point2 + " " + point3);
             for (int x = 0; x < Width; x++)//228
             {
                 for (int y = 0; y < Height; y++)
@@ -284,9 +284,9 @@ namespace CookHelper
             if (CookRuler != null)
             {
                 if (IsSuccess)
-                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount);
+                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
                 else
-                    CookRuler.Update(100,0,0);
+                    CookRuler.Update(100, 0, 0, HighDPI.Checked);
             }
         }
 
@@ -303,6 +303,15 @@ namespace CookHelper
             MenuSelect.SelectedIndex = 0;
             menuList = menuLists[MenuSelect.SelectedIndex];
             InitialItem();
+            
+            using (Graphics graphics = this.CreateGraphics())
+            {
+                float dpiX, dpiY;
+                dpiX = graphics.DpiX;
+                dpiY = graphics.DpiY;
+                if (dpiX != 96 || dpiY != 96)
+                    HighDPI.Enabled = true;
+            }
         }
 
         private void MenuSelect_SelectedIndexChanged(object sender, EventArgs e)
@@ -313,7 +322,7 @@ namespace CookHelper
 
         private void MenuForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            while (MnForm.Count > 0) 
+            while (MnForm.Count > 0)
             {
                 var fm = MnForm[0];
                 MnForm.RemoveAt(0);
@@ -326,7 +335,7 @@ namespace CookHelper
                     }
                 }
             }
-            while (MtForm.Count > 0) 
+            while (MtForm.Count > 0)
             {
                 var fm = MtForm[0];
                 MtForm.RemoveAt(0);
@@ -345,7 +354,8 @@ namespace CookHelper
             if (sender is MaterialForm material)
             {
                 ControlOwner = material.ControlOwner;
-            }else if(sender is MenuForm menu)
+            }
+            else if (sender is MenuForm menu)
             {
                 ControlOwner = menu.ControlOwner;
             }
@@ -409,7 +419,7 @@ namespace CookHelper
         public void FavoriteUpdate(bool enable)
         {
             FavoriteAdd.Enabled = enable;
-            foreach(var menu in MnForm)
+            foreach (var menu in MnForm)
             {
                 menu?.FavoriteUpdate(enable);
             }
@@ -421,7 +431,7 @@ namespace CookHelper
 
         private void FavoriteAdd_Click(object sender, EventArgs e)
         {
-            manager.favorite.AddItem(RecipeMenu.ClassID.ToString(),RecipeMenu.Name);
+            manager.favorite.AddItem(RecipeMenu.ClassID.ToString(), RecipeMenu.Name);
         }
 
         private void OnTop_CheckedChanged(object sender, EventArgs e)
@@ -432,12 +442,12 @@ namespace CookHelper
         CookRuler CookRuler = null;
         private void CookRul_Click(object sender, EventArgs e)
         {
-            if(CookRuler == null)
+            if (CookRuler == null)
             {
                 if (IsSuccess)
-                    CookRuler = new CookRuler(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount);
+                    CookRuler = new CookRuler(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
                 else
-                    CookRuler = new CookRuler(100,0,0);
+                    CookRuler = new CookRuler(100, 0, 0, HighDPI.Checked);
                 CookRuler.Show();
                 CookRuler.FormClosing += CookRuler_FormClosing;
                 CookRuler.Location = new Point(this.Location.X + this.Size.Width - CookRuler.Size.Width, this.Location.Y + this.Size.Height - CookRuler.Size.Height);
@@ -452,7 +462,7 @@ namespace CookHelper
         private void CookRuler_FormClosing(object sender, FormClosingEventArgs e)
         {
             CookRul.Text = "料理尺";
-            CookRuler= null;
+            CookRuler = null;
         }
 
         private void Switch1_Click(object sender, EventArgs e)
@@ -462,9 +472,9 @@ namespace CookHelper
             if (CookRuler != null)
             {
                 if (IsSuccess)
-                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount);
+                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
                 else
-                    CookRuler.Update(100, 0, 0);
+                    CookRuler.Update(100, 0, 0, HighDPI.Checked);
             }
         }
 
@@ -475,9 +485,20 @@ namespace CookHelper
             if (CookRuler != null)
             {
                 if (IsSuccess)
-                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount);
+                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
                 else
-                    CookRuler.Update(100, 0, 0);
+                    CookRuler.Update(100, 0, 0, HighDPI.Checked);
+            }
+        }
+
+        private void HighDPI_CheckedChanged(object sender, EventArgs e)
+        {
+            if (CookRuler != null)
+            {
+                if (IsSuccess)
+                    CookRuler.Update(menuList.M1Amount, menuList.M2Amount, menuList.M3Amount, HighDPI.Checked);
+                else
+                    CookRuler.Update(100, 0, 0, HighDPI.Checked);
             }
         }
     }

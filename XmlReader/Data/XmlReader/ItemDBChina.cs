@@ -58,8 +58,8 @@ namespace CookHelper.Data
         /// <returns>返回查询到的描述，异常时返回: NAN</returns>
         public string FindDesc(string NameId)
         {
-            if (ItemDBs.ContainsKey(NameId))
-                return ItemDBs[NameId];
+            if (ItemDBs.TryGetValue(NameId, out string desc))
+                return desc;
             else
                 return "NAN";
         }
@@ -75,8 +75,8 @@ namespace CookHelper.Data
             List<string> list = new List<string>();
             if (ItemDBs.ContainsValue(Desc))
             {
-                var find =  ItemDBs.Where(c => c.Value == Desc);
-                foreach(var c in find)
+                var find = ItemDBs.Where(c => c.Value == Desc);
+                foreach (var c in find)
                 {
                     list.Add(c.Key);
                 }

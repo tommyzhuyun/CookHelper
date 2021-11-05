@@ -155,7 +155,7 @@ namespace CookHelper.Data
         {
             get
             {
-                if (FoodEffectXml != null) 
+                if (FoodEffectXml != null)
                     return BUFFER.FormXmlString(FoodEffectXml);
                 else
                     return null;

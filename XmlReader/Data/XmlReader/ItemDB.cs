@@ -1,25 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace CookHelper.Data
 {
     public class ItemDB
     {
-        public XDocument Itemdb { private set; get; }
+        private readonly XDocument Itemdb;
 
-        public readonly IEnumerable<XElement> Mabi_Item;
+        private readonly Dictionary<string, ITEM> Mabi_Item;
 
-        public ItemDB()
-        {
-            Itemdb = XDocument.Load("itemdb.xml");
-            Mabi_Item = Itemdb.Descendants("Mabi_Item");
-        }
+        public ItemDB() : this("itemdb.xml")
+        { }
 
         public ItemDB(string filename)
         {
             Itemdb = XDocument.Load(filename);
+            Mabi_Item = ReadItemDB();
+        }
+
+        private Dictionary<string, ITEM> ReadItemDB()
+        {
+            var Items = new Dictionary<string, ITEM>();
+            foreach (var RecipeElements in Itemdb.Descendants("Mabi_Item"))
+            {
+                ITEM item = new ITEM(RecipeElements);
+                Items[item.ClassID] = item;
+            }
+            return Items;
         }
 
         public List<ITEM> ReadItemDBFromRecipe(List<MENU> menus)
@@ -34,7 +41,7 @@ namespace CookHelper.Data
                 if (trash != null)
                     Items.Add(trash);
             }
-            Items.RemoveAll(x=>x == null);
+            Items.RemoveAll(x => x == null);
             return Items;
         }
 
@@ -62,27 +69,14 @@ namespace CookHelper.Data
             return ReadItemDBFromID(ID.ToString());
         }
 
-
         public ITEM ReadItemDBFromID(string ID)
         {
-            var item = Itemdb.Descendants("Mabi_Item").LastOrDefault(x => x.Attribute("ID")?.Value == ID);
-            if (item != null)
-                return new ITEM(item);
+            if (Mabi_Item.TryGetValue(ID, out ITEM item))
+                return item;
             else
                 return null;
-
         }
 
 
-        public List<ITEM> ReadItemDB()
-        {
-            var Items = new List<ITEM>();
-            foreach (var RecipeElements in Itemdb.Descendants("Mabi_Item"))
-            {
-                Items.Add(new ITEM(RecipeElements));
-            }
-            Items.RemoveAll(x=>x == null);
-            return Items;
-        }
     }
 }

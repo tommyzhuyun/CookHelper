@@ -63,9 +63,9 @@ namespace CookHelper.Properties {
         /// <summary>
         ///   查找 System.Drawing.Bitmap 类型的本地化资源。
         /// </summary>
-        internal static System.Drawing.Bitmap BGI {
+        internal static System.Drawing.Bitmap MABI {
             get {
-                object obj = ResourceManager.GetObject("BGI", resourceCulture);
+                object obj = ResourceManager.GetObject("MABI", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

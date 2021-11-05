@@ -22,14 +22,14 @@ namespace CookHelper
             Sorting = new List<Sorting>();
             ExampleMenu = new ItemListTotal(ExamplePanel, ExamplePic, ExampleCheckBox, ExampleLabel);
         }
-        
+
         public void UpdateSorting(List<Sorting> Sorting)
         {
             this.Sorting = Sorting;
             Statistic.Tag = true;
             Statistic.Text = "统计";
         }
-        
+
         private void RecipeList_Load(object sender, EventArgs e)
         {
             ExamplePanel.Visible = false;
@@ -47,7 +47,7 @@ namespace CookHelper
 
         private void MenuCheck_CheckedChanged(object sender, EventArgs e)
         {
-            if(!OnWorking)
+            if (!OnWorking)
                 StatusUp();
         }
 
@@ -73,7 +73,7 @@ namespace CookHelper
 
         private void Favorite_ItemAdded(object sender, EventArgs e)
         {
-            if(sender is RESULTITEM item)
+            if (sender is RESULTITEM item)
             {
                 AddMenu(item);
                 StatusUp();
@@ -83,7 +83,7 @@ namespace CookHelper
         private void StatusUp()
         {
             Dictionary<string, int> dictionary = new Dictionary<string, int>();
-            foreach(var li in EFFECT.NameList)
+            foreach (var li in EFFECT.NameList)
             {
                 dictionary.Add(li, 0);
             }
@@ -103,9 +103,9 @@ namespace CookHelper
 
             StringBuilder sb = new StringBuilder($"庆典料理：{count}/10");
 
-            foreach(var dic in dictionary)
+            foreach (var dic in dictionary)
             {
-                if(dic.Value != 0)
+                if (dic.Value != 0)
                     sb.Append($"\r\n{dic.Key} {dic.Value}");
             }
             SumUp.Text = sb.ToString();

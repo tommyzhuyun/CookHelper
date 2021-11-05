@@ -1,9 +1,9 @@
-﻿using System;
+﻿using CookHelper.Data;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using CookHelper.Data;
 
 namespace CookHelper
 {
@@ -24,7 +24,7 @@ namespace CookHelper
         }
 
         public MaterialForm(Sorting RecipeMenu, Manager manager) : this(RecipeMenu, manager, null)
-        {        }
+        { }
 
         private void MaterialForm_Load(object sender, EventArgs e)
         {
@@ -51,7 +51,7 @@ namespace CookHelper
                 {
                     Price.Text = "买入价 - " + RecipeMenu.Item.Price_Buy + " Gold";
                     PriceWed.Text = "周三价 - " + (RecipeMenu.Item.Price_Buy * 0.95).ToString("f0") + " Gold";
-                    
+
                 }
                 StringBuilder sb1 = new StringBuilder();
                 foreach (var npc in ItemCouldBuy)
@@ -74,7 +74,7 @@ namespace CookHelper
                 var items = getitem.Item.Find(x => x.ClassID == RecipeMenu.ClassID.ToString());
                 var resource = items.SourceItem;
                 MissionInfo.Text = getitem + " - " + items.ExtraInfo;
-                foreach(var item in resource)
+                foreach (var item in resource)
                 {
                     Sorting sorting;
                     if (manager.IsMenu(item.ClassID))
@@ -96,7 +96,7 @@ namespace CookHelper
 
                     MissionInfoPanel.Controls.Add(checkBox);
                     ControlList.Add(checkBox);
-                    if(MissionInfoPanel.Controls.Count > 3)
+                    if (MissionInfoPanel.Controls.Count > 3)
                     {
                         MissionInfoPanel.Size = new Size(MissionInfoPanel.Width, MissionInfoPanel.Height + checkBox.Size.Height);
                         PanelMission.Size = new Size(PanelMission.Width, PanelMission.Height + checkBox.Size.Height);
@@ -216,7 +216,7 @@ namespace CookHelper
         {
             CheckBox check = (CheckBox)sender;
             Sorting sorting = (Sorting)check.Tag;
-            
+
             if (check.Checked)
             {
                 MaterialForm MaterialForm = new MaterialForm(sorting, manager, check);
@@ -235,20 +235,20 @@ namespace CookHelper
                     MaterialForm?.Close();
                 }
             }
-        } 
+        }
 
         private void MenuForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             MaterialForm material = sender as MaterialForm;
 
             Control ControlOwner = material?.ControlOwner;
-            if(ControlOwner != null)
+            if (ControlOwner != null)
                 ((CheckBox)ControlOwner).Checked = false;
         }
 
         private void MaterialForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            while (ElemForms.Count > 0) 
+            while (ElemForms.Count > 0)
             {
                 var fm = ElemForms[0];
                 ElemForms.RemoveAt(0);

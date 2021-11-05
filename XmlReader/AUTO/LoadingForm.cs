@@ -1,19 +1,16 @@
-﻿using System;
+﻿using CookHelper.Data;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
-using System.IO;
-using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using CookHelper.Data;
 
 namespace CookHelper
 {
     public partial class LoadingForm : Form
     {
-        public Manager manager;
-        public List<Sorting> Menuer;
+        private Manager manager = null;
+        private readonly List<Sorting> Menuer;
+        private readonly HashSet<int> MenuExist;
         private RecipeSearcher recipe = null;
 
         public LoadingForm(Manager manager)
@@ -21,6 +18,14 @@ namespace CookHelper
             InitializeComponent();
             this.manager = manager;
             Menuer = new List<Sorting>();
+            MenuExist = new HashSet<int>();
+        }
+
+        public LoadingForm()
+        {
+            InitializeComponent();
+            Menuer = new List<Sorting>();
+            MenuExist = new HashSet<int>();
         }
 
         private void LoadingForm_Load(object sender, EventArgs e)
@@ -33,29 +38,29 @@ namespace CookHelper
             int success = menu.SuccessIDInt;
             int trash = menu.TrashIDInt;
 
-            if (success != 0 && !Menuer.Exists(x => x.ClassID == success)) 
+            if (success != 0 && !MenuExist.Contains(success))
             {
-                ITEM item = manager.ReadItemDBFromID(menu.SuccessID);
+                ITEM item = manager.ReadItemDBFromID(success.ToString());
                 string SuccName = manager.ClassIDtoName(item);
                 Sorting sorting = new Sorting(SuccName, success, true, menu, item);
                 Menuer.Add(sorting);
+                MenuExist.Add(success);
             }
 
-            if (trash != 0 && !Menuer.Exists(x => x.ClassID == trash))
+            if (trash != 0 && !MenuExist.Contains(trash))
             {
-                ITEM item = manager.ReadItemDBFromID(menu.TrashID);
+                ITEM item = manager.ReadItemDBFromID(trash.ToString());
                 string trasName = manager.ClassIDtoName(item);
                 Sorting sorting = new Sorting(trasName, trash, false, menu, item);
                 Menuer.Add(sorting);
+                MenuExist.Add(trash);
             }
         }
 
         private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            this.BackgroundWorker.ReportProgress(1);
             var MENUS = manager.ReadRecipe();
-            int Count = 10, All = MENUS.Count + 10;
-            this.BackgroundWorker.ReportProgress(Count * 100 / All);
+            int Count = 0, All = MENUS.Count;
             foreach (var m in MENUS)
             {
                 if (BackgroundWorker.CancellationPending)
@@ -73,11 +78,20 @@ namespace CookHelper
         private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             if (!BackgroundWorker.CancellationPending)
+            {
                 this.ProgressBar.Value = e.ProgressPercentage;
+                this.ProgressBar.Invalidate();
+            }
         }
 
         private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            if (manager == null)
+            {
+                MessageBox.Show("无数据库异常");
+                Application.Exit();
+                return;
+            }
             this.DialogResult = DialogResult.OK;
             LoadingLabel.Text = "Done.";
             SearcherButton.Enabled = true;
@@ -91,6 +105,7 @@ namespace CookHelper
         {
             recipe = new RecipeSearcher(manager, Menuer);
             SearcherButton.Enabled = false;
+            //recipe.ShowInTaskbar = true;
             recipe.Show();
             recipe.FormClosed += Recipe_FormClosed;
             recipe.Location = new System.Drawing.Point(Bounds.Right, Bounds.Y);
@@ -105,6 +120,7 @@ namespace CookHelper
         private void Favorite_Click(object sender, EventArgs e)
         {
             list = new ItemList(manager);
+            //list.ShowInTaskbar = true;
             list.Show();
             list.OnLine += List_OnLine;
             list.Location = new System.Drawing.Point(Bounds.Right - list.Bounds.Width, Bounds.Bottom);
@@ -131,11 +147,10 @@ namespace CookHelper
         private void List_OnLine(object sender, EventArgs e)
         {
             FileReaded.Text = "已加载收藏夹";
-            if(recipe != null)
+            if (recipe != null)
             {
                 recipe.FavoriteUpdate(true);
             }
-
         }
 
         private void LoadingForm_FormClosing(object sender, FormClosingEventArgs e)

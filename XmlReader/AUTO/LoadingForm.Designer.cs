@@ -144,8 +144,8 @@ namespace CookHelper
             // 
             // LoadingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(244, 124);
             this.Controls.Add(this.HelpWord);
             this.Controls.Add(this.Message);
@@ -162,7 +162,7 @@ namespace CookHelper
             this.Name = "LoadingForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
-            this.Text = "料理助手V1.2";
+            this.Text = "料理助手V1.3";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.LoadingForm_FormClosing);
             this.Load += new System.EventHandler(this.LoadingForm_Load);
             this.contextMenuStrip1.ResumeLayout(false);

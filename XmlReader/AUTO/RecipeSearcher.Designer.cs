@@ -176,6 +176,7 @@ namespace CookHelper
             "魔法攻击力",
             "魔法防御力",
             "魔法保护",
+            "料理日记统计",
             "失败产物",
             "活动产物"});
             this.Chosener.Location = new System.Drawing.Point(0, 28);
@@ -376,8 +377,8 @@ namespace CookHelper
             // 
             // RecipeSearcher
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(371, 429);
             this.Controls.Add(this.OnTop);
             this.Controls.Add(this.label2);

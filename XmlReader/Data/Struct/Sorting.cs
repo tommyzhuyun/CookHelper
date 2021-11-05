@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace CookHelper.Data
 {
@@ -36,11 +33,11 @@ namespace CookHelper.Data
             this.Item = Item;
         }
 
-        public bool IsSuccess 
+        public bool IsSuccess
         {
-            get 
+            get
             {
-                if (Menu == null) 
+                if (Menu == null)
                     return false;
                 else
                     return Menu.IsSuccess(ClassID);

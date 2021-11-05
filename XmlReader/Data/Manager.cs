@@ -30,9 +30,7 @@ namespace CookHelper.Data
                 favorite = new FavoriteManager(filename);
             }
             catch (Exception)
-            {
-
-            }
+            { }
         }
 
         public void Update(FavoriteManager favorite)
@@ -56,22 +54,11 @@ namespace CookHelper.Data
 
         public Image GetImageFromId(string id)
         {
-            string file = "./img/item/" + id + ".png";
-            if (File.Exists(file))
-            {
-                Image image = Image.FromFile(file);
-                return image;
-            }
+            Image item = GetImage("./img/item/" + id + ".png");
+            if (item == null)
+                return GetImage("./img/item/unknow.png");
             else
-            {
-                if (File.Exists("./img/item/unknow.png"))
-                {
-                    Image image = Image.FromFile("./img/item/unknow.png");
-                    return image;
-                }
-                else
-                    return null;
-            }
+                return item;
         }
 
         public Image GetImageFromId(int id)
@@ -81,16 +68,15 @@ namespace CookHelper.Data
 
         public Image GetImageFromAction(string ActionName)
         {
-            string file = "./img/Skill/10020" + ActionName + ".png";
-            if (File.Exists(file))
-            {
-                Image image = Image.FromFile(file);
-                return image;
-            }
+            return GetImage("./img/Skill/10020" + ActionName + ".png");
+        }
+
+        private Image GetImage(string filename)
+        {
+            if (File.Exists(filename))
+                return Image.FromFile(filename);
             else
-            {
                 return null;
-            }
         }
 
         public Dictionary<string, string> GetFoodEffect(int id)
@@ -111,40 +97,8 @@ namespace CookHelper.Data
 
         public List<MENU> ReadRecipe()
         {
-            return recipe.ReadMenus(GetDepth);
+            return recipe.ReadMenusOnDepth(BaseItem.HasItem);
         }
-
-        public int GetDepth(MENU menu)
-        {
-            var RecipeElements = recipe.Recipe.Descendants("recipe");
-            var Essential = menu.Essential;
-            int[] depth = new int[Essential.Count];
-            int i = 0;
-            foreach (var es in Essential)
-            {
-                if (BaseItem.HasItem(es.ClassID))
-                {
-                    depth[i] = 1;
-                }
-                else
-                {
-                    var found = RecipeElements.Where(x => x.Attribute("result_item")?.Value == es.ClassID.ToString());
-                    if (found.Count() != 0)
-                    {
-                        MENU m = new MENU(found.First());
-                        depth[i] = 1 + GetDepth(m);
-                    }
-                    else
-                    {
-                        depth[i] = 1;
-                    }
-                }
-                i++;
-            }
-            return depth.Sum();
-        }
-
-        
 
         public bool IsBase(string ClassID)
         {
@@ -153,14 +107,14 @@ namespace CookHelper.Data
 
         public MENU ReadFirstRecipe(string id)
         {
-            var c = ReadRecipe();
-            return c.Where((x)=>x.SuccessID == id).FirstOrDefault();
+            return recipe.GetMenu(id);
         }
 
         public ITEM ReadItemDBFromID(string id)
         {
             return itemdb.ReadItemDBFromID(id);
         }
+
 
         public BUFFER ReadBufferFromItem(ITEM item)
         {
@@ -193,19 +147,21 @@ namespace CookHelper.Data
         }
         public Sorting GetSourceSorting(MENUSOURCE source)
         {
-            bool IsSuccess = recipe.IsSuccess(source);
-            bool IsTrash = recipe.IsTrash(source);
+            if (source == null)
+                return null;
+            string ClassID = source.ClassID;
 
-            MENU menu = recipe.GetMenu(source);
-            ITEM item = ReadItemDBFromID(source.ClassID);
-            bool IsMenu = IsSuccess || IsTrash;
-            if (BaseItem.HasItem(source.ClassID))
+            bool IsMenu = recipe.IsMenu(ClassID);
+            MENU menu = recipe.GetMenu(ClassID);
+            ITEM item = itemdb.ReadItemDBFromID(ClassID);
+
+            if (BaseItem.HasItem(ClassID))
                 IsMenu = false;
-            Sorting sorter = new Sorting(ClassIDtoName(source.ClassID), source.ClassIDInt, IsMenu, menu, item);
+            Sorting sorter = new Sorting(ClassIDtoName(ClassID), source.ClassIDInt, IsMenu, menu, item);
             return sorter;
         }
 
-        public Sorting GetSorting(List<Sorting> sbase,int ClassID)
+        public Sorting GetSorting(List<Sorting> sbase, int ClassID)
         {
             return sbase.Find(x => x.ClassID == ClassID);
         }
@@ -219,16 +175,17 @@ namespace CookHelper.Data
             if (sort.IsMenu && sort.Menu != null)
             {
                 var list = sort.Menu.Essential;
-                foreach(var li in list)
+                foreach (var li in list)
                 {
                     Sorting a = GetSourceSorting(li);
                     var loop = GetBaseItem(a);
-                    foreach(var lo in loop)
+                    foreach (var lo in loop)
                     {
                         source.Add(lo);
                     }
                 }
-            }else if (!sort.IsMenu)
+            }
+            else if (!sort.IsMenu)
             {
                 source.Add(sort);
             }
@@ -238,7 +195,7 @@ namespace CookHelper.Data
         public List<Statistic> CountOnSorting(List<Sorting> sortings)
         {
             List<Statistic> counton = new List<Statistic>();
-            foreach(var sort in sortings)
+            foreach (var sort in sortings)
             {
                 var check = counton.FirstOrDefault(x => x.Sorting.ClassID == sort.ClassID);
                 if (check != null)
@@ -259,7 +216,8 @@ namespace CookHelper.Data
                     else if (BaseItem.ItemCanSkill(sort.ClassID.ToString()))
                     {
                         status = Status.CanSkill;
-                    }else if (sort.IsMenu)
+                    }
+                    else if (sort.IsMenu)
                     {
                         status = Status.CanCook;
                     }
@@ -267,8 +225,7 @@ namespace CookHelper.Data
                 }
             }
 
-            counton.Sort((a, b) => a.Status - b.Status);
-            return counton;
+            return counton.OrderBy(a => a.Status).ThenBy(a => a.Sorting.ClassID).ToList();
         }
 
         public List<EFFECT> ReadMenuEffect(string menu)

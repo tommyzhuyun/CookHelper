@@ -1,8 +1,7 @@
-﻿using System;
+﻿using CookHelper.Data;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Forms;
-using CookHelper.Data;
 
 namespace CookHelper
 {
@@ -13,12 +12,12 @@ namespace CookHelper
         public MenuForm MenuForm;
         public bool MenuOpened = false;
 
-        public RecipeSearcher(Manager manager,List<Sorting> Menuer)
+        public RecipeSearcher(Manager manager, List<Sorting> Menuer)
         {
             this.manager = manager;
             this.Menuer = Menuer;
             InitializeComponent();
-            
+
             Technique.SelectedIndex = 0;
             Chosener.SelectedIndex = 1;
         }
@@ -49,6 +48,9 @@ namespace CookHelper
                 case "失败产物":
                 case "活动产物":
                     Searched.Sort((a, b) => AscendingOrder.Checked ? a.ClassID - b.ClassID : b.ClassID - a.ClassID);
+                    break;
+                case "料理日记统计":
+                    Searched.Sort((a, b) => AscendingOrder.Checked ? a.Menu.MenuBased - b.Menu.MenuBased : b.Menu.MenuBased - a.Menu.MenuBased);
                     break;
                 case "深度":
                     Searched.Sort((a, b) => AscendingOrder.Checked ? a.Menu.Depth - b.Menu.Depth : b.Menu.Depth - a.Menu.Depth);
@@ -93,6 +95,9 @@ namespace CookHelper
                     break;
                 case "活动产物":
                     Searched = Searched.FindAll(x => x.IsEvent);
+                    break;
+                case "料理日记统计":
+                    Searched = Searched.FindAll(x => x.Menu.MenuBased != 0 && !x.IsEvent);
                     break;
                 case "深度":
                     Searched = Searched.FindAll(x => x.Menu.Depth != 0 && !x.IsEvent);
@@ -174,14 +179,17 @@ namespace CookHelper
                         case "体重":
                             ChoosedNum.Text = Chosener.Text + " : " + KV.Item.Fatness;
                             break;
+                        case "料理日记统计":
+                            ChoosedNum.Text = "预准备 : " + KV.Menu.MenuBased + "个";
+                            break;
                         default:
-                            ChoosedNum.Text = Chosener.Text + " : " + KV.EffectValue(Chosener.Text);
+                            ChoosedNum.Text = Chosener.Text + ": " + KV.EffectValue(Chosener.Text);
                             break;
                     }
                 }
 
                 MenuOpen.Enabled = true;
-                if(MenuForm != null && MenuOpened)
+                if (MenuForm != null && MenuOpened)
                 {
                     MenuForm.UpdateMenu(KV);
                 }
@@ -217,12 +225,12 @@ namespace CookHelper
             {
                 MenuOpened = false;
                 if (MenuForm != null)
-                MenuForm.Close();
+                    MenuForm.Close();
                 MenuOpen.Text = "详细菜单";
             }
             else if (listBox.SelectedItem is Sorting KV)
             {
-                MenuForm = new MenuForm(KV, manager,MenuOpen);
+                MenuForm = new MenuForm(KV, manager, MenuOpen);
                 MenuForm.FormClosed += MenuForm_FormClosed;
                 //MenuForm.TopLevel = false;
                 //MenuForm.Parent = MenuOpen;

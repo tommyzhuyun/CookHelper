@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using CookHelper.Data;
+using System;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using CookHelper.Data;
 
 namespace CookHelper
 {
@@ -23,26 +16,18 @@ namespace CookHelper
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            Manager manager;
+            Manager manager = null;
             try
             {
                 manager = new Manager();
             }
-            catch (Exception e)
+            catch (Exception a)
             {
-                MessageBox.Show("数据库载入失败，程序无法启动：\r\n" + e.Message);
+                MessageBox.Show("数据库载入失败，程序无法启动：\r\n" + a.Message);
                 return;
             }
-            if(manager == null)
-            {
-                MessageBox.Show("NULL异常错误");
-                return;
-            }
-            Application.Run(new LoadingForm(manager));
+            if(manager != null)
+                Application.Run(new LoadingForm(manager));
         }
-
-
-
     }
 }

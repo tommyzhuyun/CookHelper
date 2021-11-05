@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace CookHelper.Data
@@ -47,7 +45,7 @@ namespace CookHelper.Data
 
         public void AddItem(string ClassID, string Name)
         {
-            AddItem(GetResultItem(ClassID,Name));
+            AddItem(GetResultItem(ClassID, Name));
         }
 
         public void RemoveItem(RESULTITEM foodMenu)
@@ -57,7 +55,7 @@ namespace CookHelper.Data
             //ItemRemoved(this, EventArgs.Empty);
         }
 
-        public XElement GetResultItem(string ClassID,string Name)
+        public XElement GetResultItem(string ClassID, string Name)
         {
             XElement element = new XElement("ResultItem");
             element.Add(new XAttribute("ResultID", ClassID));
@@ -68,7 +66,7 @@ namespace CookHelper.Data
         public List<RESULTITEM> ReadItem()
         {
             List<RESULTITEM> rs = new List<RESULTITEM>();
-            foreach(var c in favorite.Descendants("ResultItem"))
+            foreach (var c in favorite.Descendants("ResultItem"))
             {
                 RESULTITEM res = new RESULTITEM(c);
                 rs.Add(res);

@@ -30,24 +30,30 @@ namespace CookHelper
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CookRuler));
-            this.RulerPanel = new System.Windows.Forms.Panel();
+            this.Ruler = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.Ruler)).BeginInit();
             this.SuspendLayout();
             // 
-            // RulerPanel
+            // Ruler
             // 
-            this.RulerPanel.Location = new System.Drawing.Point(22, 26);
-            this.RulerPanel.Name = "RulerPanel";
-            this.RulerPanel.Size = new System.Drawing.Size(232, 16);
-            this.RulerPanel.TabIndex = 0;
+            this.Ruler.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Ruler.Location = new System.Drawing.Point(0, 0);
+            this.Ruler.Name = "Ruler";
+            this.Ruler.Size = new System.Drawing.Size(276, 107);
+            this.Ruler.TabIndex = 1;
+            this.Ruler.TabStop = false;
+            this.Ruler.MouseClick += new System.Windows.Forms.MouseEventHandler(this.CookRuler_MouseClick);
+            this.Ruler.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CookRuler_MouseDown);
+            this.Ruler.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CookRuler_MouseMove);
+            this.Ruler.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CookRuler_MouseUp);
             // 
             // CookRuler
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.BackgroundImage = global::CookHelper.Properties.Resources.BGI;
             this.ClientSize = new System.Drawing.Size(276, 107);
-            this.Controls.Add(this.RulerPanel);
+            this.Controls.Add(this.Ruler);
             this.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -57,7 +63,6 @@ namespace CookHelper
             this.Name = "CookRuler";
             this.Opacity = 0.7D;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Form1";
             this.TopMost = true;
             this.TransparencyKey = System.Drawing.SystemColors.Control;
             this.Load += new System.EventHandler(this.CookRuler_Load);
@@ -66,13 +71,14 @@ namespace CookHelper
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.CookRuler_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.CookRuler_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.CookRuler_MouseUp);
+            ((System.ComponentModel.ISupportInitialize)(this.Ruler)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel RulerPanel;
+        private System.Windows.Forms.PictureBox Ruler;
     }
 }
 

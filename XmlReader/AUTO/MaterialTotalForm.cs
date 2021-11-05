@@ -1,11 +1,6 @@
 ﻿using CookHelper.Data;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CookHelper
@@ -16,7 +11,7 @@ namespace CookHelper
         public List<Statistic> ItemList;
         public readonly MaterialTotal Example;
 
-        public MaterialTotalForm(Manager manager,List<Statistic> rs)
+        public MaterialTotalForm(Manager manager, List<Statistic> rs)
         {
             this.manager = manager;
             this.ItemList = rs;
@@ -45,7 +40,7 @@ namespace CookHelper
         private readonly List<MaterialTotal> Total = new List<MaterialTotal>();
         public void Clear()
         {
-            while(Total.Count > 0)
+            while (Total.Count > 0)
             {
                 MaterialTotal total = Total[0];
                 Total.RemoveAt(0);
@@ -242,7 +237,7 @@ namespace CookHelper
                 Text = ID.Amount + "个",
             };
 
-            
+
             MenuPanel.Controls.Add(MenuCheck);
             MenuPanel.Controls.Add(MenuValue);
             MenuPanel.Controls.Add(MenuText);

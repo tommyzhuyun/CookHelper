@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace CookHelper.Data
@@ -11,8 +10,8 @@ namespace CookHelper.Data
         public readonly XDocument Shopper;
         public readonly XDocument Skiller;
         public readonly XDocument Mission;
-        public BaseItem():this("Shop.xml", "Mission.xml", "Skill.xml")
-        {        }
+        public BaseItem() : this("Shop.xml", "Mission.xml", "Skill.xml")
+        { }
 
         public BaseItem(string Shopper, string Skiller, string Mission)
         {
@@ -26,7 +25,7 @@ namespace CookHelper.Data
             var a1 = Shopper.Descendants("Shops").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
             if (a1 > 0)
                 return true;
-           
+
             var a2 = Mission.Descendants("Missions").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
             if (a2 > 0)
                 return true;
@@ -63,7 +62,7 @@ namespace CookHelper.Data
             else
                 return false;
         }
-        
+
 
         public List<GETITEM> ItemCouldBuy(string ID)
         {
@@ -87,14 +86,14 @@ namespace CookHelper.Data
             foreach (var Info in descend)
             {
                 var t = Info.Elements("Item").Where(x => x.Attribute("ResultID")?.Value == ID);
-                if(t.Count()>0)
+                if (t.Count() > 0)
                     key.Add(new GETITEM(Info));
             }
             return key;
         }
 
 
-
+        /*
         public static void UpdateXml()
         {
             XDocument shopper = XDocument.Load("Shop.xml");
@@ -155,7 +154,7 @@ namespace CookHelper.Data
             if (save == "y")
                 shopper.Save("Shop2.xml");
         }
-
+        */
 
     }
 }

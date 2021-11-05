@@ -7,8 +7,8 @@ namespace CookHelper.Data
 {
     public class BUFFER : XmlBase
     {
-        public BUFFER(XElement Xml_FoodEffect):base(Xml_FoodEffect)
-        {        }
+        public BUFFER(XElement Xml_FoodEffect) : base(Xml_FoodEffect)
+        { }
 
         public static BUFFER FormXmlString(string xml)
         {
@@ -49,15 +49,15 @@ namespace CookHelper.Data
             {
                 List<EFFECT> es = new List<EFFECT>();
                 var effects = XElement.Elements("effect");
-                foreach(var e in effects)
+                foreach (var e in effects)
                 {
                     EFFECT effect = new EFFECT(e);
                     es.Add(effect);
                 }
-                es.RemoveAll(x=>x == null);
+                es.RemoveAll(x => x == null);
                 return es;
             }
-        } 
+        }
 
         override
         public string ToString()
@@ -65,7 +65,7 @@ namespace CookHelper.Data
             StringBuilder builder = new StringBuilder();
             builder.Append("持续时间:");
             builder.Append(Duration_Sec);
-            foreach(var effect in Effects)
+            foreach (var effect in Effects)
             {
                 builder.Append(", ");
                 builder.Append(effect);

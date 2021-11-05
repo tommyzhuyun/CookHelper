@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Xml.Linq;
 
 namespace CookHelper.Data
 {
     public class GETITEM : XmlBase
     {
-        public GETITEM(XElement x) : base(x) 
-        {         }
+        public GETITEM(XElement x) : base(x)
+        { }
 
         public string Info
         {
@@ -37,7 +35,7 @@ namespace CookHelper.Data
 
         public override string ToString()
         {
-            return Info + " - "  + NPC + "" + SkillName ;
+            return Info + " - " + NPC + "" + SkillName;
         }
 
         protected IEnumerable<XElement> Items
@@ -53,7 +51,7 @@ namespace CookHelper.Data
             get
             {
                 List<RESULTITEM> res = new List<RESULTITEM>();
-                foreach(var i in Items)
+                foreach (var i in Items)
                 {
                     res.Add(new RESULTITEM(i));
                 }

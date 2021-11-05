@@ -8,13 +8,20 @@ namespace CookHelper.Data
         public MENU(XElement recipe) : base(recipe)
         {
             Depth = 0;
+            MenuBased = 0;
         }
 
         public int Depth { private set; get; }
+        public int MenuBased { private set; get; }
 
         public void UpdateDepth(int depth)
         {
             Depth = depth;
+        }
+
+        public void MenuBasedIncrement()
+        {
+            MenuBased++;
         }
 
         public string Action
@@ -136,6 +143,16 @@ namespace CookHelper.Data
         public bool IsTrash(int ClassID)
         {
             return TrashIDInt == ClassID;
+        }
+
+        public bool IsMenu(string ClassID)
+        {
+            return IsSuccess(ClassID) || IsTrash(ClassID);
+        }
+
+        public bool IsMenu(int ClassID)
+        {
+            return IsSuccess(ClassID) || IsTrash(ClassID);
         }
 
         public string TrashID

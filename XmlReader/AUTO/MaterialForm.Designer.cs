@@ -302,8 +302,8 @@ namespace CookHelper
             // 
             // MaterialForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(234, 549);
             this.Controls.Add(this.PanelNPC);
             this.Controls.Add(this.PanelMission);

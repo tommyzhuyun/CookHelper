@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace CookHelper
@@ -14,17 +9,24 @@ namespace CookHelper
     {
         private int value1, value2, value3;
         private int LineImage = Color.Black.ToArgb();
+        private readonly Bitmap MABI;
+        private readonly Bitmap ICON;
+        private bool HighDPI;
 
-        public CookRuler(int v1,int v2,int v3)
+        public CookRuler(int v1, int v2, int v3, bool HighDPI)
         {
             InitializeComponent();
+            this.HighDPI = HighDPI;
             value1 = v1;
             value2 = v2;
             value3 = v3;
-            //Console.WriteLine(SystemColors.Control.R + " " + SystemColors.Control.G + " " + SystemColors.Control.B);
+            changed = false;
+            MABI = Properties.Resources.MABI;
+            ICON = ChangeBackImage();
         }
-        public void Update(int v1, int v2, int v3)
+        public void Update(int v1, int v2, int v3, bool HighDPI)
         {
+            this.HighDPI = HighDPI;
             value1 = v1;
             value2 = v2;
             value3 = v3;
@@ -61,92 +63,147 @@ namespace CookHelper
             }
         }
 
+        private bool changed;
         private void CookRuler_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
             {
+                changed = !changed;
                 LineImage = InvertedColor(LineImage);
                 RulerImage();
-                ChangeBackImage();
-                GC.Collect();
             }
+        }
+
+        private Bitmap ChangeBackImage()
+        {
+            Bitmap ICON = new Bitmap(MABI.Width, MABI.Height);
+            using (Graphics g = Graphics.FromImage(ICON))
+            {
+                g.DrawImage(Properties.Resources.MABI, 0, 0);
+            }
+            int ControlColor = SystemColors.Control.ToArgb();
+            int[] data = CopyToArray(ICON);
+
+            for (int x = 0; x < ICON.Width; x++)//228
+            {
+                for (int y = 0; y < ICON.Height; y++)
+                {
+                    if (data[x + y * ICON.Width] != ControlColor)
+                    {
+                        data[x + y * ICON.Width] = InvertedColor(data[x + y * ICON.Width]);
+                    }
+                }
+            }
+            CopyFromArray(data, ICON);
+            return ICON;
         }
 
         private void RulerImage()
         {
-            int Width = RulerPanel.Width;
-            int Height = RulerPanel.Height;
-            int[] data = new int[Width * Height];
-            int ControlColor = SystemColors.Control.ToArgb();
-            int Yellow = Color.Yellow.ToArgb();
-            int Cyan = Color.Cyan.ToArgb();
-            int HotPink = Color.HotPink.ToArgb();
-            for (int i = 0; i < data.Length; i++)
-            {
-                data[i] = ControlColor;
-            }
-            
             int sum = value3 + value2 + value1;
-            int point1 = (value1) * (Width) / sum;
-            int point2 = (value1 + value2) * (Width) / sum;
-            int point3 = (value1 + value2 + value3) * (Width) / sum;
-            //Console.WriteLine(point1 + " " + point2 + " " + point3);
-            for (int x = 0; x < Width; x++)//228
+            Rectangle RulerLocation = new Rectangle(22, 26, 232, 8);
+            int point1 = (value1) * (RulerLocation.Width) / sum;
+            int point2 = (value1 + value2) * (RulerLocation.Width) / sum;
+            int point3 = (value1 + value2 + value3) * (RulerLocation.Width) / sum;
+
+            Rectangle P1 = new Rectangle(RulerLocation.X,
+                                        RulerLocation.Y,
+                                        point1,
+                                        RulerLocation.Height);
+            Rectangle P2 = new Rectangle(RulerLocation.X + point1,
+                                        RulerLocation.Y,
+                                        point2 - point1,
+                                        RulerLocation.Height);
+            Rectangle P3 = new Rectangle(RulerLocation.X + point2,
+                                        RulerLocation.Y,
+                                        point3 - point2,
+                                        RulerLocation.Height);
+            float dx = 96, dy = 96;
+            Bitmap BackImage = new Bitmap(Width, Height);
+
+            using (Graphics g = Graphics.FromImage(BackImage))
+            using (Pen Line = new Pen(Color.FromArgb(LineImage)))
+            using (Pen ControlP = new Pen(SystemColors.Control))
             {
-                for(int y = 0; y < Height; y++)
+                if (HighDPI)
                 {
-                    if ( x == point1 || x == point2)
-                    {
-                        if (data[x + y * Width] != LineImage)
-                            data[x + y * Width] = LineImage;
-                    }
-                    else if (y < 8 && x <= point1)
-                        data[x + y * Width] = Yellow;
-                    else if (y < 8 && x > point1 && x <= point2)
-                        data[x + y * Width] = Cyan;
-                    else if (y < 8 && x > point2 && x<= point3)
-                        data[x + y * Width] = HotPink;
+                    dx = g.DpiX;
+                    dy = g.DpiY;
+                }
+                //Console.WriteLine(dx + " " + dy);
+                g.Clear(SystemColors.Control);
+                Rectangle left = OnScalRectangle(4, 51, MABI.Width, MABI.Height, dx, dy);
+                Rectangle right = OnScalRectangle(228, 51, MABI.Width, MABI.Height, dx, dy);
+                g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                if (!changed)
+                {
+                    g.DrawImage(MABI, left.X, left.Y, left.Width, left.Height);
+                    g.DrawImage(MABI, right.X, right.Y, right.Width, right.Height);
+                }
+                else
+                {
+                    g.DrawImage(ICON, left.X, left.Y, left.Width, left.Height);
+                    g.DrawImage(ICON, right.X, right.Y, right.Width, right.Height);
+                }
+                g.DrawRectangle(Line, OnScalRectangle(0, -1, 275, 43, dx, dy));
+                g.DrawRectangle(Line, OnScalRectangle(21, -1, 233, 43, dx, dy));
+                g.DrawRectangle(Line, OnScalRectangle(0, 42, 275, 64, dx, dy));
+                g.DrawRectangle(Line, OnScalRectangle(51, 54, 71, 37, dx, dy));
+                g.DrawRectangle(Line, OnScalRectangle(153, 54, 71, 37, dx, dy));
+                g.DrawLine(ControlP, OnScalPoint(51, 106, dx, dy), OnScalPoint(226, 106, dx, dy));
+
+                g.FillRectangle(Brushes.Yellow, OnScalRectangle(P1, dx, dy));
+                if (value2 != 0)
+                {
+                    g.FillRectangle(Brushes.Cyan, OnScalRectangle(P2, dx, dy));
+                    g.DrawLine(Line, OnScalPoint(P2.X, P2.Y, dx, dy), OnScalPoint(P2.X, P2.Bottom + 8, dx, dy));
+                }
+                if (value3 != 0)
+                {
+                    g.FillRectangle(Brushes.HotPink, OnScalRectangle(P3, dx, dy));
+                    g.DrawLine(Line, OnScalPoint(P3.X, P3.Y, dx, dy), OnScalPoint(P3.X, P3.Bottom + 8, dx, dy));
                 }
             }
-            Bitmap bitmap = new Bitmap(Width, Height, PixelFormat.Format32bppArgb);
-            CopyFromArray(data, bitmap);
-            RulerPanel.BackgroundImage?.Dispose();
-            RulerPanel.BackgroundImage = bitmap;
-            
+
+            Ruler.Image?.Dispose();
+
+            /*
+            Bitmap Resize = new Bitmap((int)(BackImage.Width * dx / 96),(int)(BackImage.Height * dy / 96));
+            using(Graphics g2 = Graphics.FromImage(Resize))
+            {
+                //g2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
+                g2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+                g2.DrawImage(BackImage, 0, 0, Resize.Width, Resize.Height);
+                g2.Dispose();
+            }*/
+
+            Ruler.Image = BackImage;
         }
 
-        private void ChangeBackImage()
+        private Point OnScalPoint(int x, int y, float dx, float dy)
         {
-            int ControlColor = SystemColors.Control.ToArgb();
-            Bitmap BackImage = new Bitmap(BackgroundImage);
-            int[] data = CopyToArray(BackImage);
-
-            for (int x = 0; x < Width; x++)//228
-            {
-                for (int y = 0; y < Height; y++)
-                {
-                    if (data[x + y * Width] != ControlColor)
-                    {
-                            data[x + y * Width] = InvertedColor(data[x + y * Width]);
-                    }
-                }
-            }
-
-            CopyFromArray(data, BackImage);
-            BackgroundImage?.Dispose();
-            BackgroundImage = BackImage;
-            this.Refresh();
+            return new Point((int)(x * dx / 96), (int)(y * dy / 96)); 
         }
 
+        private Rectangle OnScalRectangle(int x, int y, int width, int height,  float dx, float dy)
+        {
+            return new Rectangle((int)(x * dx / 96), (int)(y * dy / 96), (int)(width * dx / 96), (int)(height * dy / 96));
+        }
+
+        private Rectangle OnScalRectangle(Rectangle re, float dx, float dy)
+        {
+            return new Rectangle((int)(re.X * dx / 96), (int)(re.Y * dy / 96), (int)(re.Width * dx / 96), (int)(re.Height * dy / 96));
+        }
 
         private void CookRuler_KeyPress(object sender, KeyPressEventArgs e)
         {
             char key = e.KeyChar;
             //Console.WriteLine(key);
-            if(key == (char)Keys.Escape)
+            if (key == (char)Keys.Escape)
             {
                 this.Close();
-            }else if(key == 'w')
+            }
+            else if (key == 'w')
             {
                 this.Location = new Point(this.Location.X, this.Location.Y - 1);
             }
@@ -199,7 +256,7 @@ namespace CookHelper
             {
                 throw new ArgumentException(@"The provided bitmap must have a 32bpp depth", nameof(bitmap));
             }
-            var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height),ImageLockMode.WriteOnly, bitmap.PixelFormat);
+            var bmpData = bitmap.LockBits(new Rectangle(0, 0, bitmap.Width, bitmap.Height), ImageLockMode.WriteOnly, bitmap.PixelFormat);
 
             System.Runtime.InteropServices.Marshal.Copy(data, 0, bmpData.Scan0, data.Length);
 

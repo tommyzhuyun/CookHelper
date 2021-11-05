@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Xml.Linq;
 
 namespace CookHelper.Data
@@ -49,11 +46,11 @@ namespace CookHelper.Data
             {
                 List<SOURCEITEM> source = new List<SOURCEITEM>();
                 var eles = this.XElement.Elements("Source");
-                foreach(var e in eles)
+                foreach (var e in eles)
                 {
                     source.Add(new SOURCEITEM(e));
                 }
-               return source;
+                return source;
             }
         }
 
