@@ -66,6 +66,11 @@ namespace CookHelper.Data
                 return "???";
         }
 
+        public Image GetImageFromId(int id)
+        {
+            return GetImageFromId(id.ToString());
+        }
+
         public Image GetImageFromId(string id)
         {
             Image item = GetImage("./img/item/" + id + ".png");
@@ -75,17 +80,12 @@ namespace CookHelper.Data
                 return item;
         }
 
-        public Image GetImageFromId(int id)
-        {
-            return GetImageFromId(id.ToString());
-        }
-
         public Image GetImageFromAction(string ActionName)
         {
             return GetImage("./img/Skill/10020" + ActionName + ".png");
         }
 
-        private Image GetImage(string filename)
+        public Image GetImage(string filename)
         {
             if (File.Exists(filename))
             {
@@ -105,6 +105,26 @@ namespace CookHelper.Data
                 return null;
         }
 
+        public List<MENU> ReadRecipe()
+        {
+            return recipe.ReadMenusOnDepth(IsBase);
+        }
+        
+        public bool IsBase(string ClassID)
+        {
+            return BaseItem.HasItem(ClassID);
+        }
+
+        public MENU ReadFirstRecipe(string id)
+        {
+            return recipe.GetMenu(id);
+        }
+
+        public ITEM ReadItemDBFromID(string id)
+        {
+            return itemdb.ReadItemDBFromID(id);
+        }
+        /*
         public Dictionary<string, string> GetFoodEffect(int id)
         {
             Dictionary<string, string> ED = new Dictionary<string, string>();
@@ -120,28 +140,8 @@ namespace CookHelper.Data
             }
             return ED;
         }
-
-        public List<MENU> ReadRecipe()
-        {
-            return recipe.ReadMenusOnDepth(BaseItem.HasItem);
-        }
-
-        public bool IsBase(string ClassID)
-        {
-            return BaseItem.HasItem(ClassID);
-        }
-
-        public MENU ReadFirstRecipe(string id)
-        {
-            return recipe.GetMenu(id);
-        }
-
-        public ITEM ReadItemDBFromID(string id)
-        {
-            return itemdb.ReadItemDBFromID(id);
-        }
-
-
+        */
+        /*
         public BUFFER ReadBufferFromItem(ITEM item)
         {
             if (item == null)
@@ -149,6 +149,7 @@ namespace CookHelper.Data
             return item.FoodEffect;
         }
 
+        /*
         public List<EFFECT> ReadEffectFromBuffer(BUFFER buffer)
         {
             if (buffer != null)
@@ -160,7 +161,7 @@ namespace CookHelper.Data
         public List<EFFECT> ReadEffectFromItem(ITEM item)
         {
             return ReadEffectFromBuffer(ReadBufferFromItem(item));
-        }
+        }*/
 
         public bool IsMenu(MENUSOURCE source)
         {

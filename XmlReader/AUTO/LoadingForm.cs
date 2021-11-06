@@ -161,5 +161,6 @@ namespace CookHelper
         {
             manager.OnDPIWorking = HighDPI.Checked;
         }
+
     }
 }

@@ -22,16 +22,16 @@ namespace CookHelper.Data
 
         public bool HasItem(String ID)
         {
-            var a1 = Shopper.Descendants("Shops").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
-            if (a1 > 0)
+            var a1 = Shopper.Descendants("Shops").Elements("Item").FirstOrDefault(x => x.Attribute("ResultID")?.Value == ID);
+            if (a1 != null)
                 return true;
 
-            var a2 = Mission.Descendants("Missions").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
-            if (a2 > 0)
+            var a2 = Mission.Descendants("Missions").Elements("Item").FirstOrDefault(x => x.Attribute("ResultID")?.Value == ID);
+            if (a2 != null)
                 return true;
 
-            var a3 = Skiller.Descendants("Skills").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
-            if (a3 > 0)
+            var a3 = Skiller.Descendants("Skills").Elements("Item").FirstOrDefault(x => x.Attribute("ResultID")?.Value == ID);
+            if (a3 != null)
                 return true;
 
             return false;
@@ -39,8 +39,8 @@ namespace CookHelper.Data
 
         public bool ItemCanBuy(string ID)
         {
-            var a1 = Shopper.Descendants("Shops").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
-            if (a1 > 0)
+            var a1 = Shopper.Descendants("Shops").Elements("Item").FirstOrDefault(x => x.Attribute("ResultID")?.Value == ID);
+            if (a1 != null)
                 return true;
             else
                 return false;
@@ -48,16 +48,16 @@ namespace CookHelper.Data
 
         public bool ItemCanMission(string ID)
         {
-            var a2 = Mission.Descendants("Missions").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
-            if (a2 > 0)
+            var a2 = Mission.Descendants("Missions").Elements("Item").FirstOrDefault(x => x.Attribute("ResultID")?.Value == ID);
+            if (a2 != null)
                 return true;
             else
                 return false;
         }
         public bool ItemCanSkill(string ID)
         {
-            var a3 = Skiller.Descendants("Skills").Elements("Item").Count(x => x.Attribute("ResultID")?.Value == ID);
-            if (a3 > 0)
+            var a3 = Skiller.Descendants("Skills").Elements("Item").FirstOrDefault(x => x.Attribute("ResultID")?.Value == ID);
+            if (a3 != null)
                 return true;
             else
                 return false;
@@ -91,70 +91,5 @@ namespace CookHelper.Data
             }
             return key;
         }
-
-
-        /*
-        public static void UpdateXml()
-        {
-            XDocument shopper = XDocument.Load("Shop.xml");
-            Manager manager = new Manager();
-            List<ITEM> ITEMList = manager.itemdb.ReadItemDB();
-            var shop = shopper.Element("Shopper");
-            var Item = shopper.Descendants("Item");
-            foreach (var it in Item)
-            {
-                var ClassID = it.Attribute("ClassID");
-                var Name = it.Attribute("Name");
-                if (ClassID?.Value == "50134" || ClassID?.Value == "50004")
-                    continue;
-
-                var db = manager.db.FindID(Name.Value);
-                string desc = manager.db.FindDesc(32828);
-
-                List<ITEM> found = new List<ITEM>();
-                if (db.Count == 1)
-                {
-                    var c = ITEMList.LastOrDefault(x => x.NameID == db[0]);
-                    if(c!=null)
-                        found.Add(c);
-                }
-                else if (db.Count > 1)
-                {
-                    foreach (var d in db)
-                    {
-                        ITEM a = ITEMList.LastOrDefault(x => x.NameID == d);
-                        if (a != null)
-                        {
-                            found.Add(a);
-                            break;
-                        }
-                    }
-                }
-
-                if (found.Count == 0)
-                {
-                    Console.WriteLine("Not Found: " + ClassID.Value + " : " + Name.Value);
-                } 
-                else 
-                {
-                    foreach (var f in found)
-                    {
-                        if (ClassID?.Value != f?.ClassID.ToString())
-                        {
-                            Console.WriteLine("Check：" + ClassID?.Value + " <> " + f.ClassID.ToString() + " " + Name.Value);
-                            string line = Console.ReadLine();
-                            if (line == "y")
-                                ClassID.Value = f.ClassID.ToString();
-                        }
-                    }
-                }
-            }
-            Console.WriteLine("Press y To save");
-            string save = Console.ReadLine();
-            if (save == "y")
-                shopper.Save("Shop2.xml");
-        }
-        */
-
     }
 }

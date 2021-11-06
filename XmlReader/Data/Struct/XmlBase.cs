@@ -53,6 +53,10 @@ namespace CookHelper.Data
             }
         }
 
+        public override string ToString()
+        {
+            return XElement.ToString();
+        }
 
     }
 }

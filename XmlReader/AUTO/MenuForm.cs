@@ -14,7 +14,7 @@ namespace CookHelper
         public readonly Control ControlOwner;
         public MenuLists menuList;
         public List<MenuLists> menuLists = new List<MenuLists>();
-        readonly bool IsSuccess = false;
+        private bool IsSuccess = false;
 
         public MenuForm(Sorting RecipeMenu, Manager manager, Control Owner)
         {
@@ -278,6 +278,7 @@ namespace CookHelper
                 fm?.Dispose();
             }
             this.RecipeMenu = RecipeMenu;
+            IsSuccess = RecipeMenu.IsSuccess;
             InitializeForm();
             Solution();
             MenuSelect.SelectedIndex = 0;

@@ -35,7 +35,7 @@ namespace CookHelper.Data
             }
             return Items;
         }
-
+        /*
         public HashSet<string> ReadMenuList()
         {
             var HRecipes = new HashSet<string>();
@@ -46,7 +46,7 @@ namespace CookHelper.Data
             }
             return HRecipes;
         }
-
+        */
         public SortedSet<string> ReadItems()
         {
             SortedSet<string> items = new SortedSet<string>();
@@ -61,10 +61,10 @@ namespace CookHelper.Data
                 }
             }
             items.Remove("");
-
+            items.Remove(null);
             return items;
         }
-
+        
         public List<MENU> ReadMenusOnDepth(Func<string, bool> HasBaseItem)
         {
             foreach (MENU Recipe in Recipes.Values)

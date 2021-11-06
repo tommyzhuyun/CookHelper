@@ -9,7 +9,29 @@ namespace XmlReader.Data
 {
     class Tester
     {
-
+        public void UnKnowImage()
+        {
+            var All = recipe.ReadItems();
+            List<string> noimage = new List<string>();
+            foreach (var item in All)
+            {
+                bool image = File.Exists("./img/item/" + item + ".png");
+                if (!image)
+                {
+                    var menu = recipe.GetMenu(item);
+                    var db = itemdb.ReadItemDBFromID(item);
+                    if (menu != null && db != null)
+                        noimage.Add(db.ToString());
+                    else if (db != null)
+                        noimage.Add(db.ToString());
+                }
+            }
+            String csv = String.Join(
+                    Environment.NewLine,
+                    noimage
+                    );
+            System.IO.File.WriteAllText("./NoImage.csv", csv);
+        }
         public static void Shop()
         {
             var Shop = XDocument.Load("Shop.xml");

@@ -26,7 +26,8 @@ namespace CookHelper
                 MessageBox.Show("数据库载入失败，程序无法启动：\r\n" + a.Message);
                 return;
             }
-            if(manager != null)
+
+            if (manager != null)
                 Application.Run(new LoadingForm(manager));
         }
     }

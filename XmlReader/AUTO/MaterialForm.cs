@@ -115,7 +115,7 @@ namespace CookHelper
             {
                 GETITEM getitem = Skill[0];
                 SkillPic.Image?.Dispose();
-                SkillPic.Image = Image.FromFile($"img/Skill/{getitem.Info}.png");
+                SkillPic.Image = manager.GetImage($"img/Skill/{getitem.Info}.png");
 
                 var Resultitem = getitem.Item.Find(x => x.ClassID == RecipeMenu.ClassID.ToString());
                 SkillInfo.Text = getitem.SkillName + "\r\n" + Resultitem.ExtraInfo;
@@ -162,7 +162,7 @@ namespace CookHelper
                 if (RecipeMenu.IsMenu)
                 {
                     SkillPic.Image?.Dispose();
-                    SkillPic.Image = Image.FromFile($"img/Skill/10020.png");
+                    SkillPic.Image = manager.GetImage($"img/Skill/10020.png");
                     SkillInfo.Text = "料理";
                     CheckBox checkBox = new CheckBox
                     {
