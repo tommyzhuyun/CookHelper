@@ -1,6 +1,8 @@
 # CookHelper
 https://erinn.world/forum.php?mod=viewthread&tid=15619
 (发表于: 爱琳世界-逐梦者庭院)
+* 链接：pan.baidu.com/s/1ThCcthR13Sq6dqudpgKeew
+* 提取码：cook
 
 
 # 关于该程序：
