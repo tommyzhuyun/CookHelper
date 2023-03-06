@@ -101,7 +101,7 @@ namespace CookHelper
         private void RulerImage()
         {
             int sum = value3 + value2 + value1;
-            Rectangle RulerLocation = new Rectangle(22, 26, 232, 8);
+            Rectangle RulerLocation = new Rectangle(98, 43, 243, 9); //341-97
             int point1 = (value1) * (RulerLocation.Width) / sum;
             int point2 = (value1 + value2) * (RulerLocation.Width) / sum;
             int point3 = (value1 + value2 + value3) * (RulerLocation.Width) / sum;
@@ -132,8 +132,8 @@ namespace CookHelper
                 }
                 //Console.WriteLine(dx + " " + dy);
                 g.Clear(SystemColors.Control);
-                Rectangle left = OnScalRectangle(4, 51, MABI.Width, MABI.Height, dx, dy);
-                Rectangle right = OnScalRectangle(228, 51, MABI.Width, MABI.Height, dx, dy);
+                Rectangle left = OnScalRectangle(20, 54, MABI.Width, MABI.Height, dx, dy);
+                Rectangle right = OnScalRectangle(290, 54, MABI.Width, MABI.Height, dx, dy);
                 g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
                 if (!changed)
                 {
@@ -145,38 +145,26 @@ namespace CookHelper
                     g.DrawImage(ICON, left.X, left.Y, left.Width, left.Height);
                     g.DrawImage(ICON, right.X, right.Y, right.Width, right.Height);
                 }
-                g.DrawRectangle(Line, OnScalRectangle(0, -1, 275, 43, dx, dy));
-                g.DrawRectangle(Line, OnScalRectangle(21, -1, 233, 43, dx, dy));
-                g.DrawRectangle(Line, OnScalRectangle(0, 42, 275, 64, dx, dy));
-                g.DrawRectangle(Line, OnScalRectangle(51, 54, 71, 37, dx, dy));
-                g.DrawRectangle(Line, OnScalRectangle(153, 54, 71, 37, dx, dy));
-                g.DrawLine(ControlP, OnScalPoint(51, 106, dx, dy), OnScalPoint(226, 106, dx, dy));
+                g.DrawRectangle(Line, OnScalRectangle(0, -1, 354, 53, dx, dy));//浓度框
+                g.DrawLine(Line, OnScalPoint(97, 34, dx, dy), OnScalPoint(97, 51, dx, dy));
+                g.DrawLine(Line, OnScalPoint(341, 34, dx, dy), OnScalPoint(341, 51, dx, dy));
+                g.DrawRectangle(Line, OnScalRectangle(97, 58, 69, 35, dx, dy));//确认
+                g.DrawRectangle(Line, OnScalRectangle(189, 58, 69, 35, dx, dy));//取消
 
                 g.FillRectangle(Brushes.Yellow, OnScalRectangle(P1, dx, dy));
                 if (value2 != 0)
                 {
                     g.FillRectangle(Brushes.Cyan, OnScalRectangle(P2, dx, dy));
-                    g.DrawLine(Line, OnScalPoint(P2.X, P2.Y, dx, dy), OnScalPoint(P2.X, P2.Bottom + 8, dx, dy));
+                    g.DrawLine(Line, OnScalPoint(P2.X, P2.Top - 9, dx, dy), OnScalPoint(P2.X, P2.Bottom, dx, dy));
                 }
                 if (value3 != 0)
                 {
                     g.FillRectangle(Brushes.HotPink, OnScalRectangle(P3, dx, dy));
-                    g.DrawLine(Line, OnScalPoint(P3.X, P3.Y, dx, dy), OnScalPoint(P3.X, P3.Bottom + 8, dx, dy));
+                    g.DrawLine(Line, OnScalPoint(P3.X, P3.Top - 9, dx, dy), OnScalPoint(P3.X, P3.Bottom, dx, dy));
                 }
             }
 
             Ruler.Image?.Dispose();
-
-            /*
-            Bitmap Resize = new Bitmap((int)(BackImage.Width * dx / 96),(int)(BackImage.Height * dy / 96));
-            using(Graphics g2 = Graphics.FromImage(Resize))
-            {
-                //g2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.HighQualityBicubic;
-                g2.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-                g2.DrawImage(BackImage, 0, 0, Resize.Width, Resize.Height);
-                g2.Dispose();
-            }*/
-
             Ruler.Image = BackImage;
         }
 
